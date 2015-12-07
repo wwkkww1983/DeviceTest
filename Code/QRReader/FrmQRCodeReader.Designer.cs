@@ -30,13 +30,13 @@
         {
             this.btnOpen = new System.Windows.Forms.Button();
             this.cmbPorts = new System.Windows.Forms.ComboBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtbCode = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(347, 54);
+            this.btnOpen.Location = new System.Drawing.Point(141, 10);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(75, 23);
             this.btnOpen.TabIndex = 19;
@@ -48,41 +48,42 @@
             // 
             this.cmbPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPorts.FormattingEnabled = true;
-            this.cmbPorts.Location = new System.Drawing.Point(220, 56);
+            this.cmbPorts.Location = new System.Drawing.Point(14, 12);
             this.cmbPorts.Name = "cmbPorts";
             this.cmbPorts.Size = new System.Drawing.Size(121, 20);
             this.cmbPorts.TabIndex = 18;
             // 
-            // richTextBox1
+            // rtbCode
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.rtbCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 103);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(641, 384);
-            this.richTextBox1.TabIndex = 21;
-            this.richTextBox1.Text = "";
+            this.rtbCode.Location = new System.Drawing.Point(12, 70);
+            this.rtbCode.Name = "rtbCode";
+            this.rtbCode.Size = new System.Drawing.Size(735, 359);
+            this.rtbCode.TabIndex = 21;
+            this.rtbCode.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 88);
+            this.label1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(15, 49);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.Size = new System.Drawing.Size(89, 19);
             this.label1.TabIndex = 22;
-            this.label1.Text = "串口数据：";
+            this.label1.Text = "二维码：";
             // 
             // FrmQRCodeReader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 499);
+            this.ClientSize = new System.Drawing.Size(759, 435);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.rtbCode);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.cmbPorts);
             this.Name = "FrmQRCodeReader";
-            this.Text = "串口数据";
+            this.Text = "Desko-GSRU500-二维码阅读器(RS232)";
             this.Load += new System.EventHandler(this.FrmQRCodeReader_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -93,7 +94,7 @@
 
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.ComboBox cmbPorts;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtbCode;
         private System.Windows.Forms.Label label1;
     }
 }

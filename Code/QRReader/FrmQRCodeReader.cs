@@ -27,14 +27,14 @@ namespace QRReader
         {
             var ports = SerialPort.GetPortNames();
             cmbPorts.DataSource = ports;
+            if (cmbPorts.Items.Count == 0)
+            {
+                btnOpen.Enabled = false;
+            }
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            if (cmbPorts.Items.Count == 0)
-            {
-                MessageBox.Show("计算机未发现串口！");
-            }
             serial = new SerialPort(cmbPorts.Text, 9600, Parity.None, 8, StopBits.One);
             try
             {
@@ -52,38 +52,47 @@ namespace QRReader
         {
             while (true)
             {
-                var pos = 0;
-                byte[] buffer = new byte[128];
-                var stx = (byte)serial.ReadByte();
-                if (stx != 0x02)
-                    continue;
-
-                buffer[pos] = stx;
-                pos++;
-                byte b = 0;
-                while ((b = (byte)serial.ReadByte()) != 0x03)
+                try
                 {
-                    buffer[pos] = b;
+                    var pos = 0;
+                    byte[] buffer = new byte[128];
+                    var stx = (byte)serial.ReadByte();
+                    if (stx != 0x02)
+                        continue;
+
+                    buffer[pos] = stx;
                     pos++;
+                    byte b = 0;
+                    while ((b = (byte)serial.ReadByte()) != 0x03)
+                    {
+                        buffer[pos] = b;
+                        pos++;
+                    }
+                    PrintCode(buffer, pos);
                 }
-                ShowCode(buffer, pos);
+                catch
+                {
+                    Console.WriteLine("串口关闭");
+                }
             }
         }
 
-        private void ShowCode(byte[] buffer, int pos)
+        private void PrintCode(byte[] buffer, int pos)
         {
             var sb = new StringBuilder();
             for (var i = 0; i < pos; i++)
             {
                 sb.Append(buffer[i] + " ");
-                if (i == (pos - 1))
-                    sb.AppendLine(buffer[i].ToString());
             }
+            //结束码
+            sb.AppendLine("3");
+
             Invoke(new Action(() =>
             {
-                richTextBox1.AppendText(sb.ToString());
+                rtbCode.AppendText(sb.ToString());
                 var codeStr = Encoding.UTF8.GetString(buffer, 4, pos - 4);
-                richTextBox1.AppendText(DateTime.Now + " " + codeStr);
+                rtbCode.AppendText(DateTime.Now + " " + codeStr);
+                rtbCode.AppendText("\n");
             }));
         }
 

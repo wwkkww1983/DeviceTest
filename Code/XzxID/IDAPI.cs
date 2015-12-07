@@ -16,8 +16,17 @@ namespace XzxID
         [DllImport("SynIDCardAPI.dll", EntryPoint = "Syn_SetPhotoPath", CharSet = CharSet.Ansi)]
         public static extern int Syn_SetPhotoPath(int iOption, ref byte cPhotoPath);
 
+        [DllImport("SynIDCardAPI.dll", EntryPoint = "Syn_SetPhotoType", CharSet = CharSet.Ansi)]
+        public static extern int Syn_SetPhotoType(int iType);
+
+        [DllImport("SynIDCardAPI.dll", EntryPoint = "Syn_SetPhotoName", CharSet = CharSet.Ansi)]
+        public static extern int Syn_SetPhotoName(int iType);
+
         [DllImport("SynIDCardAPI.dll", EntryPoint = "Syn_OpenPort", CharSet = CharSet.Ansi)]
         public static extern int Syn_OpenPort(int iPort);
+
+        [DllImport("SynIDCardAPI.dll", EntryPoint = "Syn_ClosePort", CharSet = CharSet.Ansi)]
+        public static extern int Syn_ClosePort(int iPort);
 
         [DllImport("SynIDCardAPI.dll", EntryPoint = "Syn_SetMaxRFByte", CharSet = CharSet.Ansi)]
         public static extern int Syn_SetMaxRFByte(int iPort, byte ucByte, int iIfOpen);
@@ -32,6 +41,9 @@ namespace XzxID
 
         [DllImport("SynIDCardAPI.dll", EntryPoint = "Syn_SetSexType", CharSet = CharSet.Ansi)]
         public static extern int Syn_SetSexType(int iType);
+
+        [DllImport("SynIDCardAPI.dll", EntryPoint = "Syn_SetBornType", CharSet = CharSet.Ansi)]
+        public static extern int Syn_SetBornType(int iType);
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]

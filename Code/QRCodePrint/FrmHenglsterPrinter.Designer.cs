@@ -30,6 +30,7 @@
         {
             this.btnPrinterEnum = new System.Windows.Forms.Button();
             this.cmbPrinters = new System.Windows.Forms.ComboBox();
+            this.btnOpenPrinter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnPrinterEnum
@@ -50,11 +51,22 @@
             this.cmbPrinters.Size = new System.Drawing.Size(121, 20);
             this.cmbPrinters.TabIndex = 1;
             // 
+            // btnOpenPrinter
+            // 
+            this.btnOpenPrinter.Location = new System.Drawing.Point(53, 47);
+            this.btnOpenPrinter.Name = "btnOpenPrinter";
+            this.btnOpenPrinter.Size = new System.Drawing.Size(86, 29);
+            this.btnOpenPrinter.TabIndex = 2;
+            this.btnOpenPrinter.Text = "打开打印机";
+            this.btnOpenPrinter.UseVisualStyleBackColor = true;
+            this.btnOpenPrinter.Click += new System.EventHandler(this.btnOpenPrinter_Click);
+            // 
             // FrmHenglsterPrinter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 350);
+            this.Controls.Add(this.btnOpenPrinter);
             this.Controls.Add(this.cmbPrinters);
             this.Controls.Add(this.btnPrinterEnum);
             this.Name = "FrmHenglsterPrinter";
@@ -68,5 +80,6 @@
 
         private System.Windows.Forms.Button btnPrinterEnum;
         private System.Windows.Forms.ComboBox cmbPrinters;
+        private System.Windows.Forms.Button btnOpenPrinter;
     }
 }

@@ -100,5 +100,26 @@ namespace QRCode
         {
 
         }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            var g = e.Graphics;
+            g.DrawImage(pictureBox1.Image, new Rectangle(0, 0, 200, 200));
+
+            g.DrawString("    姓名：张三", new Font("宋体", 20f), Brushes.Black, new PointF(230, 20));
+            g.DrawString("    电话：13760129591", new Font("宋体", 20f), Brushes.Black, new PointF(230, 70));
+            //g.DrawString("证件号码：410726198101103012", new Font("宋体", 20f), Brushes.Black, new PointF(230, 80));
+            g.DrawString("访问时间：09:00-14:00", new Font("宋体", 20f), Brushes.Black, new PointF(230, 120));
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            //printDocument1.Print();
+
+            printDialog1.Document = printDocument1;
+
+            printPreviewDialog1.Document = printDocument1;
+            printPreviewDialog1.ShowDialog();
+        }
     }
 }
