@@ -16,7 +16,7 @@ namespace QRCode
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmBarCode());
+            Application.Run(new FrmQRCode());
         }
     }
 }

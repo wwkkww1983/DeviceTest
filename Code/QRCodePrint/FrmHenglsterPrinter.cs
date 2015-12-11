@@ -61,5 +61,63 @@ namespace QRCodePrint
                 return;
             }
         }
+
+        /// <summary>
+        /// 条码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            IntPtr ptr = Henglster.Exo_Api_Pio_PrinterOpen("cba", Henglster.D_EXO_API_PIO_OPT_NONE, 10000);
+            if (ptr == IntPtr.Zero)
+            {
+                CMessageBox.Show("打开失败");
+                return;
+            }
+        }
+
+        /// <summary>
+        /// 二维码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button2_Click(object sender, EventArgs e)
+        {
+            IntPtr ptr = Henglster.Exo_Api_Pio_PrinterOpen("cba", Henglster.D_EXO_API_PIO_OPT_NONE, 10000);
+            if (ptr == IntPtr.Zero)
+            {
+                CMessageBox.Show("打开失败");
+                return;
+            }
+
+            //n1 Style
+            //0 PDF417
+            //1 Datamatrix
+            //2 QR Code
+            byte n1 = 0x02;
+            byte n2 = 0x00;
+            //Barcode Type Range
+            //PDF417 0 (least error correction) … 8
+            //Datamatrix 0 (least error correction) … 29
+            //QR Code 0 (least error correction; “L”), 1 (“M”), 2 (“Q”), 3 (“H”)
+            byte n3 = 0x00;
+            byte[] buffer = { 0x1B, 0xF0, 0x09, 0x07, n1, n2, n3 };
+        }
+
+        /// <summary>
+        /// 字符
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            IntPtr ptr = Henglster.Exo_Api_Pio_PrinterOpen("cba", Henglster.D_EXO_API_PIO_OPT_NONE, 10000);
+            if (ptr == IntPtr.Zero)
+            {
+                CMessageBox.Show("打开失败");
+                return;
+            }
+        }
     }
 }
