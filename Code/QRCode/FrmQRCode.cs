@@ -15,6 +15,9 @@ using ZXing.QrCode.Internal;
 
 namespace QRCode
 {
+    /// <summary>
+    /// 公司更新
+    /// </summary>
     public partial class FrmQRCode : FrmBase
     {
         public FrmQRCode()

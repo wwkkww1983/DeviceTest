@@ -53,6 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encrty.cs" />
+    <Compile Include="FrmBarCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBarCode.Designer.cs">
+      <DependentUpon>FrmBarCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmQRCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmBarCode.resx">
+      <DependentUpon>FrmBarCode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmQRCode.resx">
       <DependentUpon>FrmQRCode.cs</DependentUpon>
     </EmbeddedResource>
