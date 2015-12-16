@@ -8,10 +8,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.IO.Ports;
+using Common;
 
 namespace QRCodePrint
 {
-    public partial class FrmHengstler : Form
+    public partial class FrmHengstler : FrmBase
     {
         const string init = "1B 40"; //软件初始化
         const string fontbold = "1B 45 00"; //粗体
