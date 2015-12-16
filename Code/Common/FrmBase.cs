@@ -13,7 +13,7 @@ namespace Common
         {
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.WindowState = FormWindowState.Normal;
             this.StartPosition = FormStartPosition.CenterScreen;
         }

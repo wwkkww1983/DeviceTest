@@ -50,26 +50,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="FrmDefaultPrint.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FrmDefaultPrint.Designer.cs">
+      <DependentUpon>FrmDefaultPrint.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmHenglsterPrinter.cs">
+    <Compile Include="FrmHengstler.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmHenglsterPrinter.Designer.cs">
-      <DependentUpon>FrmHenglsterPrinter.cs</DependentUpon>
+    <Compile Include="FrmHengstler.Designer.cs">
+      <DependentUpon>FrmHengstler.cs</DependentUpon>
     </Compile>
+    <Compile Include="HengeslterSerialPrinter.cs" />
     <Compile Include="printdll\HenglsterAPI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FrmDefaultPrint.resx">
+      <DependentUpon>FrmDefaultPrint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmHenglsterPrinter.resx">
-      <DependentUpon>FrmHenglsterPrinter.cs</DependentUpon>
+    <EmbeddedResource Include="FrmHengstler.resx">
+      <DependentUpon>FrmHengstler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

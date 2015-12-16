@@ -37,6 +37,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnPrinterEnum
@@ -118,11 +125,81 @@
             this.textBox3.Size = new System.Drawing.Size(148, 21);
             this.textBox3.TabIndex = 8;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(53, 236);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(86, 29);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "串口打印";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(145, 241);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(148, 20);
+            this.comboBox1.TabIndex = 10;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(145, 286);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(313, 21);
+            this.textBox4.TabIndex = 12;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(53, 281);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(86, 29);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "打印字符";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(12, 357);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(561, 66);
+            this.textBox5.TabIndex = 13;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(53, 316);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(86, 29);
+            this.button6.TabIndex = 14;
+            this.button6.Text = "打印字符";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(464, 281);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(86, 29);
+            this.button7.TabIndex = 15;
+            this.button7.Text = "打印字符";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // FrmHenglsterPrinter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 350);
+            this.ClientSize = new System.Drawing.Size(585, 435);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -151,5 +228,12 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }

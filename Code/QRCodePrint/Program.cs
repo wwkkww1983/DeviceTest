@@ -16,7 +16,7 @@ namespace QRCodePrint
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmHenglsterPrinter());
+            Application.Run(new FrmHengstler());
         }
     }
 }

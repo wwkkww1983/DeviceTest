@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HengeslterSerialPrinter.cs" />
     <EmbeddedResource Include="FrmBarCode.resx">
       <DependentUpon>FrmBarCode.cs</DependentUpon>
     </EmbeddedResource>
