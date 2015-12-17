@@ -58,32 +58,32 @@ namespace QRCodePrint
         private void button1_Click(object sender, EventArgs e)
         {
             List<byte> data = new List<byte>();
-            data.AddRange(init.ToByte());
-            data.AddRange(fontbold.ToByte());
-            data.AddRange(underline.ToByte());
-            data.AddRange(ht_c.ToByte());
-            data.AddRange(characterSize.ToByte());
-            data.AddRange(line1.ToByte());
+            data.AddRange(init.HexToByte());
+            data.AddRange(fontbold.HexToByte());
+            data.AddRange(underline.HexToByte());
+            data.AddRange(ht_c.HexToByte());
+            data.AddRange(characterSize.HexToByte());
+            data.AddRange(line1.HexToByte());
 
             data.AddRange("小票标题".ToGb2312());
-            data.AddRange(line4.ToByte());
+            data.AddRange(line4.HexToByte());
 
             data.AddRange("入场：2012-08-31 10:53".ToGb2312());
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
 
             data.AddRange("通道：一号入口".ToGb2312());
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
 
             data.AddRange("厂商：深圳来吉智能科技".ToGb2312());
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
 
             data.AddRange("先到收费处交费，再取车出场".ToGb2312());
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
 
             data.AddRange(new byte[] { 0x2D, 0x2D, 0x2D, 0x2D, 0x2D, 0x2D, 0x2D, 0x2D, 0x2D });
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
 
-            data.AddRange(cutpaper.ToByte());
+            data.AddRange(cutpaper.HexToByte());
 
             printer.Write(data.ToArray());
         }
@@ -91,41 +91,41 @@ namespace QRCodePrint
         private void button2_Click(object sender, EventArgs e)
         {
             List<byte> data = new List<byte>();
-            data.AddRange(init.ToByte());
-            data.AddRange(fontbold.ToByte());
-            data.AddRange(underline.ToByte());
-            data.AddRange(ht_c.ToByte());
-            data.AddRange(characterSize.ToByte());
-            data.AddRange(line1.ToByte());
+            data.AddRange(init.HexToByte());
+            data.AddRange(fontbold.HexToByte());
+            data.AddRange(underline.HexToByte());
+            data.AddRange(ht_c.HexToByte());
+            data.AddRange(characterSize.HexToByte());
+            data.AddRange(line1.HexToByte());
 
             //行高、宽
-            data.AddRange(barcodeH.ToByte());
-            data.AddRange(barcodeW.ToByte());
-            data.AddRange(barcodesetting1.ToByte());
-            data.AddRange(barcodecmd.ToByte());
+            data.AddRange(barcodeH.HexToByte());
+            data.AddRange(barcodeW.HexToByte());
+            data.AddRange(barcodesetting1.HexToByte());
+            data.AddRange(barcodecmd.HexToByte());
             var code = "0123456789";
             foreach (var c in code)
             {
                 data.Add((byte)c);
             }
-            data.AddRange(line2.ToByte());
+            data.AddRange(line2.HexToByte());
 
             data.AddRange("入场：2012-08-31 10:53".ToGb2312());
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
 
             data.AddRange("通道：一号入口".ToGb2312());
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
 
             data.AddRange("厂商：深圳来吉智能科技".ToGb2312());
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
 
             data.AddRange("先到收费处交费，再取车出场".ToGb2312());
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
 
             data.AddRange(new byte[] { 0x2D, 0x2D, 0x2D, 0x2D, 0x2D, 0x2D, 0x2D, 0x2D, 0x2D });
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
 
-            data.AddRange(cutpaper.ToByte());
+            data.AddRange(cutpaper.HexToByte());
 
             printer.Write(data.ToArray());
         }
@@ -133,37 +133,37 @@ namespace QRCodePrint
         private void button3_Click(object sender, EventArgs e)
         {
             List<byte> data = new List<byte>();
-            data.AddRange(init.ToByte());
-            data.AddRange(fontbold.ToByte());
-            data.AddRange(underline.ToByte());
-            data.AddRange(ht_c.ToByte());
-            data.AddRange(characterSize.ToByte());
-            data.AddRange(line2.ToByte());
+            data.AddRange(init.HexToByte());
+            data.AddRange(fontbold.HexToByte());
+            data.AddRange(underline.HexToByte());
+            data.AddRange(ht_c.HexToByte());
+            data.AddRange(characterSize.HexToByte());
+            data.AddRange(line2.HexToByte());
 
-            data.AddRange("欢迎到访帝王大厦".ToByte());
-            data.AddRange(line2.ToByte());
+            data.AddRange("欢迎到访帝王大厦".HexToByte());
+            data.AddRange(line2.HexToByte());
 
-            data.AddRange(barcodeH.ToByte());
-            data.AddRange(barcodesetting2.ToByte());
-            data.AddRange(barcodecmd2.ToByte());
+            data.AddRange(barcodeH.HexToByte());
+            data.AddRange(barcodesetting2.HexToByte());
+            data.AddRange(barcodecmd2.HexToByte());
             var code = "0123456789";
             foreach (var c in code)
             {
                 data.Add((byte)c);
             }
-            data.AddRange(line2.ToByte());
+            data.AddRange(line2.HexToByte());
 
             //文字内容 
             //左对齐
-            data.AddRange(ht_l.ToByte());
+            data.AddRange(ht_l.HexToByte());
             data.AddRange("访客：张三".ToGb2312());
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
             data.AddRange("时间：2015-12-12 09:23:45".ToGb2312());
-            data.AddRange(line1.ToByte());
-            data.AddRange(line1.ToByte());
-            data.AddRange(line1.ToByte());
+            data.AddRange(line1.HexToByte());
+            data.AddRange(line1.HexToByte());
+            data.AddRange(line1.HexToByte());
 
-            data.AddRange(cutpaper.ToByte());
+            data.AddRange(cutpaper.HexToByte());
 
             printer.Write(data.ToArray());
         }
@@ -171,7 +171,7 @@ namespace QRCodePrint
 
     public static class Ext
     {
-        public static byte[] ToByte(this string str)
+        public static byte[] HexToByte(this string str)
         {
             return str.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
         }
