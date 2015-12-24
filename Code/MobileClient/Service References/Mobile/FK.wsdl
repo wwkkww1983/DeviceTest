@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ysj.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ysj.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ysj.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushAppointment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AppointmentId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VisitorId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VisitorName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VisitorIdCard" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="VisitorMobile" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PushAppointmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PushAppointmentResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDoorRecord">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDoorRecordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDoorRecordResult" type="tns:ArrayOfTimeList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTimeList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TimeList" nillable="true" type="tns:TimeList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TimeList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BMCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BMName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BMType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SwipeTime" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfTimeList" nillable="true" type="tns:ArrayOfTimeList" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="PushAppointmentSoapIn">
+    <wsdl:part name="parameters" element="tns:PushAppointment" />
+  </wsdl:message>
+  <wsdl:message name="PushAppointmentSoapOut">
+    <wsdl:part name="parameters" element="tns:PushAppointmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDoorRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDoorRecord" />
+  </wsdl:message>
+  <wsdl:message name="GetDoorRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDoorRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PushAppointmentHttpGetIn">
+    <wsdl:part name="AppointmentId" type="s:string" />
+    <wsdl:part name="VisitorId" type="s:string" />
+    <wsdl:part name="VisitorName" type="s:string" />
+    <wsdl:part name="VisitorIdCard" type="s:string" />
+    <wsdl:part name="VisitorMobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PushAppointmentHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDoorRecordHttpGetIn" />
+  <wsdl:message name="GetDoorRecordHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfTimeList" />
+  </wsdl:message>
+  <wsdl:portType name="FKSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PushAppointment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">推送预约信息</wsdl:documentation>
+      <wsdl:input message="tns:PushAppointmentSoapIn" />
+      <wsdl:output message="tns:PushAppointmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDoorRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取门禁记录</wsdl:documentation>
+      <wsdl:input message="tns:GetDoorRecordSoapIn" />
+      <wsdl:output message="tns:GetDoorRecordSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="FKHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PushAppointment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">推送预约信息</wsdl:documentation>
+      <wsdl:input message="tns:PushAppointmentHttpGetIn" />
+      <wsdl:output message="tns:PushAppointmentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDoorRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取门禁记录</wsdl:documentation>
+      <wsdl:input message="tns:GetDoorRecordHttpGetIn" />
+      <wsdl:output message="tns:GetDoorRecordHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FKSoap" type="tns:FKSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://ysj.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushAppointment">
+      <soap:operation soapAction="http://ysj.org/PushAppointment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDoorRecord">
+      <soap:operation soapAction="http://ysj.org/GetDoorRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FKSoap12" type="tns:FKSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://ysj.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushAppointment">
+      <soap12:operation soapAction="http://ysj.org/PushAppointment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDoorRecord">
+      <soap12:operation soapAction="http://ysj.org/GetDoorRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FKHttpGet" type="tns:FKHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PushAppointment">
+      <http:operation location="/PushAppointment" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDoorRecord">
+      <http:operation location="/GetDoorRecord" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FK">
+    <wsdl:port name="FKSoap" binding="tns:FKSoap">
+      <soap:address location="http://localhost:16935/FK.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FKSoap12" binding="tns:FKSoap12">
+      <soap12:address location="http://localhost:16935/FK.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FKHttpGet" binding="tns:FKHttpGet">
+      <http:address location="http://localhost:16935/FK.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
