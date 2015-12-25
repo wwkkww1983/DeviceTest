@@ -28,8 +28,7 @@ namespace MobileClient
         {
             FKSoapClient fk = new FKSoapClient("FKSoap");
             var list = fk.GetDoorRecord().ToList();
-            CMessageBox.Show(list.Count.ToString());
-            CMessageBox.Show(string.Format("{0},{1},{2},{3}", list.First().BMCode, list.First().BMName, list.First().BMType, list.First().SwipeTime.ToShortDateString()));
+            dataGridView1.DataSource = list;
         }
 
         private void button3_Click(object sender, EventArgs e)

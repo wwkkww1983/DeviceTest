@@ -43,7 +43,11 @@ namespace FKWebServices
         {
             var list = new List<TimeList>
            {
-               new TimeList{ BMName="闸机名称", BMCode="闸机编号", BMType="出入标识", SwipeTime=DateTime.Now}
+               new TimeList{ BMCode="1" ,BMName="1", BMType="进", SwipeTime=DateTime.Now},
+               new TimeList{ BMCode="2" ,BMName="2", BMType="出", SwipeTime=DateTime.Now},
+               new TimeList{ BMCode="3" ,BMName="3", BMType="进", SwipeTime=DateTime.Now},
+               new TimeList{ BMCode="4" ,BMName="4", BMType="出", SwipeTime=DateTime.Now},
+               new TimeList{ BMCode="5" ,BMName="5", BMType="进", SwipeTime=DateTime.Now}
            };
             return list;
         }
