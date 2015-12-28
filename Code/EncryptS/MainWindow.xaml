@@ -30,9 +30,11 @@
             <Label>密码:</Label>
             <TextBox Name="txtEncode" Width="400"></TextBox>
         </StackPanel>
-        <Button Content="加密一(SHA1)" Name="btn1" Click="btn1_Click" Grid.Row="2" Grid.Column="0"></Button>
-        <Button Content="加密一(SHA256)" Name="btn2" Click="btn2_Click" Grid.Row="2" Grid.Column="1"></Button>
-        <Button Content="加密一(SHA384)" Name="btn3" Click="btn3_Click" Grid.Row="2" Grid.Column="2"></Button>
-        <Button Content="加密一(SHA512)" Name="btn4" Click="btn4_Click" Grid.Row="2" Grid.Column="3"></Button>
+        <Button Content="加密(SHA1)" Name="btn1" Click="btn1_Click" Grid.Row="2" Grid.Column="0"></Button>
+        <Button Content="加密(SHA256)" Name="btn2" Click="btn2_Click" Grid.Row="2" Grid.Column="1"></Button>
+        <Button Content="加密(SHA384)" Name="btn3" Click="btn3_Click" Grid.Row="2" Grid.Column="2"></Button>
+        <Button Content="加密(SHA512)" Name="btn4" Click="btn4_Click" Grid.Row="2" Grid.Column="3"></Button>
+
+        <Button Content="加密(MD5)" Name="btn5" Click="btn5_Click" Grid.Row="3" Grid.Column="0"></Button>
     </Grid>
 </Window>

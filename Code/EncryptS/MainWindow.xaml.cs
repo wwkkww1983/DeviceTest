@@ -39,45 +39,42 @@ namespace EncryptS
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
             SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
-
-            var bufferIn = Encoding.UTF8.GetBytes(txtSource.Text);
-            var bufferOut = sha1.ComputeHash(bufferIn);
-
-            var str = GetEncode(bufferOut);
-            txtEncode.Text = str.Length + " " + str;
+            Encode(sha1);
         }
 
         private void btn2_Click(object sender, RoutedEventArgs e)
         {
-           SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
-
-            var bufferIn = Encoding.UTF8.GetBytes(txtSource.Text);
-            var bufferOut = sha256.ComputeHash(bufferIn);
-
-            var str = GetEncode(bufferOut);
-            txtEncode.Text = str.Length + " " + str;
+            SHA256CryptoServiceProvider sha = new SHA256CryptoServiceProvider();
+            Encode(sha);
         }
 
         private void btn3_Click(object sender, RoutedEventArgs e)
         {
-            SHA384CryptoServiceProvider sha384 = new SHA384CryptoServiceProvider();
-
-            var bufferIn = Encoding.UTF8.GetBytes(txtSource.Text);
-            var bufferOut = sha384.ComputeHash(bufferIn);
-
-            var str = GetEncode(bufferOut);
-            txtEncode.Text = str.Length + " " + str;
+            SHA384CryptoServiceProvider sha = new SHA384CryptoServiceProvider();
+            Encode(sha);
         }
 
         private void btn4_Click(object sender, RoutedEventArgs e)
         {
             SHA512CryptoServiceProvider sha = new SHA512CryptoServiceProvider();
+            Encode(sha);
+        }
 
+        private void Encode(HashAlgorithm sha)
+        {
             var bufferIn = Encoding.UTF8.GetBytes(txtSource.Text);
             var bufferOut = sha.ComputeHash(bufferIn);
 
-            var str = GetEncode(bufferOut);
+            var str = Convert.ToBase64String(bufferOut, 0, bufferOut.Length);
+
+            str = GetEncode(bufferOut);
             txtEncode.Text = str.Length + " " + str;
+        }
+
+        private void btn5_Click(object sender, RoutedEventArgs e)
+        {
+            MD5CryptoServiceProvider md = new MD5CryptoServiceProvider();
+            Encode(md);
         }
     }
 }
