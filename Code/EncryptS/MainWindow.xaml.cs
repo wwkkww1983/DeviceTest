@@ -23,6 +23,7 @@ namespace EncryptS
         public MainWindow()
         {
             InitializeComponent();
+            //http://www.cr173.com/html/17773_1.html
         }
 
         private string GetEncode(byte[] buffer)
