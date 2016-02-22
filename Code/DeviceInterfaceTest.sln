@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptS", "EncryptS\Encryp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrmLinqToMySql", "FrmLinqToMySql\FrmLinqToMySql.csproj", "{C86EC6AB-DD4F-426B-896B-4569E49902ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFCreater", "PDFCreater\PDFCreater.csproj", "{5479E663-EC5B-4371-907E-617E2F94DD90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{C86EC6AB-DD4F-426B-896B-4569E49902ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C86EC6AB-DD4F-426B-896B-4569E49902ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C86EC6AB-DD4F-426B-896B-4569E49902ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5479E663-EC5B-4371-907E-617E2F94DD90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5479E663-EC5B-4371-907E-617E2F94DD90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5479E663-EC5B-4371-907E-617E2F94DD90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5479E663-EC5B-4371-907E-617E2F94DD90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
