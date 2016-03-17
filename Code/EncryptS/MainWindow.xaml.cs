@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Security;
 using System.Security.Cryptography;
+using System.IO;
 namespace EncryptS
 {
     /// <summary>
@@ -76,6 +77,70 @@ namespace EncryptS
         {
             MD5CryptoServiceProvider md = new MD5CryptoServiceProvider();
             Encode(md);
+        }
+
+        private void btn6_Click(object sender, RoutedEventArgs e)
+        {
+            var t = X.EncryptDES(txtSource.Text);
+            txtEncode.Text = t;
+        }
+
+        private void btn7_Click(object sender, RoutedEventArgs e)
+        {
+            var t = X.DecryptDES(txtEncode.Text);
+            txtSource.Text = t;
+        }
+    }
+
+
+    static class X
+    {
+        private static byte[] Keys = { 0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF };
+
+        public static string EncryptDES(string encryptString, string encryptKey = "yangshaojie")
+        {
+            try
+            {
+                byte[] rgbKey = Encoding.UTF8.GetBytes(encryptKey.Substring(0, 8));
+                byte[] rgbIV = Keys;
+                byte[] inputByteArray = Encoding.UTF8.GetBytes(encryptString);
+                DESCryptoServiceProvider dCSP = new DESCryptoServiceProvider();
+                MemoryStream mStream = new MemoryStream();
+                CryptoStream cStream = new CryptoStream(mStream, dCSP.CreateEncryptor(rgbKey, rgbIV), CryptoStreamMode.Write);
+                cStream.Write(inputByteArray, 0, inputByteArray.Length);
+                cStream.FlushFinalBlock();
+                return Convert.ToBase64String(mStream.ToArray());
+            }
+            catch
+            {
+                return encryptString;
+            }
+        }
+
+        /// <summary>
+        /// DES解密字符串 keleyi.com
+        /// </summary>
+        /// <param name="decryptString">待解密的字符串</param>
+        /// <param name="decryptKey">解密密钥,要求为8位,和加密密钥相同</param>
+        /// <returns>解密成功返回解密后的字符串，失败返源串</returns>
+        public static string DecryptDES(string decryptString, string decryptKey = "yangshaojie")
+        {
+            try
+            {
+                byte[] rgbKey = Encoding.UTF8.GetBytes(decryptKey.Substring(0, 8));
+                byte[] rgbIV = Keys;
+                byte[] inputByteArray = Convert.FromBase64String(decryptString);
+                DESCryptoServiceProvider DCSP = new DESCryptoServiceProvider();
+                MemoryStream mStream = new MemoryStream();
+                CryptoStream cStream = new CryptoStream(mStream, DCSP.CreateDecryptor(rgbKey, rgbIV), CryptoStreamMode.Write);
+                cStream.Write(inputByteArray, 0, inputByteArray.Length);
+                cStream.FlushFinalBlock();
+                return Encoding.UTF8.GetString(mStream.ToArray());
+            }
+            catch
+            {
+                return decryptString;
+            }
         }
     }
 }
