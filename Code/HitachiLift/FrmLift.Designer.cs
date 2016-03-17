@@ -31,16 +31,18 @@
             this.btnAuto = new System.Windows.Forms.Button();
             this.btnHand = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbFloors = new System.Windows.Forms.ComboBox();
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.rb2 = new System.Windows.Forms.RadioButton();
             this.rb3 = new System.Windows.Forms.RadioButton();
             this.rb4 = new System.Windows.Forms.RadioButton();
+            this.btnPort = new System.Windows.Forms.Button();
+            this.cmbPorts = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnAuto
             // 
-            this.btnAuto.Location = new System.Drawing.Point(118, 12);
+            this.btnAuto.Location = new System.Drawing.Point(118, 39);
             this.btnAuto.Name = "btnAuto";
             this.btnAuto.Size = new System.Drawing.Size(75, 23);
             this.btnAuto.TabIndex = 0;
@@ -50,7 +52,7 @@
             // 
             // btnHand
             // 
-            this.btnHand.Location = new System.Drawing.Point(118, 41);
+            this.btnHand.Location = new System.Drawing.Point(118, 68);
             this.btnHand.Name = "btnHand";
             this.btnHand.Size = new System.Drawing.Size(75, 23);
             this.btnHand.TabIndex = 1;
@@ -69,19 +71,20 @@
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
-            // comboBox1
+            // cmbFloors
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 29);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 20);
-            this.comboBox1.TabIndex = 3;
+            this.cmbFloors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFloors.FormattingEnabled = true;
+            this.cmbFloors.Location = new System.Drawing.Point(12, 56);
+            this.cmbFloors.Name = "cmbFloors";
+            this.cmbFloors.Size = new System.Drawing.Size(100, 20);
+            this.cmbFloors.TabIndex = 3;
             // 
             // rb1
             // 
             this.rb1.AutoSize = true;
             this.rb1.Checked = true;
-            this.rb1.Location = new System.Drawing.Point(199, 16);
+            this.rb1.Location = new System.Drawing.Point(199, 43);
             this.rb1.Name = "rb1";
             this.rb1.Size = new System.Drawing.Size(71, 16);
             this.rb1.TabIndex = 4;
@@ -92,7 +95,7 @@
             // rb2
             // 
             this.rb2.AutoSize = true;
-            this.rb2.Location = new System.Drawing.Point(276, 16);
+            this.rb2.Location = new System.Drawing.Point(276, 43);
             this.rb2.Name = "rb2";
             this.rb2.Size = new System.Drawing.Size(77, 16);
             this.rb2.TabIndex = 5;
@@ -103,7 +106,7 @@
             // rb3
             // 
             this.rb3.AutoSize = true;
-            this.rb3.Location = new System.Drawing.Point(359, 16);
+            this.rb3.Location = new System.Drawing.Point(359, 43);
             this.rb3.Name = "rb3";
             this.rb3.Size = new System.Drawing.Size(77, 16);
             this.rb3.TabIndex = 6;
@@ -114,7 +117,7 @@
             // rb4
             // 
             this.rb4.AutoSize = true;
-            this.rb4.Location = new System.Drawing.Point(442, 16);
+            this.rb4.Location = new System.Drawing.Point(442, 43);
             this.rb4.Name = "rb4";
             this.rb4.Size = new System.Drawing.Size(77, 16);
             this.rb4.TabIndex = 7;
@@ -122,16 +125,37 @@
             this.rb4.Text = "特殊用户2";
             this.rb4.UseVisualStyleBackColor = true;
             // 
+            // btnPort
+            // 
+            this.btnPort.Location = new System.Drawing.Point(118, 10);
+            this.btnPort.Name = "btnPort";
+            this.btnPort.Size = new System.Drawing.Size(75, 23);
+            this.btnPort.TabIndex = 8;
+            this.btnPort.Text = "串口";
+            this.btnPort.UseVisualStyleBackColor = true;
+            this.btnPort.Click += new System.EventHandler(this.btnPort_Click);
+            // 
+            // cmbPorts
+            // 
+            this.cmbPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPorts.FormattingEnabled = true;
+            this.cmbPorts.Location = new System.Drawing.Point(12, 13);
+            this.cmbPorts.Name = "cmbPorts";
+            this.cmbPorts.Size = new System.Drawing.Size(100, 20);
+            this.cmbPorts.TabIndex = 9;
+            // 
             // FrmLift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 482);
+            this.Controls.Add(this.cmbPorts);
+            this.Controls.Add(this.btnPort);
             this.Controls.Add(this.rb4);
             this.Controls.Add(this.rb3);
             this.Controls.Add(this.rb2);
             this.Controls.Add(this.rb1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbFloors);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnHand);
             this.Controls.Add(this.btnAuto);
@@ -148,11 +172,13 @@
         private System.Windows.Forms.Button btnAuto;
         private System.Windows.Forms.Button btnHand;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbFloors;
         private System.Windows.Forms.RadioButton rb1;
         private System.Windows.Forms.RadioButton rb2;
         private System.Windows.Forms.RadioButton rb3;
         private System.Windows.Forms.RadioButton rb4;
+        private System.Windows.Forms.Button btnPort;
+        private System.Windows.Forms.ComboBox cmbPorts;
     }
 }
 

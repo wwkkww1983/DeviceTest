@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -16,17 +17,21 @@ namespace HitachiLift
     /// </summary>
     public partial class FrmLift : FrmBase
     {
+        SerialPort _port = null;
         public FrmLift()
         {
             InitializeComponent();
+
+            cmbPorts.DataSource = SerialPort.GetPortNames();
+            if (cmbPorts.DataSource != null)
+                cmbPorts.SelectedIndex = 0;
         }
 
         private void InitFloors()
         {
             var floorsRang = Enumerable.Range(1, 64).ToList();
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.DataSource = floorsRang;
-            comboBox1.SelectedIndex = 0;
+            cmbFloors.DataSource = floorsRang;
+            cmbFloors.SelectedIndex = 0;
         }
 
         private void Log(string log, params object[] p)
@@ -49,6 +54,20 @@ namespace HitachiLift
             InitFloors();
         }
 
+        private void btnPort_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _port = new SerialPort(cmbPorts.Text, 9600, Parity.None, 8, StopBits.One);
+                _port.Open();
+                btnPort.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                CMessageBox.Show("串口打开失败：" + ex.Message);
+            }
+        }
+
         /// <summary>
         /// 自动派
         /// </summary>
@@ -56,7 +75,7 @@ namespace HitachiLift
         /// <param name="e"></param>
         private void btnAuto_Click(object sender, EventArgs e)
         {
-            var floor = (byte)(comboBox1.SelectedIndex + 1);
+            var floor = (byte)(cmbFloors.SelectedIndex + 1);
             byte bx = 0x00;
             if (rb1.Checked)
                 bx = 0x00;
@@ -82,7 +101,7 @@ namespace HitachiLift
         /// <param name="e"></param>
         private void btnHand_Click(object sender, EventArgs e)
         {
-            var floor = (byte)(comboBox1.SelectedIndex + 1);
+            var floor = (byte)(cmbFloors.SelectedIndex + 1);
             var buffer = GetHandFloor(floor);
 
             var str = buffer.ToHex();
