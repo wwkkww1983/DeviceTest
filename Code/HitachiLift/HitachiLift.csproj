@@ -51,9 +51,11 @@
     <Compile Include="FrmLift.Designer.cs">
       <DependentUpon>FrmLift.cs</DependentUpon>
     </Compile>
+    <Compile Include="Funs.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerialPortOperate.cs" />
     <EmbeddedResource Include="FrmLift.resx">
       <DependentUpon>FrmLift.cs</DependentUpon>
     </EmbeddedResource>

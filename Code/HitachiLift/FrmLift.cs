@@ -25,6 +25,8 @@ namespace HitachiLift
             cmbPorts.DataSource = SerialPort.GetPortNames();
             if (cmbPorts.DataSource != null)
                 cmbPorts.SelectedIndex = 0;
+
+            SerialPortOperate.Window = this;
         }
 
         private void InitFloors()
@@ -34,10 +36,17 @@ namespace HitachiLift
             cmbFloors.SelectedIndex = 0;
         }
 
-        private void Log(string log, params object[] p)
+        public void Log(string log, params object[] p)
         {
-            richTextBox1.AppendText(string.Format(log, p));
-            richTextBox1.AppendText(Environment.NewLine);
+            Action act = () =>
+            {
+                richTextBox1.AppendText(string.Format(log, p));
+                richTextBox1.AppendText(Environment.NewLine);
+            };
+            if (richTextBox1.InvokeRequired)
+                richTextBox1.Invoke(act);
+            else
+                act();
         }
 
         private byte[] GetHandFloor(int floor)
@@ -58,9 +67,12 @@ namespace HitachiLift
         {
             try
             {
-                _port = new SerialPort(cmbPorts.Text, 9600, Parity.None, 8, StopBits.One);
-                _port.Open();
-                btnPort.Enabled = false;
+                var bOpen = SerialPortOperate.Open(cmbPorts.Text);
+                if (bOpen)
+                {
+                    SerialPortOperate.DoReceive();
+                    btnPort.Enabled = false;
+                }
             }
             catch (Exception ex)
             {
@@ -90,8 +102,10 @@ namespace HitachiLift
             Log("自动权限层：{0}", b41.ToHex());
             var handBuffer = new byte[8];
             var total = Package.CardDataSendToLiftPackage(handBuffer, b41);
-            Log("数据包长度：{0}", total.Length);
+            Log("长度：{0}", total.Length);
             Log("自动权限层完整包：{0}", total.ToHex());
+
+            SerialPortOperate.SendData(total);
         }
 
         /// <summary>
@@ -110,6 +124,72 @@ namespace HitachiLift
             var total = Package.CardDataSendToLiftPackage(buffer, 0);
             Log("数据包长度：{0}", total.Length);
             Log("手动权限层完整包：{0}", total.ToHex());
+
+            SerialPortOperate.SendData(total);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            SerialPortOperate.ClosePort();
+            base.OnClosing(e);
+        }
+
+        private void btnNoCard_Click(object sender, EventArgs e)
+        {
+            var total = Package.NoCard_Package();
+            Log("长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+        }
+
+        private void btnBaud_Click(object sender, EventArgs e)
+        {
+            var total = Package.ConfrmBaudRate_Package(9600);
+            Log("长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+
+            total = Package.ConfrmBaudRate_Package(19200);
+            Log("长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+
+            total = Package.ConfrmBaudRate_Package(38400);
+            Log("长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+
+            total = Package.ConfrmBaudRate_Package(57600);
+            Log("数据包长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+
+            total = Package.ConfrmBaudRate_Package(115200);
+            Log("数据包长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+        }
+
+        private void btnChangeBaud_Click(object sender, EventArgs e)
+        {
+            var total = Package.ChangeBaud_Package(9600);
+            Log("长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+            SerialPortOperate.ParsePackage(total);
+
+            total = Package.ChangeBaud_Package(19200);
+            Log("长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+            SerialPortOperate.ParsePackage(total);
+
+            total = Package.ChangeBaud_Package(38400);
+            Log("长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+            SerialPortOperate.ParsePackage(total);
+
+            total = Package.ChangeBaud_Package(57600);
+            Log("数据包长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+            SerialPortOperate.ParsePackage(total);
+
+            total = Package.ChangeBaud_Package(115200);
+            Log("数据包长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+            SerialPortOperate.ParsePackage(total);
         }
     }
 }
