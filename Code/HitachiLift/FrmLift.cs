@@ -17,14 +17,15 @@ namespace HitachiLift
     /// </summary>
     public partial class FrmLift : FrmBase
     {
-        SerialPort _port = null;
         public FrmLift()
         {
             InitializeComponent();
 
             cmbPorts.DataSource = SerialPort.GetPortNames();
-            if (cmbPorts.DataSource != null)
+            if (cmbPorts.DataSource != null && cmbPorts.Items.Count > 0)
                 cmbPorts.SelectedIndex = 0;
+            else
+                btnPort.Enabled = false;
 
             SerialPortOperate.Window = this;
         }
@@ -156,11 +157,11 @@ namespace HitachiLift
             Log("数据包：{0}", total.ToHex());
 
             total = Package.ConfrmBaudRate_Package(57600);
-            Log("数据包长度：{0}", total.Length);
+            Log("长度：{0}", total.Length);
             Log("数据包：{0}", total.ToHex());
 
             total = Package.ConfrmBaudRate_Package(115200);
-            Log("数据包长度：{0}", total.Length);
+            Log("长度：{0}", total.Length);
             Log("数据包：{0}", total.ToHex());
         }
 
@@ -182,14 +183,28 @@ namespace HitachiLift
             SerialPortOperate.ParsePackage(total);
 
             total = Package.ChangeBaud_Package(57600);
-            Log("数据包长度：{0}", total.Length);
+            Log("长度：{0}", total.Length);
             Log("数据包：{0}", total.ToHex());
             SerialPortOperate.ParsePackage(total);
 
             total = Package.ChangeBaud_Package(115200);
-            Log("数据包长度：{0}", total.Length);
+            Log("长度：{0}", total.Length);
+            Log("数据包：{0}", total.ToHex());
+            SerialPortOperate.ParsePackage(total);
+        }
+
+        private void btnBackGateState_Click(object sender, EventArgs e)
+        {
+           var total = Package.GateState_Package(1);
+            Log("闸机返回状态 长度：{0}", total.Length);
             Log("数据包：{0}", total.ToHex());
             SerialPortOperate.ParsePackage(total);
         }
     }
 }
+/*
+196
+ 44
+ 155
+ 207
+*/

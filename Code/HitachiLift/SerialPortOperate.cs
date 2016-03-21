@@ -22,7 +22,7 @@ namespace HitachiLift
         private static int _currentCardID = 0x00;
 
 
-        private static string _portName = "";
+        private static string _portName = "com1";
         public static FrmLift Window = null;
 
         public static bool Open(string portName, int baudRate = 9600)
@@ -34,8 +34,9 @@ namespace HitachiLift
                 _port.Open();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Log("串口打开失败：" + ex.Message);
                 return false;
             }
         }
@@ -104,7 +105,8 @@ namespace HitachiLift
                 _port.Close();
             }
             Thread.Sleep(100);
-            if (_thread.ThreadState == System.Threading.ThreadState.Running)
+            if (_thread != null &&
+                _thread.ThreadState == System.Threading.ThreadState.Running)
             {
                 _thread.Abort();
                 _thread = null;
@@ -191,9 +193,11 @@ namespace HitachiLift
             var baudRate = BitConverter.ToInt32(baudBytes, 0);
             //串口
             ClosePort();
+            Log("设置波特率：{0}", baudRate);
             if (Open(_portName, baudRate))
             {
-                Log("波特率设置成功：{0}", baudRate);
+                Log("波特率设置成功");
+                _isWork = true;
                 DoReceive();
             }
         }

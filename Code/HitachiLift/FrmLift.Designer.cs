@@ -40,11 +40,15 @@
             this.cmbPorts = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnNoCard = new System.Windows.Forms.Button();
-            this.btnBaud = new System.Windows.Forms.Button();
+            this.btnBackBaud = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnChangeBaud = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.btnBackGateState = new System.Windows.Forms.Button();
+            this.cmbBaud = new System.Windows.Forms.ComboBox();
+            this.cmbGateState = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -77,7 +81,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Location = new System.Drawing.Point(9, 99);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(921, 406);
+            this.richTextBox1.Size = new System.Drawing.Size(921, 393);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -168,7 +172,7 @@
             // 
             // btnNoCard
             // 
-            this.btnNoCard.Location = new System.Drawing.Point(6, 20);
+            this.btnNoCard.Location = new System.Drawing.Point(6, 39);
             this.btnNoCard.Name = "btnNoCard";
             this.btnNoCard.Size = new System.Drawing.Size(75, 23);
             this.btnNoCard.TabIndex = 11;
@@ -176,23 +180,27 @@
             this.btnNoCard.UseVisualStyleBackColor = true;
             this.btnNoCard.Click += new System.EventHandler(this.btnNoCard_Click);
             // 
-            // btnBaud
+            // btnBackBaud
             // 
-            this.btnBaud.Location = new System.Drawing.Point(87, 20);
-            this.btnBaud.Name = "btnBaud";
-            this.btnBaud.Size = new System.Drawing.Size(75, 23);
-            this.btnBaud.TabIndex = 12;
-            this.btnBaud.Text = "返回波特率";
-            this.btnBaud.UseVisualStyleBackColor = true;
-            this.btnBaud.Click += new System.EventHandler(this.btnBaud_Click);
+            this.btnBackBaud.Location = new System.Drawing.Point(87, 39);
+            this.btnBackBaud.Name = "btnBackBaud";
+            this.btnBackBaud.Size = new System.Drawing.Size(75, 23);
+            this.btnBackBaud.TabIndex = 12;
+            this.btnBackBaud.Text = "返回波特率";
+            this.btnBackBaud.UseVisualStyleBackColor = true;
+            this.btnBackBaud.Click += new System.EventHandler(this.btnBaud_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.cmbGateState);
+            this.groupBox2.Controls.Add(this.cmbBaud);
+            this.groupBox2.Controls.Add(this.btnBackGateState);
             this.groupBox2.Controls.Add(this.btnNoCard);
-            this.groupBox2.Controls.Add(this.btnBaud);
-            this.groupBox2.Location = new System.Drawing.Point(12, 511);
+            this.groupBox2.Controls.Add(this.btnBackBaud);
+            this.groupBox2.Location = new System.Drawing.Point(12, 498);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 57);
+            this.groupBox2.Size = new System.Drawing.Size(380, 70);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "闸机->选层器";
@@ -226,6 +234,51 @@
             this.button2.TabIndex = 12;
             this.button2.Text = "返回波特率";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // btnBackGateState
+            // 
+            this.btnBackGateState.Location = new System.Drawing.Point(168, 39);
+            this.btnBackGateState.Name = "btnBackGateState";
+            this.btnBackGateState.Size = new System.Drawing.Size(87, 23);
+            this.btnBackGateState.TabIndex = 13;
+            this.btnBackGateState.Text = "闸机返回状态";
+            this.btnBackGateState.UseVisualStyleBackColor = true;
+            this.btnBackGateState.Click += new System.EventHandler(this.btnBackGateState_Click);
+            // 
+            // cmbBaud
+            // 
+            this.cmbBaud.FormattingEnabled = true;
+            this.cmbBaud.Items.AddRange(new object[] {
+            "9600",
+            "19200",
+            "38400",
+            "57600",
+            "115200"});
+            this.cmbBaud.Location = new System.Drawing.Point(87, 13);
+            this.cmbBaud.Name = "cmbBaud";
+            this.cmbBaud.Size = new System.Drawing.Size(75, 20);
+            this.cmbBaud.TabIndex = 14;
+            // 
+            // cmbGateState
+            // 
+            this.cmbGateState.FormattingEnabled = true;
+            this.cmbGateState.Items.AddRange(new object[] {
+            "0",
+            "255",
+            "36"});
+            this.cmbGateState.Location = new System.Drawing.Point(168, 13);
+            this.cmbGateState.Name = "cmbGateState";
+            this.cmbGateState.Size = new System.Drawing.Size(75, 20);
+            this.cmbGateState.TabIndex = 15;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(287, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(87, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "闸机确认卡片权限";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // FrmLift
             // 
@@ -266,11 +319,15 @@
         private System.Windows.Forms.ComboBox cmbPorts;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnNoCard;
-        private System.Windows.Forms.Button btnBaud;
+        private System.Windows.Forms.Button btnBackBaud;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnChangeBaud;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnBackGateState;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cmbGateState;
+        private System.Windows.Forms.ComboBox cmbBaud;
     }
 }
 
