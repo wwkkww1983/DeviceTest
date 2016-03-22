@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Text.RegularExpressions;
+using Common;
 namespace HitachiLift
 {
     public static class Funs
@@ -38,6 +39,23 @@ namespace HitachiLift
                 array[i] = val;
             }
             return array;
+        }
+
+        public static byte GetNumber(string str)
+        {
+            Regex reg = new Regex(@"\d+");
+            Match m = reg.Match(str, 0);
+            while (m.Success)
+            {
+                var gc = m.Groups.Count;
+                for (int i = 0; i < gc; i++)
+                {
+                    Group g = m.Groups[i];
+                    var val = g.Value.ToByte();
+                    return val;
+                }
+            }
+            return 0;
         }
     }
 }

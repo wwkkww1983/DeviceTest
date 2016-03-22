@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace HitachiLift
@@ -28,6 +29,10 @@ namespace HitachiLift
                 btnPort.Enabled = false;
 
             SerialPortOperate.Window = this;
+            cmbSetBaud.SelectedIndex = 0;
+            cmbBaud.SelectedIndex = 0;
+            cmbGateState.SelectedIndex = 0;
+            cmbPersion.SelectedIndex = 0;
         }
 
         private void InitFloors()
@@ -81,6 +86,37 @@ namespace HitachiLift
             }
         }
 
+        private void btnQueryPackage_Click(object sender, EventArgs e)
+        {
+            var total = Package.Query_Package();
+            Log("查询--->");
+            Log("长度：{0}", total.Length);
+            Log("数据：{0}", total.ToHex());
+            SerialPortOperate.SendData(total);
+            SerialPortOperate.ParsePackage(total);
+        }
+
+        private void btnConfrmPackage_Click(object sender, EventArgs e)
+        {
+            var cardId = txtConfrmCardID.Text.ToInt32();
+            var total = Package.Confrm_Package(cardId);
+            Log("查询--->");
+            Log("长度：{0}", total.Length);
+            Log("数据：{0}", total.ToHex());
+            SerialPortOperate.SendData(total);
+            SerialPortOperate.ParsePackage(total);
+        }
+
+        private void btnChangeBaud_Click(object sender, EventArgs e)
+        {
+            var total = Package.ChangeBaud_Package(cmbSetBaud.Text.ToInt32());
+            Log("设置波特率--->");
+            Log("长度：{0}", total.Length);
+            Log("数据：{0}", total.ToHex());
+            SerialPortOperate.SendData(total);
+            SerialPortOperate.ParsePackage(total);
+        }
+
         /// <summary>
         /// 自动派
         /// </summary>
@@ -121,10 +157,9 @@ namespace HitachiLift
 
             var str = buffer.ToHex();
             Log("手动权限层：{0}", str);
-
             var total = Package.CardDataSendToLiftPackage(buffer, 0);
-            Log("数据包长度：{0}", total.Length);
-            Log("手动权限层完整包：{0}", total.ToHex());
+            Log("长度：{0}", total.Length);
+            Log("数据：{0}", total.ToHex());
 
             SerialPortOperate.SendData(total);
         }
@@ -138,66 +173,62 @@ namespace HitachiLift
         private void btnNoCard_Click(object sender, EventArgs e)
         {
             var total = Package.NoCard_Package();
+            Log("无卡包--->");
             Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
+            Log("数据：{0}", total.ToHex());
+            SerialPortOperate.SendData(total);
         }
 
         private void btnBaud_Click(object sender, EventArgs e)
         {
-            var total = Package.ConfrmBaudRate_Package(9600);
+            var total = Package.ConfrmBaudRate_Package(cmbBaud.Text.ToInt32());
+            Log("返回波特率--->");
             Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
-
-            total = Package.ConfrmBaudRate_Package(19200);
-            Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
-
-            total = Package.ConfrmBaudRate_Package(38400);
-            Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
-
-            total = Package.ConfrmBaudRate_Package(57600);
-            Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
-
-            total = Package.ConfrmBaudRate_Package(115200);
-            Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
-        }
-
-        private void btnChangeBaud_Click(object sender, EventArgs e)
-        {
-            var total = Package.ChangeBaud_Package(9600);
-            Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
-            SerialPortOperate.ParsePackage(total);
-
-            total = Package.ChangeBaud_Package(19200);
-            Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
-            SerialPortOperate.ParsePackage(total);
-
-            total = Package.ChangeBaud_Package(38400);
-            Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
-            SerialPortOperate.ParsePackage(total);
-
-            total = Package.ChangeBaud_Package(57600);
-            Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
-            SerialPortOperate.ParsePackage(total);
-
-            total = Package.ChangeBaud_Package(115200);
-            Log("长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
-            SerialPortOperate.ParsePackage(total);
+            Log("数据：{0}", total.ToHex());
+            SerialPortOperate.SendData(total);
         }
 
         private void btnBackGateState_Click(object sender, EventArgs e)
         {
-           var total = Package.GateState_Package(1);
-            Log("闸机返回状态 长度：{0}", total.Length);
-            Log("数据包：{0}", total.ToHex());
+            var gateState = cmbGateState.Text;
+            var val = Funs.GetNumber(gateState);
+            var total = Package.GateState_Package(val);
+            Log("闸机返回状态-->");
+            Log("长度：{0}", total.Length);
+            Log("数据：{0}", total.ToHex());
+            SerialPortOperate.ParsePackage(total);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var cardID = txtBackCardID.Text.ToInt32();
+            var gateState = cmbPersion.Text;
+            var val = Funs.GetNumber(gateState);
+            var total = Package.ConfrmGateCard_Package(cardID, val);
+            Log("闸机确认卡片状态-->");
+            Log("长度：{0}", total.Length);
+            Log("数据：{0}", total.ToHex());
+            SerialPortOperate.ParsePackage(total);
+        }
+
+        private void btnQueryGateState_Click(object sender, EventArgs e)
+        {
+            var total = Package.QueryGateState_Package();
+            Log("查询闸机状态-->");
+            Log("长度：{0}", total.Length);
+            Log("数据：{0}", total.ToHex());
+            SerialPortOperate.SendData(total);
+            SerialPortOperate.ParsePackage(total);
+        }
+
+        private void btnQueryGateCardPermission_Click(object sender, EventArgs e)
+        {
+            var cardID = txtId.Text.ToInt32();
+            var total = Package.QueryGateCardState_Package(cardID);
+            Log("查询闸机卡片权限-->");
+            Log("长度：{0}", total.Length);
+            Log("数据：{0}", total.ToHex());
+            SerialPortOperate.SendData(total);
             SerialPortOperate.ParsePackage(total);
         }
     }

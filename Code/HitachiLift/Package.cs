@@ -41,6 +41,109 @@ namespace HitachiLift
             return totals;
         }
 
+        /// <summary>
+        /// 查询包
+        /// </summary>
+        /// <returns></returns>
+        public static byte[] Query_Package()
+        {
+            List<byte> package = new List<byte>();
+            package.Add(_bFrameStart);
+            package.Add(0x5A);
+
+            var data = Funs.InitArray(5, 0xFF);
+            package.AddRange(data);
+
+            byte xor = Funs.GetXOR(package);
+            package.Add(xor);
+            package.Add(_bFrameEnd);
+            return package.ToArray();
+        }
+
+        /// <summary>
+        /// 确认包
+        /// </summary>
+        /// <returns></returns>
+        public static byte[] Confrm_Package(int cardID)
+        {
+            List<byte> package = new List<byte>();
+            package.Add(_bFrameStart);
+            package.Add(0x5C);
+
+            var cardBytes = Funs.IntToBytes(cardID);
+            package.AddRange(cardBytes);
+
+            package.Add(0xFF);
+
+            byte xor = Funs.GetXOR(package);
+            package.Add(xor);
+            package.Add(_bFrameEnd);
+            return package.ToArray();
+        }
+
+        /// <summary>
+        /// 变更波特率
+        /// </summary>
+        /// <param name="baudRate"></param>
+        /// <returns></returns>
+        public static byte[] ChangeBaud_Package(int baudRate)
+        {
+            List<byte> package = new List<byte>();
+            package.Add(_bFrameStart);
+            package.Add(0x5B);
+
+            var baudBytes = Funs.IntToBytes(baudRate);
+            package.AddRange(baudBytes);
+
+            package.Add(0xFF);
+
+            byte xor = Funs.GetXOR(package);
+            package.Add(xor);
+            package.Add(_bFrameEnd);
+
+            return package.ToArray();
+        }
+
+        /// <summary>
+        /// 查询闸机状态
+        /// </summary>
+        /// <returns></returns>
+        public static byte[] QueryGateState_Package()
+        {
+            List<byte> package = new List<byte>();
+            package.Add(_bFrameStart);
+            package.Add(0x5E);
+
+            var data = Funs.InitArray(5, 0xFF);
+            package.AddRange(data);
+
+            byte xor = Funs.GetXOR(package);
+            package.Add(xor);
+            package.Add(_bFrameEnd);
+            return package.ToArray();
+        }
+
+        /// <summary>
+        /// 查询闸机卡片权限
+        /// </summary>
+        /// <returns></returns>
+        public static byte[] QueryGateCardState_Package(int cardId)
+        {
+            List<byte> package = new List<byte>();
+            package.Add(_bFrameStart);
+            package.Add(0x5E);
+
+            var cardBytes = Funs.IntToBytes(cardId);
+            package.AddRange(cardBytes);
+
+            package.Add(0xFF);
+
+            byte xor = Funs.GetXOR(package);
+            package.Add(xor);
+            package.Add(_bFrameEnd);
+            return package.ToArray();
+        }
+
 
         /// <summary>
         /// 没有卡数据包
@@ -126,24 +229,6 @@ namespace HitachiLift
 
             var data = Funs.InitArray(36, 0xFF);
             package.AddRange(data);
-
-            byte xor = Funs.GetXOR(package);
-            package.Add(xor);
-            package.Add(_bFrameEnd);
-
-            return package.ToArray();
-        }
-
-        public static byte[] ChangeBaud_Package(int baudRate)
-        {
-            List<byte> package = new List<byte>();
-            package.Add(_bFrameStart);
-            package.Add(0x5B);
-
-            var baudBytes = Funs.IntToBytes(baudRate);
-            package.AddRange(baudBytes);
-
-            package.Add(0xFF);
 
             byte xor = Funs.GetXOR(package);
             package.Add(xor);

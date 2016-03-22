@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using Common;
 
 namespace HitachiLift
 {
@@ -118,7 +119,6 @@ namespace HitachiLift
             if (_port != null && _port.IsOpen)
             {
                 _port.Write(data, 0, data.Length);
-                Log("数据发送成功");
             }
             else
             {
@@ -139,11 +139,16 @@ namespace HitachiLift
                         {
                             //无卡
                             var back = Package.NoCard_Package();
+                            Log("无卡包--->");
+                            Log("长度：{0}", back.Length);
+                            Log("数据：{0}", back.ToHex());
                             SendData(back);
                         }
                         else
                         {
                             //有卡
+                            Log("确认包");
+
                         }
                     }
                     else
@@ -164,11 +169,22 @@ namespace HitachiLift
                         const byte Gate_OK = 0xFF;
                         const byte Gate_Error = 0x01;
                         var back = Package.GateState_Package(Gate_Error);
+
+                        Log("返回闸机状态--->");
+                        Log("长度：{0}", back.Length);
+                        Log("数据：{0}", back.ToHex());
+
                         SendData(back);
                     }
                     else
                     {
                         //闸机卡片权限
+
+                        var cardBytes = new byte[4];
+                        Array.Copy(data, 2, cardBytes, 0, 4);
+                        //发送时，高字节数据在前
+                        Array.Reverse(cardBytes);
+                        var _currentCardID = BitConverter.ToInt32(cardBytes, 0);
                         if (_currentCardID > 0)
                         {
                             const byte open = 0x00;
@@ -176,6 +192,11 @@ namespace HitachiLift
                             const byte open_error = 0xFF;
                             const byte data_error = 0x02;
                             var back = Package.ConfrmGateCard_Package(_currentCardID, open);
+
+                            Log("返回闸机卡片权限--->");
+                            Log("卡ID：{0}", _currentCardID);
+                            Log("长度：{0}", back.Length);
+                            Log("数据：{0}", back.ToHex());
                             SendData(back);
                             _currentCardID = 0x00;
                         }
@@ -200,6 +221,12 @@ namespace HitachiLift
                 _isWork = true;
                 DoReceive();
             }
+
+            var back = Package.ConfrmBaudRate_Package(baudRate);
+            Log("确认波特率--->");
+            Log("长度：{0}", back.Length);
+            Log("数据：{0}", back.ToHex());
+            SendData(back);
         }
 
         private static void Log(string log, params object[] p)
