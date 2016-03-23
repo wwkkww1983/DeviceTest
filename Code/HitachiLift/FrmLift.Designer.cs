@@ -159,7 +159,7 @@
             this.btnPort.Name = "btnPort";
             this.btnPort.Size = new System.Drawing.Size(75, 23);
             this.btnPort.TabIndex = 8;
-            this.btnPort.Text = "串口";
+            this.btnPort.Text = "串口111";
             this.btnPort.UseVisualStyleBackColor = true;
             this.btnPort.Click += new System.EventHandler(this.btnPort_Click);
             // 
