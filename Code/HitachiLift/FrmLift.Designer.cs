@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLift));
             this.btnAuto = new System.Windows.Forms.Button();
             this.btnHand = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -103,7 +104,7 @@
             // 
             this.cmbFloors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFloors.FormattingEnabled = true;
-            this.cmbFloors.Location = new System.Drawing.Point(12, 68);
+            this.cmbFloors.Location = new System.Drawing.Point(12, 66);
             this.cmbFloors.Name = "cmbFloors";
             this.cmbFloors.Size = new System.Drawing.Size(100, 20);
             this.cmbFloors.TabIndex = 3;
@@ -159,7 +160,7 @@
             this.btnPort.Name = "btnPort";
             this.btnPort.Size = new System.Drawing.Size(75, 23);
             this.btnPort.TabIndex = 8;
-            this.btnPort.Text = "串口";
+            this.btnPort.Text = "打开串口";
             this.btnPort.UseVisualStyleBackColor = true;
             this.btnPort.Click += new System.EventHandler(this.btnPort_Click);
             // 
@@ -186,7 +187,7 @@
             // 
             // btnNoCard
             // 
-            this.btnNoCard.Location = new System.Drawing.Point(194, 17);
+            this.btnNoCard.Location = new System.Drawing.Point(163, 17);
             this.btnNoCard.Name = "btnNoCard";
             this.btnNoCard.Size = new System.Drawing.Size(87, 23);
             this.btnNoCard.TabIndex = 11;
@@ -196,7 +197,7 @@
             // 
             // btnBackBaud
             // 
-            this.btnBackBaud.Location = new System.Drawing.Point(194, 43);
+            this.btnBackBaud.Location = new System.Drawing.Point(163, 43);
             this.btnBackBaud.Name = "btnBackBaud";
             this.btnBackBaud.Size = new System.Drawing.Size(87, 23);
             this.btnBackBaud.TabIndex = 12;
@@ -218,9 +219,9 @@
             this.groupBox2.Controls.Add(this.btnBackGateState);
             this.groupBox2.Controls.Add(this.btnNoCard);
             this.groupBox2.Controls.Add(this.btnBackBaud);
-            this.groupBox2.Location = new System.Drawing.Point(542, 6);
+            this.groupBox2.Location = new System.Drawing.Point(555, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(330, 154);
+            this.groupBox2.Size = new System.Drawing.Size(319, 154);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "闸机->选层器";
@@ -228,7 +229,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(48, 49);
+            this.label4.Location = new System.Drawing.Point(17, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 22;
@@ -237,7 +238,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 78);
+            this.label3.Location = new System.Drawing.Point(5, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 21;
@@ -246,7 +247,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 129);
+            this.label2.Location = new System.Drawing.Point(29, 129);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 20;
@@ -261,14 +262,14 @@
             "1 已开闸",
             "255 开闸异常",
             "12 数据出错"});
-            this.cmbPersion.Location = new System.Drawing.Point(95, 126);
+            this.cmbPersion.Location = new System.Drawing.Point(64, 126);
             this.cmbPersion.Name = "cmbPersion";
             this.cmbPersion.Size = new System.Drawing.Size(93, 20);
             this.cmbPersion.TabIndex = 19;
             // 
             // txtBackCardID
             // 
-            this.txtBackCardID.Location = new System.Drawing.Point(95, 99);
+            this.txtBackCardID.Location = new System.Drawing.Point(64, 99);
             this.txtBackCardID.Name = "txtBackCardID";
             this.txtBackCardID.Size = new System.Drawing.Size(93, 21);
             this.txtBackCardID.TabIndex = 18;
@@ -277,7 +278,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 104);
+            this.label1.Location = new System.Drawing.Point(29, 104);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 17;
@@ -285,7 +286,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(194, 109);
+            this.button1.Location = new System.Drawing.Point(163, 109);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 23);
             this.button1.TabIndex = 16;
@@ -301,7 +302,7 @@
             "0   退出使用",
             "255 正常使用",
             "6   数据出错"});
-            this.cmbGateState.Location = new System.Drawing.Point(95, 73);
+            this.cmbGateState.Location = new System.Drawing.Point(64, 73);
             this.cmbGateState.Name = "cmbGateState";
             this.cmbGateState.Size = new System.Drawing.Size(93, 20);
             this.cmbGateState.TabIndex = 15;
@@ -316,14 +317,14 @@
             "38400",
             "57600",
             "115200"});
-            this.cmbBaud.Location = new System.Drawing.Point(95, 46);
+            this.cmbBaud.Location = new System.Drawing.Point(64, 46);
             this.cmbBaud.Name = "cmbBaud";
             this.cmbBaud.Size = new System.Drawing.Size(93, 20);
             this.cmbBaud.TabIndex = 14;
             // 
             // btnBackGateState
             // 
-            this.btnBackGateState.Location = new System.Drawing.Point(194, 69);
+            this.btnBackGateState.Location = new System.Drawing.Point(163, 69);
             this.btnBackGateState.Name = "btnBackGateState";
             this.btnBackGateState.Size = new System.Drawing.Size(87, 23);
             this.btnBackGateState.TabIndex = 13;
@@ -345,7 +346,7 @@
             this.groupBox3.Controls.Add(this.btnQueryPackage);
             this.groupBox3.Location = new System.Drawing.Point(306, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(230, 154);
+            this.groupBox3.Size = new System.Drawing.Size(243, 154);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "选层器->闸机";
@@ -381,7 +382,7 @@
             // 
             this.btnQueryGateState.Location = new System.Drawing.Point(120, 100);
             this.btnQueryGateState.Name = "btnQueryGateState";
-            this.btnQueryGateState.Size = new System.Drawing.Size(88, 23);
+            this.btnQueryGateState.Size = new System.Drawing.Size(110, 23);
             this.btnQueryGateState.TabIndex = 21;
             this.btnQueryGateState.Text = "查询闸机状态";
             this.btnQueryGateState.UseVisualStyleBackColor = true;
@@ -408,7 +409,7 @@
             // 
             this.btnConfrmPackage.Location = new System.Drawing.Point(120, 41);
             this.btnConfrmPackage.Name = "btnConfrmPackage";
-            this.btnConfrmPackage.Size = new System.Drawing.Size(88, 23);
+            this.btnConfrmPackage.Size = new System.Drawing.Size(110, 23);
             this.btnConfrmPackage.TabIndex = 16;
             this.btnConfrmPackage.Text = "确认包";
             this.btnConfrmPackage.UseVisualStyleBackColor = true;
@@ -433,7 +434,7 @@
             // 
             this.btnChangeBaud.Location = new System.Drawing.Point(120, 70);
             this.btnChangeBaud.Name = "btnChangeBaud";
-            this.btnChangeBaud.Size = new System.Drawing.Size(88, 23);
+            this.btnChangeBaud.Size = new System.Drawing.Size(110, 23);
             this.btnChangeBaud.TabIndex = 11;
             this.btnChangeBaud.Text = "变更波特率";
             this.btnChangeBaud.UseVisualStyleBackColor = true;
@@ -443,7 +444,7 @@
             // 
             this.btnQueryPackage.Location = new System.Drawing.Point(120, 12);
             this.btnQueryPackage.Name = "btnQueryPackage";
-            this.btnQueryPackage.Size = new System.Drawing.Size(88, 23);
+            this.btnQueryPackage.Size = new System.Drawing.Size(110, 23);
             this.btnQueryPackage.TabIndex = 12;
             this.btnQueryPackage.Text = "查询包";
             this.btnQueryPackage.UseVisualStyleBackColor = true;
@@ -463,9 +464,9 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnHand);
             this.Controls.Add(this.btnAuto);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmLift";
-            this.ShowIcon = false;
-            this.Text = "日立派梯测试-Demo";
+            this.Text = "日立电梯派梯测试-Demo";
             this.Load += new System.EventHandler(this.FrmLift_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -22,9 +22,8 @@ namespace HitachiLift
         private static Thread _thread = null;
         private static int _currentCardID = 0x00;
 
-
-        private static string _portName = "com1";
         public static FrmLift Window = null;
+        private static string _portName = "com1";
 
         public static bool Open(string portName, int baudRate = 9600)
         {
@@ -44,6 +43,7 @@ namespace HitachiLift
 
         public static void DoReceive()
         {
+            _isWork = true;
             _thread = new Thread(Receive);
             _thread.Start();
         }
@@ -54,8 +54,8 @@ namespace HitachiLift
             {
                 try
                 {
-                    var b0 = _port.ReadByte();
-                    if (b0 != _bFrameStart)
+                    var frame = _port.ReadByte();
+                    if (frame != _bFrameStart)
                         continue;
 
                     var data = ReadData(_port);
@@ -67,7 +67,7 @@ namespace HitachiLift
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("port close");
+                    Log("处理异常:" + ex.Message);
                 }
             }
         }
@@ -88,14 +88,15 @@ namespace HitachiLift
 
         private static bool Xor(byte[] data)
         {
-            byte xor = 0x00;
-            byte sendXor = data[data.Length - 1];
-            for (var i = 0; i < data.Length - 1; i++)
+            var xor = 0x00;
+            var xorIndex = data.Length - 2;
+            var sendXor = data[xorIndex];
+            for (var i = 0; i < xorIndex; i++)
             {
                 xor ^= data[i];
             }
-            var b = (xor == sendXor);
-            return b;
+            var equal = (xor == sendXor);
+            return equal;
         }
 
         public static void ClosePort()
@@ -147,8 +148,11 @@ namespace HitachiLift
                         else
                         {
                             //有卡
-                            Log("确认包");
-
+                            Log("返回有卡数据包");
+                            var handBuffer = new byte[8];
+                            var floors = (byte)new Random().Next(1, 63);
+                            var back = Package.CardDataSendToLiftPackage(_currentCardID, handBuffer, floors);
+                            SendData(back);
                         }
                     }
                     else
@@ -169,22 +173,20 @@ namespace HitachiLift
                         const byte Gate_OK = 0xFF;
                         const byte Gate_Error = 0x01;
                         var back = Package.GateState_Package(Gate_Error);
-
                         Log("返回闸机状态--->");
                         Log("长度：{0}", back.Length);
                         Log("数据：{0}", back.ToHex());
-
                         SendData(back);
                     }
                     else
                     {
                         //闸机卡片权限
-
                         var cardBytes = new byte[4];
                         Array.Copy(data, 2, cardBytes, 0, 4);
                         //发送时，高字节数据在前
                         Array.Reverse(cardBytes);
                         var _currentCardID = BitConverter.ToInt32(cardBytes, 0);
+                        Log("确认卡片权限，卡号：" + _currentCardID);
                         if (_currentCardID > 0)
                         {
                             const byte open = 0x00;
@@ -192,7 +194,6 @@ namespace HitachiLift
                             const byte open_error = 0xFF;
                             const byte data_error = 0x02;
                             var back = Package.ConfrmGateCard_Package(_currentCardID, open);
-
                             Log("返回闸机卡片权限--->");
                             Log("卡ID：{0}", _currentCardID);
                             Log("长度：{0}", back.Length);
@@ -218,7 +219,6 @@ namespace HitachiLift
             if (Open(_portName, baudRate))
             {
                 Log("波特率设置成功");
-                _isWork = true;
                 DoReceive();
             }
 

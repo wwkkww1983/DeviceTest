@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
@@ -138,7 +139,7 @@ namespace HitachiLift
             var b41 = (byte)(bx | floor);
             Log("自动权限层：{0}", b41.ToHex());
             var handBuffer = new byte[8];
-            var total = Package.CardDataSendToLiftPackage(handBuffer, b41);
+            var total = Package.CardDataSendToLiftPackage(0, handBuffer, b41);
             Log("长度：{0}", total.Length);
             Log("自动权限层完整包：{0}", total.ToHex());
 
@@ -157,7 +158,7 @@ namespace HitachiLift
 
             var str = buffer.ToHex();
             Log("手动权限层：{0}", str);
-            var total = Package.CardDataSendToLiftPackage(buffer, 0);
+            var total = Package.CardDataSendToLiftPackage(0, buffer, 0);
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
 

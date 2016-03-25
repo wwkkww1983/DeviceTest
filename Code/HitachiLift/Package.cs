@@ -13,17 +13,18 @@ namespace HitachiLift
         /// <summary>
         /// 发送卡数据
         /// </summary>
+        /// <param name="cardID"></param>
         /// <param name="handfloors"></param>
         /// <param name="autofloor"></param>
         /// <returns></returns>
-        public static byte[] CardDataSendToLiftPackage(byte[] handfloors, byte autofloor)
+        public static byte[] CardDataSendToLiftPackage(int cardID, byte[] handfloors, byte autofloor)
         {
             List<byte> buffers = new List<byte>();
             buffers.Add(_bFrameStart);
             buffers.Add(0x5C);
 
-            byte[] cardID = new byte[4] { 0, 0, 0, 0 };
-            buffers.AddRange(cardID);
+            byte[] cardBytes = Funs.IntToBytes(cardID);
+            buffers.AddRange(cardBytes);
 
             buffers.AddRange(handfloors);
 
@@ -68,7 +69,7 @@ namespace HitachiLift
         {
             List<byte> package = new List<byte>();
             package.Add(_bFrameStart);
-            package.Add(0x5C);
+            package.Add(0x5A);
 
             var cardBytes = Funs.IntToBytes(cardID);
             package.AddRange(cardBytes);
@@ -220,7 +221,7 @@ namespace HitachiLift
         /// <returns></returns>
         public static byte[] ConfrmBaudRate_Package(int baudRate)
         {
-            List<byte> package = new List<byte>();
+            List<byte> package = new List<byte>(44);    
             package.Add(_bFrameStart);
             package.Add(0x5D);
 
@@ -233,7 +234,6 @@ namespace HitachiLift
             byte xor = Funs.GetXOR(package);
             package.Add(xor);
             package.Add(_bFrameEnd);
-
             return package.ToArray();
         }
     }
