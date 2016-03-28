@@ -1,5 +1,4 @@
-﻿
-using Common;
+﻿using Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,20 +6,22 @@ using System.Data;
 using System.Drawing;
 using System.IO.Ports;
 using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace QRReader
 {
+    /// <summary>
+    /// 德国Desko二维码阅读器
+    /// </summary>
     public partial class FrmQRCodeReader : FrmBase
     {
-        SerialPort serial = null;
-        string sourceByte = "02 5D 51 31 68 74 74 70 3A 2F 2F 77 77 77 2E 63 68 69 6E 61 62 65 73 6F 2E 63 6F 6D 2F 03";
+        private SerialPort serial = null;
+        private string sourceByte = "02 5D 51 31 68 74 74 70 3A 2F 2F 77 77 77 2E 63 68 69 6E 61 62 65 73 6F 2E 63 6F 6D 2F 03";
         public FrmQRCodeReader()
         {
             InitializeComponent();
-
-            var c = Encoding.UTF8.GetBytes("/");
         }
 
         private void FrmQRCodeReader_Load(object sender, EventArgs e)
@@ -46,6 +47,8 @@ namespace QRReader
             {
                 throw ex;
             }
+            var buffer = sourceByte.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
+            PrintCode(buffer, buffer.Length);
         }
 
         private void ReadComm(object obj)
@@ -63,10 +66,12 @@ namespace QRReader
                     buffer[pos] = stx;
                     pos++;
                     byte b = 0;
-                    while ((b = (byte)serial.ReadByte()) != 0x03)
+                    while ((b = (byte)serial.ReadByte()) > 0)
                     {
                         buffer[pos] = b;
                         pos++;
+                        if (b == 0x03)
+                            break;
                     }
                     PrintCode(buffer, pos);
                 }
@@ -84,13 +89,11 @@ namespace QRReader
             {
                 sb.Append(buffer[i] + " ");
             }
-            //结束码
-            sb.AppendLine("3");
-
             Invoke(new Action(() =>
             {
                 rtbCode.AppendText(sb.ToString());
-                var codeStr = Encoding.UTF8.GetString(buffer, 4, pos - 4);
+                rtbCode.AppendText("\n");
+                var codeStr = Encoding.UTF8.GetString(buffer, 4, pos - 5);
                 rtbCode.AppendText(DateTime.Now + " " + codeStr);
                 rtbCode.AppendText("\n");
             }));
