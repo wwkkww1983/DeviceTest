@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLift));
             this.btnAuto = new System.Windows.Forms.Button();
             this.btnHand = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtbLog = new System.Windows.Forms.RichTextBox();
             this.cmbFloors = new System.Windows.Forms.ComboBox();
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.rb2 = new System.Windows.Forms.RadioButton();
@@ -64,6 +64,8 @@
             this.cmbSetBaud = new System.Windows.Forms.ComboBox();
             this.btnChangeBaud = new System.Windows.Forms.Button();
             this.btnQueryPackage = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -89,24 +91,24 @@
             this.btnHand.UseVisualStyleBackColor = true;
             this.btnHand.Click += new System.EventHandler(this.btnHand_Click);
             // 
-            // richTextBox1
+            // rtbLog
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.rtbLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(4, 166);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(870, 389);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.rtbLog.Location = new System.Drawing.Point(4, 166);
+            this.rtbLog.Name = "rtbLog";
+            this.rtbLog.Size = new System.Drawing.Size(843, 389);
+            this.rtbLog.TabIndex = 2;
+            this.rtbLog.Text = "";
             // 
             // cmbFloors
             // 
             this.cmbFloors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFloors.FormattingEnabled = true;
-            this.cmbFloors.Location = new System.Drawing.Point(12, 66);
+            this.cmbFloors.Location = new System.Drawing.Point(48, 66);
             this.cmbFloors.Name = "cmbFloors";
-            this.cmbFloors.Size = new System.Drawing.Size(100, 20);
+            this.cmbFloors.Size = new System.Drawing.Size(64, 20);
             this.cmbFloors.TabIndex = 3;
             // 
             // rb1
@@ -168,9 +170,9 @@
             // 
             this.cmbPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPorts.FormattingEnabled = true;
-            this.cmbPorts.Location = new System.Drawing.Point(12, 25);
+            this.cmbPorts.Location = new System.Drawing.Point(48, 25);
             this.cmbPorts.Name = "cmbPorts";
-            this.cmbPorts.Size = new System.Drawing.Size(100, 20);
+            this.cmbPorts.Size = new System.Drawing.Size(64, 20);
             this.cmbPorts.TabIndex = 9;
             // 
             // groupBox1
@@ -184,6 +186,7 @@
             this.groupBox1.Size = new System.Drawing.Size(101, 113);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "用户类型";
             // 
             // btnNoCard
             // 
@@ -221,7 +224,7 @@
             this.groupBox2.Controls.Add(this.btnBackBaud);
             this.groupBox2.Location = new System.Drawing.Point(555, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(319, 154);
+            this.groupBox2.Size = new System.Drawing.Size(292, 154);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "闸机->选层器";
@@ -229,7 +232,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 49);
+            this.label4.Location = new System.Drawing.Point(17, 50);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 22;
@@ -238,7 +241,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 78);
+            this.label3.Location = new System.Drawing.Point(5, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 21;
@@ -247,7 +250,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 129);
+            this.label2.Location = new System.Drawing.Point(29, 130);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 20;
@@ -278,11 +281,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 104);
+            this.label1.Location = new System.Drawing.Point(29, 103);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 17;
-            this.label1.Text = "卡ID";
+            this.label1.Text = "卡号";
             // 
             // button1
             // 
@@ -362,11 +365,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 132);
+            this.label6.Location = new System.Drawing.Point(8, 131);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 23;
-            this.label6.Text = "卡ID";
+            this.label6.Text = "卡号";
             // 
             // btnQueryGateCardPermission
             // 
@@ -399,11 +402,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 47);
+            this.label5.Location = new System.Drawing.Point(9, 47);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 19;
-            this.label5.Text = "卡ID";
+            this.label5.Text = "卡号";
             // 
             // btnConfrmPackage
             // 
@@ -450,18 +453,38 @@
             this.btnQueryPackage.UseVisualStyleBackColor = true;
             this.btnQueryPackage.Click += new System.EventHandler(this.btnQueryPackage_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(13, 69);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "楼层";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(13, 28);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(29, 12);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "串口";
+            // 
             // FrmLift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 561);
+            this.ClientSize = new System.Drawing.Size(852, 561);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmbPorts);
             this.Controls.Add(this.btnPort);
             this.Controls.Add(this.cmbFloors);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.rtbLog);
             this.Controls.Add(this.btnHand);
             this.Controls.Add(this.btnAuto);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -475,6 +498,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -482,7 +506,7 @@
 
         private System.Windows.Forms.Button btnAuto;
         private System.Windows.Forms.Button btnHand;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtbLog;
         private System.Windows.Forms.ComboBox cmbFloors;
         private System.Windows.Forms.RadioButton rb1;
         private System.Windows.Forms.RadioButton rb2;
@@ -515,6 +539,8 @@
         private System.Windows.Forms.Button btnQueryGateCardPermission;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 

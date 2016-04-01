@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmQRCodeReader));
             this.btnOpen = new System.Windows.Forms.Button();
             this.cmbPorts = new System.Windows.Forms.ComboBox();
             this.rtbCode = new System.Windows.Forms.RichTextBox();
@@ -48,7 +49,7 @@
             // 
             this.cmbPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPorts.FormattingEnabled = true;
-            this.cmbPorts.Location = new System.Drawing.Point(14, 12);
+            this.cmbPorts.Location = new System.Drawing.Point(7, 12);
             this.cmbPorts.Name = "cmbPorts";
             this.cmbPorts.Size = new System.Drawing.Size(121, 20);
             this.cmbPorts.TabIndex = 18;
@@ -57,9 +58,9 @@
             // 
             this.rtbCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbCode.Location = new System.Drawing.Point(12, 70);
+            this.rtbCode.Location = new System.Drawing.Point(5, 70);
             this.rtbCode.Name = "rtbCode";
-            this.rtbCode.Size = new System.Drawing.Size(735, 359);
+            this.rtbCode.Size = new System.Drawing.Size(727, 397);
             this.rtbCode.TabIndex = 21;
             this.rtbCode.Text = "";
             // 
@@ -67,7 +68,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(15, 49);
+            this.label1.Location = new System.Drawing.Point(8, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 19);
             this.label1.TabIndex = 22;
@@ -77,11 +78,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(759, 435);
+            this.ClientSize = new System.Drawing.Size(737, 479);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rtbCode);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.cmbPorts);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmQRCodeReader";
             this.Text = "Desko-GSRU500-二维码阅读器(RS232)";
             this.Load += new System.EventHandler(this.FrmQRCodeReader_Load);

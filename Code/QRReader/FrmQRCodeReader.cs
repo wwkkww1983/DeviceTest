@@ -9,6 +9,7 @@ using System.Text;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace QRReader
 {
@@ -19,9 +20,34 @@ namespace QRReader
     {
         private SerialPort serial = null;
         private string sourceByte = "02 5D 51 31 68 74 74 70 3A 2F 2F 77 77 77 2E 63 68 69 6E 61 62 65 73 6F 2E 63 6F 6D 2F 03";
+
+
+        const char SODB = '\u001E';
+
+        const char EODB = '\u001F';
+
+        const char STX = '\u0002';
+
+        const char ETX = '\u0003';
+
+        const char SODM = '\u000E';
+
+        const char EODM = '\u000F';
+
+        const char SODO = '\u001C';
+
+        const char EODO = '\u001D';
+
+        const char CR = '\r';
+
+        const char DOC_ID_ATB = 'A';
+
+        const char DOC_ID_CC = 'C';
         public FrmQRCodeReader()
         {
             InitializeComponent();
+
+      
         }
 
         private void FrmQRCodeReader_Load(object sender, EventArgs e)
@@ -107,6 +133,16 @@ namespace QRReader
                     serial.Close();
             }
             base.OnFormClosing(e);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F1)
+            {
+                new FrmAbout().ShowDialog();
+                return false;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace HitachiLift
 {
     /// <summary>
-    /// 日立电梯派梯
+    /// 广州耀华 日立电梯派梯
     /// </summary>
     public partial class FrmLift : FrmBase
     {
@@ -47,11 +47,11 @@ namespace HitachiLift
         {
             Action act = () =>
             {
-                richTextBox1.AppendText(string.Format(log, p));
-                richTextBox1.AppendText(Environment.NewLine);
+                rtbLog.AppendText(string.Format(log, p));
+                rtbLog.AppendText(Environment.NewLine);
             };
-            if (richTextBox1.InvokeRequired)
-                richTextBox1.Invoke(act);
+            if (rtbLog.InvokeRequired)
+                rtbLog.Invoke(act);
             else
                 act();
         }
@@ -141,7 +141,7 @@ namespace HitachiLift
             var handBuffer = new byte[8];
             var total = Package.CardDataSendToLiftPackage(0, handBuffer, b41);
             Log("长度：{0}", total.Length);
-            Log("自动权限层完整包：{0}", total.ToHex());
+            Log("数据：{0}", total.ToHex());
 
             SerialPortOperate.SendData(total);
         }
