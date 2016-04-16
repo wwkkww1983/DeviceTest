@@ -26,8 +26,9 @@ namespace HitachiLift
             byte[] cardBytes = Funs.IntToBytes(cardID);
             buffers.AddRange(cardBytes);
 
+            //手动权限层
             buffers.AddRange(handfloors);
-
+            //保留
             var reserves = Funs.InitArray(27, 0xFF);
             buffers.AddRange(reserves);
 

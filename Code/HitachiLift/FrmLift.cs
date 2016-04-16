@@ -50,10 +50,17 @@ namespace HitachiLift
                 rtbLog.AppendText(string.Format(log, p));
                 rtbLog.AppendText(Environment.NewLine);
             };
-            if (rtbLog.InvokeRequired)
-                rtbLog.Invoke(act);
-            else
-                act();
+
+            try
+            {
+                if (rtbLog.InvokeRequired)
+                    rtbLog.Invoke(act);
+                else
+                    act();
+            }
+            catch
+            {
+            }
         }
 
         private byte[] GetHandFloor(int floor)
@@ -119,7 +126,7 @@ namespace HitachiLift
         }
 
         /// <summary>
-        /// 自动派
+        /// 自动派梯
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -147,7 +154,7 @@ namespace HitachiLift
         }
 
         /// <summary>
-        /// 手工派
+        /// 手动派梯
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

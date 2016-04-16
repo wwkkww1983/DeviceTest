@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
@@ -33,11 +34,14 @@ namespace Honeywell3580
             {
                 btnOpen.Enabled = false;
             }
+
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            _serialPort = new SerialPort(cmbPorts.Text, 9600, Parity.None, 8, StopBits.One);
+            //Honeywell 3580扫描抢默认波特率为 9600
+            //YJ-HF500      扫描抢默认波特率为 115200
+            _serialPort = new SerialPort(cmbPorts.Text, 115200, Parity.None, 8, StopBits.One);
             try
             {
                 _serialPort.Open();
@@ -61,7 +65,6 @@ namespace Honeywell3580
                     {
                         if (b == 13)
                         {
-                            var r = _serialPort.ReadByte();
                             var barcode = new string(_barcodeList.ToArray());
                             PrintCode(barcode);
                             _barcodeList.Clear();
@@ -91,7 +94,7 @@ namespace Honeywell3580
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             _stop = true;
-            if (_serialPort.IsOpen)
+            if (_serialPort != null && _serialPort.IsOpen)
                 _serialPort.Close();
         }
     }
