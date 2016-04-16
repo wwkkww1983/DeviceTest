@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarCodeReader.cs" />
+    <Compile Include="CommData.cs" />
     <Compile Include="FrmLift.cs">
       <SubType>Form</SubType>
     </Compile>

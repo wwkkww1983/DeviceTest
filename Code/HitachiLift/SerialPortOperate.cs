@@ -20,7 +20,6 @@ namespace HitachiLift
         private const byte _bFrameStart = 0xAC;
         private const byte _bFrameEnd = 0xCA;
         private static Thread _thread = null;
-        private static int _currentCardID = 0x00;
 
         public static FrmLift Window = null;
         private static string _portName = "com1";
@@ -136,7 +135,7 @@ namespace HitachiLift
                     if (data[2] == 0xFF && data[3] == 0xFF && data[4] == 0xFF && data[5] == 0xFF)
                     {
                         //查询有无卡
-                        if (_currentCardID == 0)
+                        if (CommData.CardCode == 0)
                         {
                             //无卡
                             var back = Package.NoCard_Package();
@@ -151,7 +150,7 @@ namespace HitachiLift
                             Log("返回有卡数据包");
                             var handBuffer = new byte[8];
                             var floors = (byte)new Random().Next(1, 63);
-                            var back = Package.CardDataSendToLiftPackage(_currentCardID, handBuffer, floors);
+                            var back = Package.CardDataSendToLiftPackage(CommData.CardCode, handBuffer, floors);
                             SendData(back);
                         }
                     }
@@ -160,6 +159,8 @@ namespace HitachiLift
                         //确认包
                         var back = Package.NoCard_Package();
                         SendData(back);
+                        //收到选层器确认包后，清空卡号结束本次回话
+                        CommData.CardCode = 0;
                     }
                     break;
                 case 0x5B: //选择器->读卡器  变更波特率

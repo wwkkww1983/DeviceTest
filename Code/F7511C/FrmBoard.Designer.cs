@@ -45,14 +45,14 @@
             this.DI1 = new System.Windows.Forms.CheckBox();
             this.Write_Button = new System.Windows.Forms.Button();
             this.DO_GroupBox = new System.Windows.Forms.GroupBox();
-            this.DO1 = new System.Windows.Forms.CheckBox();
-            this.DO2 = new System.Windows.Forms.CheckBox();
-            this.DO3 = new System.Windows.Forms.CheckBox();
-            this.DO4 = new System.Windows.Forms.CheckBox();
-            this.DO5 = new System.Windows.Forms.CheckBox();
             this.DO6 = new System.Windows.Forms.CheckBox();
             this.DO7 = new System.Windows.Forms.CheckBox();
             this.DO8 = new System.Windows.Forms.CheckBox();
+            this.DO4 = new System.Windows.Forms.CheckBox();
+            this.DO5 = new System.Windows.Forms.CheckBox();
+            this.DO2 = new System.Windows.Forms.CheckBox();
+            this.DO3 = new System.Windows.Forms.CheckBox();
+            this.DO1 = new System.Windows.Forms.CheckBox();
             this.WDT_GroupBox.SuspendLayout();
             this.DI_GroupBox.SuspendLayout();
             this.DO_GroupBox.SuspendLayout();
@@ -223,46 +223,6 @@
             this.DO_GroupBox.TabStop = false;
             this.DO_GroupBox.Text = "DO";
             // 
-            // DO1
-            // 
-            this.DO1.Location = new System.Drawing.Point(288, 29);
-            this.DO1.Name = "DO1";
-            this.DO1.Size = new System.Drawing.Size(38, 26);
-            this.DO1.TabIndex = 7;
-            this.DO1.Text = "1";
-            // 
-            // DO2
-            // 
-            this.DO2.Location = new System.Drawing.Point(250, 28);
-            this.DO2.Name = "DO2";
-            this.DO2.Size = new System.Drawing.Size(38, 26);
-            this.DO2.TabIndex = 11;
-            this.DO2.Text = "2";
-            // 
-            // DO3
-            // 
-            this.DO3.Location = new System.Drawing.Point(211, 28);
-            this.DO3.Name = "DO3";
-            this.DO3.Size = new System.Drawing.Size(38, 26);
-            this.DO3.TabIndex = 10;
-            this.DO3.Text = "3";
-            // 
-            // DO4
-            // 
-            this.DO4.Location = new System.Drawing.Point(173, 28);
-            this.DO4.Name = "DO4";
-            this.DO4.Size = new System.Drawing.Size(38, 26);
-            this.DO4.TabIndex = 13;
-            this.DO4.Text = "4";
-            // 
-            // DO5
-            // 
-            this.DO5.Location = new System.Drawing.Point(134, 28);
-            this.DO5.Name = "DO5";
-            this.DO5.Size = new System.Drawing.Size(38, 26);
-            this.DO5.TabIndex = 12;
-            this.DO5.Text = "5";
-            // 
             // DO6
             // 
             this.DO6.Location = new System.Drawing.Point(96, 28);
@@ -287,6 +247,46 @@
             this.DO8.TabIndex = 15;
             this.DO8.Text = "8";
             // 
+            // DO4
+            // 
+            this.DO4.Location = new System.Drawing.Point(173, 28);
+            this.DO4.Name = "DO4";
+            this.DO4.Size = new System.Drawing.Size(38, 26);
+            this.DO4.TabIndex = 13;
+            this.DO4.Text = "4";
+            // 
+            // DO5
+            // 
+            this.DO5.Location = new System.Drawing.Point(134, 28);
+            this.DO5.Name = "DO5";
+            this.DO5.Size = new System.Drawing.Size(38, 26);
+            this.DO5.TabIndex = 12;
+            this.DO5.Text = "5";
+            // 
+            // DO2
+            // 
+            this.DO2.Location = new System.Drawing.Point(250, 28);
+            this.DO2.Name = "DO2";
+            this.DO2.Size = new System.Drawing.Size(38, 26);
+            this.DO2.TabIndex = 11;
+            this.DO2.Text = "2";
+            // 
+            // DO3
+            // 
+            this.DO3.Location = new System.Drawing.Point(211, 28);
+            this.DO3.Name = "DO3";
+            this.DO3.Size = new System.Drawing.Size(38, 26);
+            this.DO3.TabIndex = 10;
+            this.DO3.Text = "3";
+            // 
+            // DO1
+            // 
+            this.DO1.Location = new System.Drawing.Point(288, 29);
+            this.DO1.Name = "DO1";
+            this.DO1.Size = new System.Drawing.Size(38, 26);
+            this.DO1.TabIndex = 7;
+            this.DO1.Text = "1";
+            // 
             // FrmBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -298,7 +298,7 @@
             this.Controls.Add(this.DI_GroupBox);
             this.Controls.Add(this.Write_Button);
             this.Name = "FrmBoard";
-            this.Text = "Form1";
+            this.Text = "工控机IO测试";
             this.Load += new System.EventHandler(this.FrmBoard_Load);
             this.WDT_GroupBox.ResumeLayout(false);
             this.WDT_GroupBox.PerformLayout();

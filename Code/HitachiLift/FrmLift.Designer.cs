@@ -66,6 +66,7 @@
             this.btnQueryPackage = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.btnBarcode = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -137,7 +138,7 @@
             // rb3
             // 
             this.rb3.AutoSize = true;
-            this.rb3.Location = new System.Drawing.Point(10, 61);
+            this.rb3.Location = new System.Drawing.Point(10, 63);
             this.rb3.Name = "rb3";
             this.rb3.Size = new System.Drawing.Size(77, 16);
             this.rb3.TabIndex = 6;
@@ -153,7 +154,7 @@
             this.rb4.Size = new System.Drawing.Size(77, 16);
             this.rb4.TabIndex = 7;
             this.rb4.TabStop = true;
-            this.rb4.Text = "特殊用户2";
+            this.rb4.Text = "特殊用户3";
             this.rb4.UseVisualStyleBackColor = true;
             // 
             // btnPort
@@ -471,11 +472,22 @@
             this.label8.TabIndex = 21;
             this.label8.Text = "串口";
             // 
+            // btnBarcode
+            // 
+            this.btnBarcode.Location = new System.Drawing.Point(118, 136);
+            this.btnBarcode.Name = "btnBarcode";
+            this.btnBarcode.Size = new System.Drawing.Size(75, 23);
+            this.btnBarcode.TabIndex = 22;
+            this.btnBarcode.Text = "QRCode";
+            this.btnBarcode.UseVisualStyleBackColor = true;
+            this.btnBarcode.Click += new System.EventHandler(this.btnBarcode_Click);
+            // 
             // FrmLift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 561);
+            this.Controls.Add(this.btnBarcode);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox3);
@@ -541,6 +553,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnBarcode;
     }
 }
 

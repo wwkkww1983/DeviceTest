@@ -239,6 +239,14 @@ namespace HitachiLift
             SerialPortOperate.SendData(total);
             SerialPortOperate.ParsePackage(total);
         }
+
+        BarCodeReader code = null;
+        private void btnBarcode_Click(object sender, EventArgs e)
+        {
+            code = new BarCodeReader();
+            code.Open("Com5", 115200);
+            btnBarcode.Enabled = false;
+        }
     }
 }
 /*
