@@ -5,6 +5,9 @@ using System.Text;
 
 namespace HitachiLift
 {
+    /// <summary>
+    /// 日立电梯协议包
+    /// </summary>
     public static class Package
     {
         private const byte _bFrameStart = 0xAC;

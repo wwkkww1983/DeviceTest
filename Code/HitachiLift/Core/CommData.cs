@@ -5,6 +5,9 @@ using System.Text;
 
 namespace HitachiLift
 {
+    /// <summary>
+    /// 公共数据
+    /// </summary>
     public static class CommData
     {
         /// <summary>

@@ -48,8 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BarCodeReader.cs" />
-    <Compile Include="CommData.cs" />
+    <Compile Include="Core\CommData.cs" />
     <Compile Include="FrmLift.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,10 +56,10 @@
       <DependentUpon>FrmLift.cs</DependentUpon>
     </Compile>
     <Compile Include="Funs.cs" />
-    <Compile Include="Package.cs" />
+    <Compile Include="Core\Package.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SerialPortOperate.cs" />
+    <Compile Include="Core\SerialPortOperate.cs" />
     <EmbeddedResource Include="FrmLift.resx">
       <DependentUpon>FrmLift.cs</DependentUpon>
     </EmbeddedResource>

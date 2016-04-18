@@ -16,38 +16,14 @@ namespace QRReader
     /// <summary>
     /// 德国Desko二维码阅读器
     /// </summary>
-    public partial class FrmQRCodeReader : FrmBase
+    public partial class FrmCodeReader : FrmBase
     {
-        private SerialPort serial = null;
-        private string sourceByte = "02 5D 51 31 68 74 74 70 3A 2F 2F 77 77 77 2E 63 68 69 6E 61 62 65 73 6F 2E 63 6F 6D 2F 03";
-
-
-        const char SODB = '\u001E';
-
-        const char EODB = '\u001F';
-
-        const char STX = '\u0002';
-
-        const char ETX = '\u0003';
-
-        const char SODM = '\u000E';
-
-        const char EODM = '\u000F';
-
-        const char SODO = '\u001C';
-
-        const char EODO = '\u001D';
-
-        const char CR = '\r';
-
-        const char DOC_ID_ATB = 'A';
-
-        const char DOC_ID_CC = 'C';
-        public FrmQRCodeReader()
+        private bool _isStop = false;
+        private SerialPort _serial = null;
+        private string _sourceByte = "02 5D 51 31 68 74 74 70 3A 2F 2F 77 77 77 2E 63 68 69 6E 61 62 65 73 6F 2E 63 6F 6D 2F 03";
+        public FrmCodeReader()
         {
             InitializeComponent();
-
-      
         }
 
         private void FrmQRCodeReader_Load(object sender, EventArgs e)
@@ -62,10 +38,10 @@ namespace QRReader
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            serial = new SerialPort(cmbPorts.Text, 9600, Parity.None, 8, StopBits.One);
+            _serial = new SerialPort(cmbPorts.Text, 9600, Parity.None, 8, StopBits.One);
             try
             {
-                serial.Open();
+                _serial.Open();
                 ThreadPool.QueueUserWorkItem(ReadComm);
                 btnOpen.Enabled = false;
             }
@@ -73,26 +49,26 @@ namespace QRReader
             {
                 throw ex;
             }
-            var buffer = sourceByte.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
+            var buffer = _sourceByte.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
             PrintCode(buffer, buffer.Length);
         }
 
         private void ReadComm(object obj)
         {
-            while (true)
+            while (!_isStop)
             {
                 try
                 {
                     var pos = 0;
                     byte[] buffer = new byte[128];
-                    var stx = (byte)serial.ReadByte();
+                    var stx = (byte)_serial.ReadByte();
                     if (stx != 0x02)
                         continue;
 
                     buffer[pos] = stx;
                     pos++;
                     byte b = 0;
-                    while ((b = (byte)serial.ReadByte()) > 0)
+                    while ((b = (byte)_serial.ReadByte()) > 0)
                     {
                         buffer[pos] = b;
                         pos++;
@@ -127,22 +103,13 @@ namespace QRReader
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (serial != null)
+            _isStop = true;
+            if (_serial != null)
             {
-                if (serial.IsOpen)
-                    serial.Close();
+                if (_serial.IsOpen)
+                    _serial.Close();
             }
             base.OnFormClosing(e);
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.F1)
-            {
-                new FrmAbout().ShowDialog();
-                return false;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

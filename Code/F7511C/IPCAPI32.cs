@@ -4,12 +4,12 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace TrafficBankGateControl
+namespace F7511C
 {
     /// <summary>
-    /// 主板IO控制
+    /// 主板IO控制(32)
     /// </summary>
-    public sealed class IPCAPI
+    public sealed class IPCAPI32
     {
         const string dllname = "IPC\\F7511132.dll";
         [DllImport(dllname, CharSet = CharSet.None, ExactSpelling = false)]

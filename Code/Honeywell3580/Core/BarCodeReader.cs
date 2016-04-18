@@ -8,19 +8,30 @@ using System.Diagnostics;
 using System.Threading;
 using Common;
 
-namespace HitachiLift
+namespace Honeywell3580
 {
-    public class BarCodeReader
+    /// <summary>
+    /// 霍尼韦尔和优解二维码阅读器
+    /// </summary>
+    /// <remarks>
+    /// Honeywell 3580扫描抢默认波特率为 9600
+    /// YJ-HF500      扫描抢默认波特率为 115200
+    /// </remarks>
+    public class BarCodeReader : IDisposable
     {
-        string _portName = "";
-        SerialPort _serialPort = null;
-        bool _stop = false;
-        List<char> _barcodeList = new List<char>();
-        public bool Open(string portName, int baudRate = 9600)
+        private bool _stop = false;
+        private SerialPort _serialPort = null;
+        private List<char> _barcodeList = new List<char>();
+        public bool Open(string portName, ReaderType reader)
         {
             try
             {
-                _portName = portName;
+                var baudRate = 9600;
+                if (reader == ReaderType.Honeywell)
+                    baudRate = 9600;
+                else if (reader == ReaderType.YJ)
+                    baudRate = 115200;
+
                 _serialPort = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
                 _serialPort.Open();
 
@@ -34,6 +45,7 @@ namespace HitachiLift
             }
         }
 
+
         public void ReadComm(object obj)
         {
             while (!_stop)
@@ -46,7 +58,6 @@ namespace HitachiLift
                         if (b == 13)
                         {
                             var barcode = new string(_barcodeList.ToArray());
-                            CommData.CardCode = barcode.ToInt32();
                             Log(barcode);
                             _barcodeList.Clear();
                         }
@@ -63,15 +74,29 @@ namespace HitachiLift
             }
         }
 
-        public void Close()
+
+        private void Log(string log, params object[] p)
+        {
+            Context.Log.Write(string.Format(log, p));
+        }
+
+        public void Dispose()
         {
             _stop = true;
+            if (_serialPort != null)
+                _serialPort.Close();
         }
+    }
 
-
-        private static void Log(string log, params object[] p)
-        {
-            Debug.WriteLine(string.Format(log, p));
-        }
+    public enum ReaderType
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        Honeywell,
+        /// <summary>
+        /// 优解
+        /// </summary>
+        YJ
     }
 }

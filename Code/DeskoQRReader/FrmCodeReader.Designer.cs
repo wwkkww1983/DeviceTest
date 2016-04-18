@@ -1,6 +1,6 @@
 ﻿namespace QRReader
 {
-    partial class FrmQRCodeReader
+    partial class FrmCodeReader
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmQRCodeReader));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCodeReader));
             this.btnOpen = new System.Windows.Forms.Button();
             this.cmbPorts = new System.Windows.Forms.ComboBox();
             this.rtbCode = new System.Windows.Forms.RichTextBox();

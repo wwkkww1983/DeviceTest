@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
-namespace IO
+namespace QRReader
 {
     static class Program
     {
@@ -15,7 +14,7 @@ namespace IO
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmMain());
+            Application.Run(new FrmCodeReader());
         }
     }
 }
