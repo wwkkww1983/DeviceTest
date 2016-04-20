@@ -55,7 +55,7 @@
     <Compile Include="FrmLift.Designer.cs">
       <DependentUpon>FrmLift.cs</DependentUpon>
     </Compile>
-    <Compile Include="Funs.cs" />
+    <Compile Include="Core\Funs.cs" />
     <Compile Include="Core\Package.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

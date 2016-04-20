@@ -101,6 +101,8 @@ namespace HitachiLift
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
             SerialPortOperate.SendData(total);
+
+            CommData.CardCode = 233;
             SerialPortOperate.ParsePackage(total);
         }
 

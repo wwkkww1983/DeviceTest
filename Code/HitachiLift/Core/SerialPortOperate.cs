@@ -15,8 +15,8 @@ namespace HitachiLift
     /// </summary>
     public static class SerialPortOperate
     {
-        private static SerialPort _port = null;
         private static bool _isWork = true;
+        private static SerialPort _port = null;
         private const byte _bFrameStart = 0xAC;
         private const byte _bFrameEnd = 0xCA;
         private static Thread _thread = null;
@@ -134,7 +134,6 @@ namespace HitachiLift
                 case 0x5A: //选择器->读卡器  查询包
                     if (data[2] == 0xFF && data[3] == 0xFF && data[4] == 0xFF && data[5] == 0xFF)
                     {
-                        //查询有无卡
                         if (CommData.CardCode == 0)
                         {
                             //无卡
@@ -146,17 +145,19 @@ namespace HitachiLift
                         }
                         else
                         {
-                            //有卡
-                            Log("返回有卡数据包");
+                            //有卡(带卡权限)
+                            Log("有卡包--->");
                             var handBuffer = new byte[8];
                             var floors = (byte)new Random().Next(1, 63);
                             var back = Package.CardDataSendToLiftPackage(CommData.CardCode, handBuffer, floors);
+                            Log("楼层=" + floors);
                             SendData(back);
                         }
                     }
                     else
                     {
                         //确认包
+                        //返回无卡数据包
                         var back = Package.NoCard_Package();
                         SendData(back);
                         //收到选层器确认包后，清空卡号结束本次回话
