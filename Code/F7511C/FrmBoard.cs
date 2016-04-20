@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace F7511C
 {
+    /// <summary>
+    /// 工控机主板测试
+    /// </summary>
     public partial class FrmBoard : FrmBase
     {
         public FrmBoard()
@@ -20,7 +23,7 @@ namespace F7511C
 
         private void FrmBoard_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now > new DateTime(2016, 4, 18, 23, 59, 59))
+            if (DateTime.Now > new DateTime(2016, 4, 20, 23, 59, 59))
             {
                 this.Text += "---授权过期";
                 this.Disabeld();
@@ -29,7 +32,7 @@ namespace F7511C
 #if(x86)
             {
                 var ret = IPCAPI32.F75111_Init();
-                if (ret == 0)
+                if (!ret)
                 {
                     CMessageBox.Show("Init F75111 Failed...");
                     Disabeld();

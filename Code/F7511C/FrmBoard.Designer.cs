@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBoard));
             this.Enable_Button = new System.Windows.Forms.Button();
             this.WDT_Number = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -297,6 +298,7 @@
             this.Controls.Add(this.WDT_GroupBox);
             this.Controls.Add(this.DI_GroupBox);
             this.Controls.Add(this.Write_Button);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmBoard";
             this.Text = "工控机IO测试";
             this.Load += new System.EventHandler(this.FrmBoard_Load);
