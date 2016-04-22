@@ -23,7 +23,7 @@ namespace F7511C
 
         private void FrmBoard_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now > new DateTime(2016, 4, 20, 23, 59, 59))
+            if (DateTime.Now > new DateTime(2016, 4, 21, 23, 59, 59))
             {
                 this.Text += "---授权过期";
                 this.Disabeld();
