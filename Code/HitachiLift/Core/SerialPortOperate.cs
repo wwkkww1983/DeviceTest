@@ -225,6 +225,7 @@ namespace HitachiLift
                 Log("无卡数据包");
                 return;
             }
+
             //发送时，高字节数据在前
             Array.Reverse(cardBytes);
             var currentCardID = BitConverter.ToInt32(cardBytes, 0);

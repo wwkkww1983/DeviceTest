@@ -23,7 +23,8 @@ namespace HitachiLift
         {
             InitializeComponent();
 
-            cmbPorts.DataSource = SerialPort.GetPortNames();
+            var ports = SerialPort.GetPortNames().OrderBy(s => s.Length).ToList();
+            cmbPorts.DataSource = ports;
             if (cmbPorts.DataSource != null && cmbPorts.Items.Count > 0)
                 cmbPorts.SelectedIndex = 0;
             else
