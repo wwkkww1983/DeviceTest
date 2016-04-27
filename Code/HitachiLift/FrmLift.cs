@@ -141,8 +141,8 @@ namespace HitachiLift
                 bx = 0xC0;
 
             var b41 = (byte)(bx | floor);
-            Log("自动权限层：{0}", b41.ToHex());
-            var handBuffer = new byte[8];
+            Log("自动权限层：{0} {1}", b41.ToHex(), floor);
+            var handBuffer = Funs.InitArray(8, 0xFF);
             var total = Package.CardDataSendToLiftPackage(txtBackCardID.Text.ToInt32(), handBuffer, b41);
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
@@ -233,6 +233,11 @@ namespace HitachiLift
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
             SerialPortOperate.SendData(total);
+        }
+
+        private void btnLogClear_Click(object sender, EventArgs e)
+        {
+            rtbLog.Clear();
         }
     }
 }

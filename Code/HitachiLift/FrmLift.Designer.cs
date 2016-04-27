@@ -66,6 +66,7 @@
             this.btnQueryPackage = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.btnLogClear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -471,11 +472,22 @@
             this.label8.TabIndex = 21;
             this.label8.Text = "串口";
             // 
+            // btnLogClear
+            // 
+            this.btnLogClear.Location = new System.Drawing.Point(4, 137);
+            this.btnLogClear.Name = "btnLogClear";
+            this.btnLogClear.Size = new System.Drawing.Size(75, 23);
+            this.btnLogClear.TabIndex = 22;
+            this.btnLogClear.Text = "清空";
+            this.btnLogClear.UseVisualStyleBackColor = true;
+            this.btnLogClear.Click += new System.EventHandler(this.btnLogClear_Click);
+            // 
             // FrmLift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 561);
+            this.Controls.Add(this.btnLogClear);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox3);
@@ -541,6 +553,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnLogClear;
     }
 }
 
