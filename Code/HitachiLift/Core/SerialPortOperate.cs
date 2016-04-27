@@ -215,14 +215,14 @@ namespace HitachiLift
         {
             var cardBytes = new byte[4];
             Array.Copy(data, 2, cardBytes, 0, 4);
-            if (cardBytes.Any(s => s == 0))
+            if (cardBytes.All(s => s == 0))
             {
-                Log("读卡设备退出");
+                Log("<---读卡设备退出");
                 return;
             }
-            else if (cardBytes.Any(s => s == 0xFF))
+            else if (cardBytes.All(s => s == 0xFF))
             {
-                Log("无卡数据包");
+                Log("<---无卡数据包");
                 return;
             }
 
