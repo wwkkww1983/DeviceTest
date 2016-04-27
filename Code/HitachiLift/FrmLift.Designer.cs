@@ -276,7 +276,7 @@
             this.txtBackCardID.Name = "txtBackCardID";
             this.txtBackCardID.Size = new System.Drawing.Size(93, 21);
             this.txtBackCardID.TabIndex = 18;
-            this.txtBackCardID.Text = "10";
+            this.txtBackCardID.Text = "123";
             // 
             // label1
             // 

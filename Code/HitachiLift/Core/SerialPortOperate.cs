@@ -167,8 +167,8 @@ namespace HitachiLift
                 case 0x5B: //选择器->读卡器  变更波特率
                     ChangeBaud(data);
                     break;
-                case 0x5C:
-
+                case 0x5C: //设备有卡数据包
+                    GetCardFloor(data);
                     break;
                 case 0x5E: //选择器->读卡器  查询闸机状态
                     if (data[2] == 0xFF && data[3] == 0xFF && data[4] == 0xFF && data[5] == 0xFF)
@@ -208,6 +208,43 @@ namespace HitachiLift
                         }
                     }
                     break;
+            }
+        }
+
+        private static void GetCardFloor(byte[] data)
+        {
+            var cardBytes = new byte[4];
+            Array.Copy(data, 2, cardBytes, 0, 4);
+            //发送时，高字节数据在前
+            Array.Reverse(cardBytes);
+            var currentCardID = BitConverter.ToInt32(cardBytes, 0);
+            Log("确认卡片权限，卡号：" + currentCardID);
+
+            var handFloor = new byte[8];
+            Array.Copy(data, 6, handFloor, 0, 8);
+            bool hand = handFloor.Any(s => s != 0xFF);
+            if (hand)
+            {
+                Log("手动权限层有数据");
+            }
+            else
+            {
+                var autoByte = data[41];
+                if (autoByte > 0)
+                {
+                    var userType = (autoByte >> 6) & 0x03;
+                    if (userType == 0)
+                        Log("普通");
+                    else if (userType == 1)
+                        Log("vip");
+                    else if (userType == 2)
+                        Log("残疾人");
+                    else if (userType == 3)
+                        Log("高级vip");
+
+                    var fs = autoByte & 0x3F;
+                    Log("自动楼层, floor->" + fs);
+                }
             }
         }
 

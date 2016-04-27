@@ -101,9 +101,6 @@ namespace HitachiLift
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
             SerialPortOperate.SendData(total);
-
-            //CommData.CardCode = 233;
-            //SerialPortOperate.ParsePackage(total);
         }
 
         private void btnConfrmPackage_Click(object sender, EventArgs e)
@@ -114,7 +111,6 @@ namespace HitachiLift
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
             SerialPortOperate.SendData(total);
-            SerialPortOperate.ParsePackage(total);
         }
 
         private void btnChangeBaud_Click(object sender, EventArgs e)
@@ -124,7 +120,6 @@ namespace HitachiLift
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
             SerialPortOperate.SendData(total);
-            SerialPortOperate.ParsePackage(total);
         }
 
         /// <summary>
@@ -148,7 +143,7 @@ namespace HitachiLift
             var b41 = (byte)(bx | floor);
             Log("自动权限层：{0}", b41.ToHex());
             var handBuffer = new byte[8];
-            var total = Package.CardDataSendToLiftPackage(0, handBuffer, b41);
+            var total = Package.CardDataSendToLiftPackage(txtBackCardID.Text.ToInt32(), handBuffer, b41);
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
 
@@ -167,7 +162,7 @@ namespace HitachiLift
 
             var str = buffer.ToHex();
             Log("手动权限层：{0}", str);
-            var total = Package.CardDataSendToLiftPackage(0, buffer, 0);
+            var total = Package.CardDataSendToLiftPackage(txtBackCardID.Text.ToInt32(), buffer, 0);
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
 
@@ -228,7 +223,6 @@ namespace HitachiLift
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
             SerialPortOperate.SendData(total);
-            SerialPortOperate.ParsePackage(total);
         }
 
         private void btnQueryGateCardPermission_Click(object sender, EventArgs e)
@@ -239,7 +233,6 @@ namespace HitachiLift
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
             SerialPortOperate.SendData(total);
-            SerialPortOperate.ParsePackage(total);
         }
     }
 }
