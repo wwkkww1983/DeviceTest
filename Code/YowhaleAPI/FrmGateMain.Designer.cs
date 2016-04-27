@@ -34,7 +34,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(158, 12);
+            this.button1.Location = new System.Drawing.Point(153, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 33);
             this.button1.TabIndex = 0;
@@ -44,10 +44,10 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("宋体", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(90, 67);
+            this.label1.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(35, 77);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(232, 55);
+            this.label1.Size = new System.Drawing.Size(342, 55);
             this.label1.TabIndex = 1;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 

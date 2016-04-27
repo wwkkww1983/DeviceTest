@@ -31,10 +31,12 @@ namespace MeetingClient
         {
             using (MeetingHttpRequest requestAPI = new MeetingHttpRequest())
             {
+                var sw = Stopwatch.StartNew();
                 var code = "meeting://book?code=c4bc7af4-618e-4aed-a014-fd089b2b3106";
                 var flag = requestAPI.VerfiyAccess(code);
+                sw.Stop();
                 Debug.WriteLine("open door:" + flag);
-                label1.Text = (flag ? "true" : "false");
+                label1.Text = "API call:" + sw.ElapsedMilliseconds + " " + (flag ? "true" : "false");
             }
         }
 
