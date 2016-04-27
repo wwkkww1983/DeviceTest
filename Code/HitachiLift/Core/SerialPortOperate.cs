@@ -167,6 +167,9 @@ namespace HitachiLift
                 case 0x5B: //选择器->读卡器  变更波特率
                     ChangeBaud(data);
                     break;
+                case 0x5C:
+
+                    break;
                 case 0x5E: //选择器->读卡器  查询闸机状态
                     if (data[2] == 0xFF && data[3] == 0xFF && data[4] == 0xFF && data[5] == 0xFF)
                     {
