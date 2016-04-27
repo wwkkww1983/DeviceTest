@@ -215,6 +215,16 @@ namespace HitachiLift
         {
             var cardBytes = new byte[4];
             Array.Copy(data, 2, cardBytes, 0, 4);
+            if (cardBytes.Any(s => s == 0))
+            {
+                Log("读卡设备退出");
+                return;
+            }
+            else if (cardBytes.Any(s => s == 0xFF))
+            {
+                Log("无卡数据包");
+                return;
+            }
             //发送时，高字节数据在前
             Array.Reverse(cardBytes);
             var currentCardID = BitConverter.ToInt32(cardBytes, 0);
