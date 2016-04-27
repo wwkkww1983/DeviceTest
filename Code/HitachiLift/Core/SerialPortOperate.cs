@@ -24,6 +24,8 @@ namespace HitachiLift
         public static FrmLift Window = null;
         private static string _portName = "com1";
 
+        private delegate void AsyncParse(byte[] buffer);
+
         public static bool Open(string portName, int baudRate = 9600)
         {
             try
@@ -61,7 +63,8 @@ namespace HitachiLift
                     if (Xor(data))
                     {
                         //校验成功
-                        ParsePackage(data);
+                        AsyncParse async = ParsePackage;
+                        async.BeginInvoke(data, null, null);
                     }
                 }
                 catch (Exception ex)
