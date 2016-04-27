@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutsubishiLift", "Mutsubish
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskoUsbQRReader", "DeskoUsbQRReader\DeskoUsbQRReader.csproj", "{4C5A8125-0757-455D-8A42-502DEFE2A692}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YowhaleAPI", "YowhaleAPI\YowhaleAPI.csproj", "{05868D0B-0A2B-417C-866D-C9FC08387894}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +149,10 @@ Global
 		{4C5A8125-0757-455D-8A42-502DEFE2A692}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C5A8125-0757-455D-8A42-502DEFE2A692}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C5A8125-0757-455D-8A42-502DEFE2A692}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05868D0B-0A2B-417C-866D-C9FC08387894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05868D0B-0A2B-417C-866D-C9FC08387894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05868D0B-0A2B-417C-866D-C9FC08387894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05868D0B-0A2B-417C-866D-C9FC08387894}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
