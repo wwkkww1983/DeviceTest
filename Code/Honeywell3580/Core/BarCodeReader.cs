@@ -45,7 +45,6 @@ namespace Honeywell3580
             }
         }
 
-
         public void ReadComm(object obj)
         {
             while (!_stop)

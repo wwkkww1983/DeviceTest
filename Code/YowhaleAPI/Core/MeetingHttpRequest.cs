@@ -20,7 +20,7 @@ namespace MeetingClient.Core
         {
             SortedDictionary<string, string> sParaTemp = new SortedDictionary<string, string>();
             sParaTemp.Add("content", qrcode);
-            sParaTemp.Add("gurad", Config.termId);
+            sParaTemp.Add("guard", Config.termId);
             sParaTemp.Add("app", Config.App);
             return sParaTemp;
         }
