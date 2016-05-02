@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace F7511C
 {
     /// <summary>
-    /// 工控机主板测试
+    /// 工控机主板测试(注意：动态库和exe必须在同一目录下)
     /// </summary>
     public partial class FrmBoard : FrmBase
     {
@@ -23,7 +23,7 @@ namespace F7511C
 
         private void FrmBoard_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now > new DateTime(2016, 4, 21, 23, 59, 59))
+            if (DateTime.Now > new DateTime(2016, 5, 1, 23, 59, 59))
             {
                 this.Text += "---授权过期";
                 this.Disabeld();

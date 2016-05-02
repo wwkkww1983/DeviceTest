@@ -67,6 +67,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnLogClear = new System.Windows.Forms.Button();
+            this.btnClosePort = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -482,11 +485,46 @@
             this.btnLogClear.UseVisualStyleBackColor = true;
             this.btnLogClear.Click += new System.EventHandler(this.btnLogClear_Click);
             // 
+            // btnClosePort
+            // 
+            this.btnClosePort.Location = new System.Drawing.Point(118, 109);
+            this.btnClosePort.Name = "btnClosePort";
+            this.btnClosePort.Size = new System.Drawing.Size(75, 23);
+            this.btnClosePort.TabIndex = 23;
+            this.btnClosePort.Text = "关闭串口";
+            this.btnClosePort.UseVisualStyleBackColor = true;
+            this.btnClosePort.Click += new System.EventHandler(this.btnClosePort_Click);
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.Color.Black;
+            this.label9.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(13, 93);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(100, 35);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "楼层：0";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(118, 138);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 25;
+            this.button2.Text = "循环派";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // FrmLift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 561);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.btnClosePort);
             this.Controls.Add(this.btnLogClear);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -554,6 +592,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnLogClear;
+        private System.Windows.Forms.Button btnClosePort;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button2;
     }
 }
 

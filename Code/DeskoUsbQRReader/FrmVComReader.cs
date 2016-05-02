@@ -43,7 +43,7 @@ namespace DeskoUsbQRReader
 
         private void FrmVComReader_Load(object sender, EventArgs e)
         {
-
+            cmbPorts.DataSource = SerialPort.GetPortNames();
         }
 
         void _serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -52,7 +52,6 @@ namespace DeskoUsbQRReader
             var num = str.IndexOf('\u0002');
             var num2 = str.IndexOf('\u0003');
             var num3 = str.IndexOf('\r');
-            log(num + " " + num2 + " " + num3);
 
             if (num != -1)
                 str = str.Substring(num + 2, (num3 - num - 2));
@@ -110,21 +109,13 @@ namespace DeskoUsbQRReader
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _serial = new SerialPort("COM34", 19200, Parity.None, 8, StopBits.One);
+            _serial = new SerialPort(cmbPorts.Text, 19200, Parity.None, 8, StopBits.One);
             _serial.Open();
             _serial.RtsEnable = true;
             _serial.ReceivedBytesThreshold = 1;
             _serial.DataReceived += _serial_DataReceived;
             log("port open");
-
-            //_serial.Write("DESKO.CONTROL.ENABLE=1");
-            lock (expectResponseMutex)
-            {
-                if (Monitor.Wait(expectResponseMutex, 1000))
-                {
-                    log("qrreader is ok");
-                }
-            }
+            btnOpen.Enabled = false;
         }
     }
 }

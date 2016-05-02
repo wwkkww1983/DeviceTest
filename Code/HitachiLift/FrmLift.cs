@@ -10,6 +10,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace HitachiLift
@@ -48,6 +49,10 @@ namespace HitachiLift
         {
             Action act = () =>
             {
+                if (rtbLog.Lines.Length >=25)
+                {
+                    rtbLog.Clear();
+                }
                 rtbLog.AppendText(string.Format(log, p));
                 rtbLog.AppendText(Environment.NewLine);
             };
@@ -76,6 +81,7 @@ namespace HitachiLift
         private void FrmLift_Load(object sender, EventArgs e)
         {
             InitFloors();
+            btnClosePort.Enabled = false;
         }
 
         private void btnPort_Click(object sender, EventArgs e)
@@ -87,6 +93,7 @@ namespace HitachiLift
                 {
                     SerialPortOperate.DoReceive();
                     btnPort.Enabled = false;
+                    btnClosePort.Enabled = true;
                 }
             }
             catch (Exception ex)
@@ -143,10 +150,12 @@ namespace HitachiLift
 
             var b41 = (byte)(bx | floor);
             Log("自动权限层：{0} {1}", b41.ToHex(), floor);
-            var handBuffer = Funs.InitArray(8, 0xFF);
+            var handBuffer = Funs.InitArray(8, 0x00);
             var total = Package.CardDataSendToLiftPackage(txtBackCardID.Text.ToInt32(), handBuffer, b41);
             Log("长度：{0}", total.Length);
             Log("数据：{0}", total.ToHex());
+
+            label9.Text = "楼层：" + floor;
 
             SerialPortOperate.SendData(total);
         }
@@ -239,6 +248,54 @@ namespace HitachiLift
         private void btnLogClear_Click(object sender, EventArgs e)
         {
             rtbLog.Clear();
+        }
+
+        private void btnClosePort_Click(object sender, EventArgs e)
+        {
+            SerialPortOperate.ClosePort();
+            btnPort.Enabled = true;
+            btnClosePort.Enabled = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Thread(() =>
+            {
+                var floor = 1;
+                while (true)
+                {
+                    byte bx = 0x00;
+                    if (rb1.Checked)
+                        bx = 0x00;
+                    if (rb2.Checked)
+                        bx = 0x80;
+                    if (rb3.Checked)
+                        bx = 0x40;
+                    if (rb4.Checked)
+                        bx = 0xC0;
+
+                    var b41 = (byte)(bx | floor);
+                    Log("自动权限层：{0} {1}", b41.ToHex(), floor);
+                    var handBuffer = Funs.InitArray(8, 0x00);
+                    var total = Package.CardDataSendToLiftPackage(txtBackCardID.Text.ToInt32(), handBuffer, b41);
+                    Log("长度：{0}", total.Length);
+                    Log("数据：{0}", total.ToHex());
+
+                    Action act = () =>
+                    {
+                        label9.Text = "楼层：" + floor;
+                    };
+                    Invoke(act);
+
+                    floor++;
+                    if (floor > 17)
+                    {
+                        floor = 1;
+                    }
+                    SerialPortOperate.SendData(total);
+                    Thread.Sleep(5000);
+                }
+            }).Start();
         }
     }
 }

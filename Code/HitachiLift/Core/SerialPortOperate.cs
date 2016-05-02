@@ -117,11 +117,15 @@ namespace HitachiLift
             }
         }
 
+        private static object syncObject = new object();
         public static void SendData(byte[] data)
         {
             if (_port != null && _port.IsOpen)
             {
-                _port.Write(data, 0, data.Length);
+                lock (syncObject)
+                {
+                    _port.Write(data, 0, data.Length);
+                }
             }
             else
             {
@@ -142,8 +146,8 @@ namespace HitachiLift
                             //无卡
                             var back = Package.NoCard_Package();
                             Log("无卡包--->");
-                            Log("长度：{0}", back.Length);
-                            Log("数据：{0}", back.ToHex());
+                            //Log("长度：{0}", back.Length);
+                            //Log("数据：{0}", back.ToHex());
                             SendData(back);
                         }
                         else
@@ -162,6 +166,7 @@ namespace HitachiLift
                         //确认包
                         //返回无卡数据包
                         var back = Package.NoCard_Package();
+                        Log("确认包，返回无卡数据-->");
                         SendData(back);
                         //收到选层器确认包后，清空卡号结束本次回话
                         CommData.CardCode = 0;
