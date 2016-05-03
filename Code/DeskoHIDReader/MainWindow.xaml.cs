@@ -34,6 +34,13 @@ namespace DeskoHIDReader
         private HidDevice _deviceOut = null;
         private delegate void ReadHandlerDelegate(HidReport report);
 
+        private const string heartbitpackage = "09 5D 5A 36 43 42 52 45 4E 41 30 06 2E";
+
+        public static readonly DependencyProperty CodeProperty =
+            DependencyProperty.Register("QRCode", typeof(string), typeof(MainWindow));
+
+        public static readonly DependencyProperty DataBufferProperty =
+            DependencyProperty.Register("DataBuffer", typeof(string), typeof(MainWindow));
         public MainWindow()
         {
             InitializeComponent();
@@ -59,36 +66,17 @@ namespace DeskoHIDReader
             base.OnClosing(e);
         }
 
-        private void Write(string str)
-        {
-            var bytes = str.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
-            var code = Encoding.ASCII.GetString(bytes);
-            Debug.WriteLine(code);
-        }
-
         public string QRCode
         {
             get { return (string)GetValue(CodeProperty); }
             set { SetValue(CodeProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Code.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CodeProperty =
-            DependencyProperty.Register("QRCode", typeof(string), typeof(MainWindow));
-
-
-
         public string DataBuffer
         {
             get { return (string)GetValue(DataBufferProperty); }
             set { SetValue(DataBufferProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for DataBuffer.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DataBufferProperty =
-            DependencyProperty.Register("DataBuffer", typeof(string), typeof(MainWindow));
-
-
 
         private void RefreshDevice()
         {
@@ -99,23 +87,24 @@ namespace DeskoHIDReader
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             RefreshDevice();
+
             if (_deviceIn != null)
             {
-                _deviceIn.OpenDevice();
-                _deviceIn.MonitorDeviceEvents = true;
-                _deviceIn.Inserted += Device_Inserted;
-                _deviceIn.Removed += Device_Removed;
-                _deviceIn.ReadReport(ReadProcess);
+                RegisterHidDevice(_deviceIn);
             }
-
             if (_deviceOut != null)
             {
-                _deviceOut.OpenDevice();
-                _deviceOut.MonitorDeviceEvents = true;
-                _deviceOut.Inserted += Device_Inserted;
-                _deviceOut.Removed += Device_Removed;
-                _deviceOut.ReadReport(ReadProcess);
+                RegisterHidDevice(_deviceOut);
             }
+        }
+
+        private void RegisterHidDevice(HidDevice device)
+        {
+            device.OpenDevice();
+            device.MonitorDeviceEvents = true;
+            device.Inserted += Device_Inserted;
+            device.Removed += Device_Removed;
+            device.ReadReport(ReadProcess);
         }
 
         void Device_Removed()
@@ -136,13 +125,12 @@ namespace DeskoHIDReader
         List<byte[]> packages = new List<byte[]>();
         private void ReadHandler(HidReport report)
         {
-            var emptypackage = "09 5D 5A 36 43 42 52 45 4E 41 30 06 2E";
             var data = String.Join(" ", report.Data.Select(d => d.ToString("X2")));
-            DataBuffer = data + "->" + report.Data.Length;
-            if (data.StartsWith(emptypackage))
+            DataBuffer = string.Concat(data, "->", report.Data.Length);
+            if (data.StartsWith(heartbitpackage))
             {
                 Debug.WriteLine(data);
-                Debug.WriteLine("heartBit" + report.ReadStatus);
+                Debug.WriteLine("heartBit");
             }
             else
             {
