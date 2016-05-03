@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Linq;
 namespace HIDSdk
 {
     public class HidDevice : IHidDevice
@@ -64,7 +65,7 @@ namespace HIDSdk
             get { return _monitorDeviceEvents; }
             set
             {
-                if (value & _monitorDeviceEvents == false) 
+                if (value & _monitorDeviceEvents == false)
                     _deviceEventMonitor.Init();
                 _monitorDeviceEvents = value;
             }
@@ -607,6 +608,8 @@ namespace HIDSdk
                         var overlapped = new NativeOverlapped();
 
                         NativeMethods.ReadFile(Handle, buffer, (uint)buffer.Length, out bytesRead, ref overlapped);
+                        //Debug.WriteLine("len:" + buffer.Length + " " + bytesRead);
+                        //Debug.WriteLine(string.Join(" ", buffer.Select(s => s.ToString("X2"))));
                         status = HidDeviceData.ReadStatus.Success;
                     }
                     catch { status = HidDeviceData.ReadStatus.ReadError; }

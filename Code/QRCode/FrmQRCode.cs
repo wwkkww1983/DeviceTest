@@ -24,7 +24,6 @@ namespace QRCode
         {
             InitializeComponent();
             //txtEncodeInfo.Text = DateTime.Now.ToString("yyyyMMddHHmmss");
-            txtEncodeInfo.Text = "12345678ABCDEFG";
         }
 
         private void btnEncode_Click(object sender, EventArgs e)

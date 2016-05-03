@@ -61,6 +61,7 @@
             this.txtEncodeInfo.Name = "txtEncodeInfo";
             this.txtEncodeInfo.Size = new System.Drawing.Size(400, 21);
             this.txtEncodeInfo.TabIndex = 1;
+            this.txtEncodeInfo.Text = "meeting://book?code=c4bc7af4-618e-4aed-a014-fd089b2";
             // 
             // txtDecodeInfo
             // 

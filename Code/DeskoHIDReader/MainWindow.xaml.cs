@@ -1,7 +1,10 @@
-﻿using System;
+﻿using HIDSdk;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,10 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HIDSdk;
-using System.Diagnostics;
 
 namespace DeskoHIDReader
 {
@@ -27,17 +27,43 @@ namespace DeskoHIDReader
         private const string vid_out = "0c2f";
         private const string pid_out = "";
 
-        private const byte DataStartPos = 8;
+        private const byte DataPos = 8;
         private const byte ETX = 0x03;
 
         private HidDevice _deviceIn = null;
         private HidDevice _deviceOut = null;
         private delegate void ReadHandlerDelegate(HidReport report);
+
         public MainWindow()
         {
             InitializeComponent();
+
             this.Loaded += MainWindow_Loaded;
             this.DataContext = this;
+
+            this.Left = 0;
+            this.Top = 0;
+            this.Width = SystemParameters.PrimaryScreenWidth;
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            if (_deviceIn != null && _deviceIn.IsOpen)
+            {
+                _deviceIn.CloseDevice();
+            }
+            if (_deviceOut != null && _deviceOut.IsOpen)
+            {
+                _deviceOut.CloseDevice();
+            }
+            base.OnClosing(e);
+        }
+
+        private void Write(string str)
+        {
+            var bytes = str.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
+            var code = Encoding.ASCII.GetString(bytes);
+            Debug.WriteLine(code);
         }
 
         public string QRCode
@@ -107,44 +133,90 @@ namespace DeskoHIDReader
             this.Dispatcher.BeginInvoke(new ReadHandlerDelegate(ReadHandler), new object[] { report });
         }
 
+        List<byte[]> packages = new List<byte[]>();
         private void ReadHandler(HidReport report)
         {
-            var empty = "09 5D 5A 36 43 42 52 45 4E 41 30 06 2E";
+            var emptypackage = "09 5D 5A 36 43 42 52 45 4E 41 30 06 2E";
             var data = String.Join(" ", report.Data.Select(d => d.ToString("X2")));
             DataBuffer = data + "->" + report.Data.Length;
-            if (data.StartsWith(empty))
+            if (data.StartsWith(emptypackage))
             {
-                Debug.WriteLine("心跳" + report.ReadStatus);
+                Debug.WriteLine(data);
+                Debug.WriteLine("heartBit" + report.ReadStatus);
             }
             else
             {
                 var buffer = report.Data;
                 if (buffer.All(s => s == 0))
                 {
-                    Debug.WriteLine("断开");
+                    Debug.WriteLine("Disconnected");
                     _deviceIn.CloseDevice();
                     return;
                 }
                 else
                 {
-                    var end = Array.IndexOf<byte>(buffer, ETX);
-                    if (end > -1)
+                    if (buffer.Last() == 0x01)
                     {
-                        var dataLen = end - DataStartPos;
-                        var xdata = new byte[dataLen];
-                        Array.Copy(buffer, DataStartPos, xdata, 0, dataLen);
-                        Debug.WriteLine(data);
-                        var code = Encoding.ASCII.GetString(xdata);
-                        QRCode = code + "->" + code.Length;
-                        Debug.WriteLine(code);
+                        //多包二维码(第一包)
+                        Debug.WriteLine(buffer.First());
+                        packages.Add(report.Data);
                     }
                     else
                     {
-                        Debug.WriteLine(data);
+                        if (packages.Count == 0)
+                        {
+                            //单包二维码
+                            Debug.WriteLine(buffer.First());
+                            var end = Array.IndexOf<byte>(buffer, ETX);
+                            if (end > -1)
+                            {
+                                var dataLen = end - DataPos;
+                                byte[] total = new byte[128];
+                                Array.Copy(buffer, DataPos, total, 0, dataLen);
+                                Debug.WriteLine(data);
+                                var code = ToAscii(total);
+                                QRCode = code + "->" + code.Length;
+                                Debug.WriteLine(code);
+                            }
+                            else
+                            {
+                                Debug.WriteLine(data);
+                            }
+                        }
+                        else
+                        {
+                            Debug.WriteLine(buffer.First());
+                            var package1 = packages.First().ToArray();
+                            var package2 = buffer;
+                            byte[] total = new byte[128];
+                            //第一包结尾 73 00 01
+                            var len = package1.Length - DataPos - 3;
+                            //第一包从8个字节开始
+                            Array.Copy(package1, DataPos, total, 0, len);
+                            var end = Array.IndexOf<byte>(package2, ETX);
+                            if (end > -1)
+                            {
+                                var pos = len;
+                                //第二包从第4字节开始
+                                len = end - 4;
+                                Array.Copy(package2, 4, total, pos, len);
+                            }
+                            packages.Clear();
+                            var code = ToAscii(total);
+                            QRCode = code + "->" + code.Length;
+                            Debug.WriteLine(code);
+                        }
                     }
                 }
             }
             _deviceIn.ReadReport(ReadProcess);
+        }
+
+        private static string ToAscii(byte[] buffer)
+        {
+            var code = Encoding.ASCII.GetString(buffer);
+            code = code.Remove(code.IndexOf((char)0));
+            return code;
         }
     }
 }
