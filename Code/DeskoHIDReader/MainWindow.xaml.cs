@@ -30,6 +30,9 @@ namespace DeskoHIDReader
         private const byte DataPos = 8;
         private const byte ETX = 0x03;
 
+        private const string intdeviceId = "68B5355";
+        private const string outdeviceId = "31D9B3D";
+
         private HidDevice _deviceIn = null;
         private HidDevice _deviceOut = null;
         private delegate void ReadHandlerDelegate(HidReport report);
@@ -80,8 +83,9 @@ namespace DeskoHIDReader
 
         private void RefreshDevice()
         {
-            _deviceIn = HidDevices.Enumerate().FirstOrDefault(s => s.DevicePath.Contains(vid_in));
-            _deviceOut = HidDevices.Enumerate().FirstOrDefault(s => s.DevicePath.Contains(vid_out));
+            var list = HidDevices.Enumerate().Where(s => s.DevicePath.Contains(vid_in)).ToList();
+            _deviceIn = list.FirstOrDefault(s => s.DevicePath.Contains(intdeviceId.ToLower()));
+            _deviceOut = list.FirstOrDefault(s => s.DevicePath.Contains(outdeviceId.ToLower()));
         }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -90,11 +94,19 @@ namespace DeskoHIDReader
 
             if (_deviceIn != null)
             {
-                RegisterHidDevice(_deviceIn);
+                _deviceIn.OpenDevice();
+                _deviceIn.MonitorDeviceEvents = true;
+                _deviceIn.Inserted += Device_Inserted;
+                _deviceIn.Removed += Device_Removed;
+                _deviceIn.ReadReport(ReadInProcess);
             }
             if (_deviceOut != null)
             {
-                RegisterHidDevice(_deviceOut);
+                _deviceOut.OpenDevice();
+                _deviceOut.MonitorDeviceEvents = true;
+                _deviceOut.Inserted += Device_Inserted;
+                _deviceOut.Removed += Device_Removed;
+                _deviceOut.ReadReport(ReadOutProcess);
             }
         }
 
@@ -104,7 +116,7 @@ namespace DeskoHIDReader
             device.MonitorDeviceEvents = true;
             device.Inserted += Device_Inserted;
             device.Removed += Device_Removed;
-            device.ReadReport(ReadProcess);
+            device.ReadReport(ReadInProcess);
         }
 
         void Device_Removed()
@@ -117,13 +129,30 @@ namespace DeskoHIDReader
             Debug.WriteLine("connected");
         }
 
-        private void ReadProcess(HidReport report)
+        private void ReadInProcess(HidReport report)
         {
-            this.Dispatcher.BeginInvoke(new ReadHandlerDelegate(ReadHandler), new object[] { report });
+            this.Dispatcher.BeginInvoke(new ReadHandlerDelegate(ReadInHandler), new object[] { report });
+        }
+
+        private void ReadOutProcess(HidReport report)
+        {
+            this.Dispatcher.BeginInvoke(new ReadHandlerDelegate(ReadOutHandler), new object[] { report });
         }
 
         List<byte[]> packages = new List<byte[]>();
-        private void ReadHandler(HidReport report)
+        private void ReadInHandler(HidReport report)
+        {
+            Parsecode(report, true);
+            _deviceIn.ReadReport(ReadInProcess);
+        }
+
+        private void ReadOutHandler(HidReport report)
+        {
+            Parsecode(report, false);
+            _deviceOut.ReadReport(ReadOutProcess);
+        }
+
+        private void Parsecode(HidReport report, bool flag)
         {
             var data = String.Join(" ", report.Data.Select(d => d.ToString("X2")));
             DataBuffer = string.Concat(data, "->", report.Data.Length);
@@ -163,7 +192,8 @@ namespace DeskoHIDReader
                                 Array.Copy(buffer, DataPos, total, 0, dataLen);
                                 Debug.WriteLine(data);
                                 var code = ToAscii(total);
-                                QRCode = code + "->" + code.Length;
+                                var prefix = flag ? "开门-" : "关门-";
+                                QRCode = prefix + code + "->" + code.Length;
                                 Debug.WriteLine(code);
                             }
                             else
@@ -191,13 +221,13 @@ namespace DeskoHIDReader
                             }
                             packages.Clear();
                             var code = ToAscii(total);
-                            QRCode = code + "->" + code.Length;
+                            var prefix = flag ? "开门-" : "关门-";
+                            QRCode = prefix + code + "->" + code.Length;
                             Debug.WriteLine(code);
                         }
                     }
                 }
             }
-            _deviceIn.ReadReport(ReadProcess);
         }
 
         private static string ToAscii(byte[] buffer)

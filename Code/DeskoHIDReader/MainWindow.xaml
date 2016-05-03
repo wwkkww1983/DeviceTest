@@ -14,11 +14,16 @@
         <TextBlock Grid.Row="0"
                    FontSize="14"
                    FontWeight="Bold"
+                   Background="Green"
+                   Foreground="White"
                    Text="{Binding DataBuffer}" />
 
         <TextBlock Grid.Row="1"
-                   FontSize="20"
+                   FontSize="40"
+                   Background="Green"
                    FontWeight="Bold"
+                   Foreground="White"
+                   TextAlignment="Center"
                    Text="{Binding QRCode}" />
     </Grid>
 </Window>
