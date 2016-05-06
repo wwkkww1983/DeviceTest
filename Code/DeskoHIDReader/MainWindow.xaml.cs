@@ -175,7 +175,6 @@ namespace DeskoHIDReader
                     if (buffer.Last() == 0x01)
                     {
                         //多包二维码(第一包)
-                        Debug.WriteLine(buffer.First());
                         packages.Add(report.Data);
                     }
                     else
@@ -203,9 +202,12 @@ namespace DeskoHIDReader
                         }
                         else
                         {
-                            Debug.WriteLine(buffer.First());
                             var package1 = packages.First().ToArray();
                             var package2 = buffer;
+
+                            Debug.WriteLine(string.Join(" ", package1));
+                            Debug.WriteLine(string.Join(" ", package2));
+
                             byte[] total = new byte[128];
                             //第一包结尾 73 00 01
                             var len = package1.Length - DataPos - 3;
