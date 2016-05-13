@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>h.ico</ApplicationIcon>
+    <ApplicationIcon>elevator.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -89,7 +89,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="h.ico" />
+    <Content Include="elevator.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

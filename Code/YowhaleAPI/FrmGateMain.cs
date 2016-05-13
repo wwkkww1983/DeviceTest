@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Web;
 using System.Windows.Forms;
 
 namespace MeetingClient
@@ -32,7 +33,7 @@ namespace MeetingClient
             using (MeetingHttpRequest requestAPI = new MeetingHttpRequest())
             {
                 var sw = Stopwatch.StartNew();
-                var code = "meeting://book?code=c4bc7af4-618e-4aed-a014-fd089b2b3106";
+                var code = "meeting://book?code=8c3cff41-f476-4c9c-8126-e9a6163f564b";
                 var flag = requestAPI.VerfiyAccess(code);
                 sw.Stop();
                 Debug.WriteLine("open door:" + flag);

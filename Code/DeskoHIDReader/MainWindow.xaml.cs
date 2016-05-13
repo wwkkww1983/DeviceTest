@@ -21,11 +21,7 @@ namespace DeskoHIDReader
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string vid_in = "0c2e";
-        private const string pid_in = "";
-
-        private const string vid_out = "0c2f";
-        private const string pid_out = "";
+        private const string vid = "0c2e";
 
         private const byte DataPos = 8;
         private const byte ETX = 0x03;
@@ -83,7 +79,7 @@ namespace DeskoHIDReader
 
         private void RefreshDevice()
         {
-            var list = HidDevices.Enumerate().Where(s => s.DevicePath.Contains(vid_in)).ToList();
+            var list = HidDevices.Enumerate().Where(s => s.DevicePath.Contains(vid)).ToList();
             _deviceIn = list.FirstOrDefault(s => s.DevicePath.Contains(intdeviceId.ToLower()));
             _deviceOut = list.FirstOrDefault(s => s.DevicePath.Contains(outdeviceId.ToLower()));
         }

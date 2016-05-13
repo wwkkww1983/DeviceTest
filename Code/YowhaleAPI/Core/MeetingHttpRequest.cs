@@ -52,6 +52,7 @@ namespace MeetingClient.Core
             var urlcode = Encoding.GetEncoding(Config.Input_charset);
             var preSignStr = Core.CreateLinkStringUrlencode(inputPara, urlcode);
 
+            Debug.WriteLine(preSignStr);
             try
             {
                 var httpGetUrl = string.Format(URL, preSignStr);
@@ -72,6 +73,11 @@ namespace MeetingClient.Core
 
                 JavaScriptSerializer java = new JavaScriptSerializer();
                 var jsonObject = java.Deserialize<ErrorModel>(jsonStr);
+                if (!jsonObject.success)
+                {
+                    var str = jsonObject.errorCode + " " + jsonObject.errorMsg + " " + jsonObject.level;
+                    Debug.WriteLine(str);
+                }
                 return jsonObject.success;
             }
             catch (Exception ex)

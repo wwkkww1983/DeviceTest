@@ -16,7 +16,7 @@ using System.Windows.Forms;
 namespace HitachiLift
 {
     /// <summary>
-    /// 广州耀华 日立电梯派梯
+    /// 广州凯华 日立电梯派梯
     /// </summary>
     public partial class FrmLift : FrmBase
     {
@@ -49,7 +49,7 @@ namespace HitachiLift
         {
             Action act = () =>
             {
-                if (rtbLog.Lines.Length >=25)
+                if (rtbLog.Lines.Length >= 25)
                 {
                     rtbLog.Clear();
                 }
