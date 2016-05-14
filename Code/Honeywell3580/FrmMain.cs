@@ -38,7 +38,11 @@ namespace Honeywell3580
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            _reader.Open(cmbPorts.Text, ReaderType.YJ);
+            var b = _reader.Open(cmbPorts.Text, ReaderType.YJ);
+            if(b)
+            {
+                btnOpen.Enabled = false;
+            }
         }
 
 

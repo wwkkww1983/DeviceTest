@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIDSdk", "HIDSdk\HIDSdk.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitchElevator", "HitchElevator\HitchElevator.csproj", "{D82E362D-A063-40CC-8E85-5902E3CF9384}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessReader", "AccessReader\AccessReader.csproj", "{C4F5D999-BC40-4E68-9B6C-56494A0FA614}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -171,6 +173,10 @@ Global
 		{D82E362D-A063-40CC-8E85-5902E3CF9384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D82E362D-A063-40CC-8E85-5902E3CF9384}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D82E362D-A063-40CC-8E85-5902E3CF9384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F5D999-BC40-4E68-9B6C-56494A0FA614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F5D999-BC40-4E68-9B6C-56494A0FA614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F5D999-BC40-4E68-9B6C-56494A0FA614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F5D999-BC40-4E68-9B6C-56494A0FA614}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

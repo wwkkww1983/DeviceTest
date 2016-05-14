@@ -1,0 +1,52 @@
+﻿<Window x:Class="AccessReader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        Title="Access Device Test" Height="300" Width="600">
+    <Window.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="120"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="80"></Setter>
+            <Setter Property="Margin" Value="5,0,0,0"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <ComboBox Name="cmbPorts" Margin="10,0,0,0">
+            </ComboBox>
+            <Button x:Name="btnOpen"  Content="打开 Barcode" Width="100" Click="Button_Click"/>
+            <Button x:Name="btnIC"  Content="打开 IC" Width="100" Click="btnIC_Click"/>
+
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" 
+                    Margin="10,5,0,0"
+                    Grid.Row="1">
+            <Label Content="二维码：" HorizontalContentAlignment="Right" Width="150" Background="Yellow"></Label>
+            <Label Content="{Binding BarCode}" Margin="10,0,0,0" Width="10" Background="Green"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Button Name="btnClear" Content="Clear" Margin="10,0,0,0" Click="btnClear_Click"></Button>
+            <Button x:Name="btnSend"   Content="Get Mifare Type" Width="100" Click="btnSend_Click"/>
+            <Button x:Name="btnMifareType"  Content="Load Key" Width="100" Click="btnMifareType_Click"/>
+        </StackPanel>
+        <Grid Grid.Row="3">
+            <TextBox Name="txt" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBox>
+        </Grid>
+    </Grid>
+</Window>

@@ -63,6 +63,7 @@ namespace Honeywell3580
                         else
                         {
                             _barcodeList.Add((char)b);
+                            Log(b.ToString());
                         }
                     }
                 }
