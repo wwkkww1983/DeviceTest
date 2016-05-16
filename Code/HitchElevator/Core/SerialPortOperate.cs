@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using Common;
+using HitchElevator;
 
 namespace HitachiLift
 {
@@ -21,7 +22,7 @@ namespace HitachiLift
         private const byte _bFrameEnd = 0xCA;
         private static Thread _thread = null;
 
-        //public static FrmLift Window = null;
+        public static MainWindow Window = null;
         private static string _portName = "com1";
 
         private delegate void AsyncParse(byte[] buffer);
@@ -33,6 +34,7 @@ namespace HitachiLift
                 _portName = portName;
                 _port = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
                 _port.Open();
+                Log("串口打开");
                 return true;
             }
             catch (Exception ex)
@@ -292,7 +294,7 @@ namespace HitachiLift
 
         private static void Log(string log, params object[] p)
         {
-            //Window.Log(log, p);
+            Window.Log(log, p);
         }
     }
 }

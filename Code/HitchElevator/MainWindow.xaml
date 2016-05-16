@@ -9,26 +9,84 @@
                  WindowStartupLocation="CenterScreen">
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
-        <!--第一行-->
-        <StackPanel Grid.Row="0"
-                    Grid.ColumnSpan="3"
+        <!--  第一行  -->
+
+        <StackPanel Grid.Column="0"
+                    VerticalAlignment="Center"
                     Orientation="Horizontal">
-            <Label Content="串口：" />
-            <ComboBox Name="cmbPorts"
+            <Label Content="二维码串口：" />
+            <ComboBox Name="cmbIS"
                       Width="80"
                       ItemsSource="{Binding ComPorts}" />
-            <Button Width="80" Content="打开" />
+
+            <Label Margin="10,0,0,0" Content="选层器串口：" />
+            <ComboBox Name="cmbSelecter"
+                      Width="80"
+                      ItemsSource="{Binding ComPorts}" />
+
+            <Button Name="btnOpen"
+                    Width="80"
+                    Click="btnOpen_Click"
+                    Content="打开" />
+            <Button x:Name="btnClose"
+                    Width="80"
+                    Margin="2,0,0,0"
+                    Click="btnClose_Click"
+                    Content="关闭" />
         </StackPanel>
-        <!--第二行-->
+        <Grid Grid.Row="0"
+              Grid.RowSpan="2"
+              Grid.Column="1"
+              Margin="5,0,0,0">
+            <TextBlock Width="400"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch"
+                       Background="Orange"
+                       FontFamily="楷体"
+                       FontSize="80"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       Text="{Binding BarcodeFloor}" />
+        </Grid>
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <Label Content="二维码串口：" />
+            <ComboBox Name="cmbFloors"
+                      Width="80"
+                      ItemsSource="{Binding ComPorts}" />
+            <Button Name="btnHandFloor"
+                    Width="80"
+                    Click="btnHandFloor_Click"
+                    Content="打开" />
+            <Button Name="btnClear"
+                    Width="80"
+                    Margin="2,0,0,0"
+                    Click="btnClear_Click"
+                    Content="打开" />
+        </StackPanel>
+
+        <!--  第二行  -->
+
+
+        <Grid Grid.Row="2"
+              Grid.ColumnSpan="2"
+              Margin="0,5,0,0">
+            <GroupBox HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Header="日志数据">
+                <ListBox Name="listbox" />
+            </GroupBox>
+        </Grid>
     </Grid>
 </mah:MetroWindow>

@@ -19,7 +19,7 @@ namespace AccessReader
     /// <summary>
     /// Access IS
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private bool _isStop = false;
         private SerialPort _serial = null;
