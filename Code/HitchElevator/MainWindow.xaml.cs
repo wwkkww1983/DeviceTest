@@ -72,6 +72,8 @@ namespace HitchElevator
                 cmbFloors.Items.Add(i);
             }
             cmbFloors.SelectedIndex = 7;
+
+            SerialPortOperate.Window = this;
         }
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
@@ -85,7 +87,6 @@ namespace HitchElevator
             //_access.SetCallBack(OnReadBarCode);
             //_access.Open(cmbIS.Text);
 
-            SerialPortOperate.Window = this;
             SerialPortOperate.Open(cmbSelecter.Text);
             btnOpen.IsEnabled = false;
         }
@@ -99,6 +100,7 @@ namespace HitchElevator
             }
             SerialPortOperate.ClosePort();
             btnOpen.IsEnabled = true;
+            Log("串口关闭");
         }
 
         private void OnReadBarCode(string barcode)
@@ -110,15 +112,17 @@ namespace HitchElevator
         private void SendToSelector(int floor)
         {
             byte bx = 0x00;
-
             var b41 = (byte)(bx | floor);
-            Log("自动权限层：{0} {1}", b41.ToHex(), floor);
             var handBuffer = Funs.InitArray(8, 0x00);
             var total = Package.CardDataSendToLiftPackage(0, handBuffer, b41);
-            Log("长度：{0}", total.Length);
-            Log("数据：{0}", total.ToHex());
             BarcodeFloor = "楼层：" + floor;
-            SerialPortOperate.SendData(total);
+            var bsend = SerialPortOperate.SendData(total);
+            if (bsend)
+            {
+                Log("自动权限层：{0} {1}", b41.ToHex(), floor);
+                Log("长度：{0}", total.Length);
+                Log("数据：{0}", total.ToHex());
+            }
         }
 
         /// <summary>

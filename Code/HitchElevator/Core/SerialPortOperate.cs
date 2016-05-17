@@ -25,6 +25,8 @@ namespace HitachiLift
         public static MainWindow Window = null;
         private static string _portName = "com1";
 
+        private static object _syncObject = new object();
+
         private delegate void AsyncParse(byte[] buffer);
 
         public static bool Open(string portName, int baudRate = 9600)
@@ -80,7 +82,6 @@ namespace HitachiLift
         {
             List<byte> data = new List<byte>();
             data.Add(_bFrameStart);
-
             byte b = 0;
             while ((b = (byte)port.ReadByte()) != _bFrameEnd)
             {
@@ -119,19 +120,21 @@ namespace HitachiLift
             }
         }
 
-        private static object syncObject = new object();
-        public static void SendData(byte[] data)
+        
+        public static bool SendData(byte[] data)
         {
             if (_port != null && _port.IsOpen)
             {
-                lock (syncObject)
+                lock (_syncObject)
                 {
                     _port.Write(data, 0, data.Length);
+                    return true;
                 }
             }
             else
             {
                 Log("串口未打开");
+                return false;
             }
         }
 
