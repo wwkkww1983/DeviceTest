@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using Common;
 using HitchElevator;
+using HitchElevator.Core;
 
 namespace HitachiLift
 {
@@ -36,7 +37,7 @@ namespace HitachiLift
                 _portName = portName;
                 _serial = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
                 _serial.Open();
-                Log("串口打开");
+                Log("选层器串口打开=" + portName);
                 return true;
             }
             catch (Exception ex)
@@ -120,7 +121,6 @@ namespace HitachiLift
             }
         }
 
-        
         public static bool SendData(byte[] data)
         {
             if (_serial != null && _serial.IsOpen)
@@ -133,7 +133,7 @@ namespace HitachiLift
             }
             else
             {
-                Log("串口未打开");
+                Log("选层器串口未打开");
                 return false;
             }
         }
@@ -153,6 +153,7 @@ namespace HitachiLift
                             Log("无卡包--->");
                             //Log("长度：{0}", back.Length);
                             //Log("数据：{0}", back.ToHex());
+                            Logger.ToFile(back.ToHex());
                             SendData(back);
                         }
                         else

@@ -1,4 +1,7 @@
 ﻿using Common;
+using Common.NotifyBase;
+using HitachiLift;
+using HitchElevator.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +13,10 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Common.NotifyBase;
-using HitchElevator.Core;
-using HitachiLift;
-using System.Windows.Media.Animation;
 
 namespace HitchElevator
 {
@@ -36,6 +36,7 @@ namespace HitchElevator
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             ClosePort();
+            Logger.ToFile("app finish------------------------>");
             base.OnClosing(e);
         }
 
@@ -59,13 +60,17 @@ namespace HitchElevator
         {
             this.Dispatcher.Invoke(() =>
             {
-                listbox.Items.Add(string.Format(obj, arg));
+                if (listbox.Items.Count == 100)
+                    listbox.Items.Clear();
+
+                listbox.Items.Insert(0, string.Format(obj, arg));
+                listbox.SelectedIndex = 0;
             });
         }
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            var ComPorts = System.IO.Ports.SerialPort.GetPortNames();
+            var ComPorts = System.IO.Ports.SerialPort.GetPortNames().OrderBy(s => s).ToArray();
             AddComboxItem(cmbIS, ComPorts);
             AddComboxItem(cmbSelecter, ComPorts);
 
@@ -81,6 +86,8 @@ namespace HitchElevator
             cmbFloors.SelectedIndex = 7;
 
             SerialPortOperate.Window = this;
+            AccessISPort.Window = this;
+            Logger.ToFile("app start------------------------->");
         }
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
@@ -123,23 +130,24 @@ namespace HitchElevator
 
         private void SendToSelector(int floor)
         {
-            var animation = OpacityAnimation();
-            tbBarcode.BeginAnimation(Label.OpacityProperty, animation);
-
             byte bx = 0x00;
             var b41 = (byte)(bx | floor);
             var handBuffer = Funs.InitArray(8, 0x00);
             var total = Package.CardDataSendToLiftPackage(0, handBuffer, b41);
-            BarcodeFloor = "楼层：" + floor;
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                BarcodeFloor = "楼层：" + floor;
+                var animation = OpacityAnimation();
+                tbBarcode.BeginAnimation(Label.OpacityProperty, animation);
+            }));
             var bsend = SerialPortOperate.SendData(total);
             if (bsend)
             {
-                Log("自动权限层：{0} {1}", b41.ToHex(), floor);
-                Log("长度：{0}", total.Length);
-                Log("数据：{0}", total.ToHex());
+                //Log("自动权限层：{0} {1}", b41.ToHex(), floor);
+                //Log("长度：{0}", total.Length);
+                Log("发送数据：{0}", total.ToHex());
             }
         }
-
         /// <summary>
         /// 手动选层
         /// </summary>
@@ -159,7 +167,7 @@ namespace HitchElevator
         private DoubleAnimation OpacityAnimation()
         {
             DoubleAnimation opacity = new DoubleAnimation(1, (Duration)TimeSpan.FromSeconds(2));
-            opacity.From = 0.1;
+            opacity.From = 0.5;
             return opacity;
         }
     }

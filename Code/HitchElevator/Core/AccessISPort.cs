@@ -16,6 +16,7 @@ namespace HitchElevator.Core
         private bool _isStop = false;
         private SerialPort _serial = null;
         private Action<string> _onReadebarcode = null;
+        public static MainWindow Window = null;
         public void Open(string portname)
         {
             //二维码波特率为19200
@@ -23,6 +24,7 @@ namespace HitchElevator.Core
             try
             {
                 _serial.Open();
+                Window.Log("二维码串口打开="+portname);
                 ThreadPool.QueueUserWorkItem(ReadComm);
             }
             catch (Exception ex)
@@ -59,16 +61,19 @@ namespace HitchElevator.Core
                 }
                 catch
                 {
-                    Console.WriteLine("串口关闭");
                 }
             }
         }
 
         private void PrintCode(byte[] buffer)
         {
-            var code = System.Text.Encoding.ASCII.GetString(buffer);
+            var code = System.Text.Encoding.UTF8.GetString(buffer).Replace("楼", "").Trim();
             var pos = code.IndexOf((char)0);
             code = code.Remove(pos);
+            if (_onReadebarcode != null)
+            {
+                _onReadebarcode(code);
+            }
         }
 
         public void Close()

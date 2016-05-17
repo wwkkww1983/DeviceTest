@@ -6,7 +6,8 @@
                  Width="800"
                  Height="600"
                  Icon="{StaticResource systemico}"
-                 WindowStartupLocation="CenterScreen">
+                 WindowStartupLocation="CenterScreen"
+                 WindowState="Maximized">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />

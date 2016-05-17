@@ -33,11 +33,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iaspec.Net.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Iaspec.Net.Common.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\MahApps.Metro.dll</HintPath>
@@ -80,6 +85,7 @@
     <Compile Include="Core\AccessISPort.cs" />
     <Compile Include="Core\CommData.cs" />
     <Compile Include="Core\Funs.cs" />
+    <Compile Include="Core\Logger.cs" />
     <Compile Include="Core\Package.cs" />
     <Compile Include="Core\SerialPortOperate.cs" />
     <Compile Include="MainWindow.xaml.cs">

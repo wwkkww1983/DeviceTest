@@ -38,7 +38,7 @@ namespace HitachiLift
             //校验位
             var xor = Funs.GetXOR(buffers);
             buffers.Add(xor);
-            //帧位
+            //帧尾
             buffers.Add(_bFrameEnd);
             
             var totals = buffers.ToArray();
