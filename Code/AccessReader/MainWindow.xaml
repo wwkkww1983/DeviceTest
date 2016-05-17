@@ -6,23 +6,7 @@
                       Width="600"
                       Height="300"
                       WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <!--<Style TargetType="ComboBox">
-            <Setter Property="Height" Value="30" />
-            <Setter Property="Width" Value="120" />
-        </Style>
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="30" />
-            <Setter Property="Width" Value="80" />
-            <Setter Property="Margin" Value="5,0,0,0" />
-        </Style>
-        <Style TargetType="Label">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Height" Value="40" />
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="Foreground" Value="White" />
-        </Style>-->
-    </Window.Resources>
+    <Window.Resources />
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -30,30 +14,37 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <ComboBox Name="cmbPorts" Margin="10,0,0,0" />
-            <Button x:Name="btnOpen"
-                    Width="100"
-                    Click="Button_Click"
-                    Content="打开 Barcode" />
-            <Button x:Name="btnIC"
-                    Width="100"
-                    Click="btnIC_Click"
-                    Content="打开 IC" />
-
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Name="cmbBarcodePorts" Margin="10,0,0,0" />
+                <Button x:Name="btnBarOpen"
+                        Width="100"
+                        Click="btnBarOpen_Click"
+                        Content="打开 Barcode" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Name="cmbNFCPorts" Margin="10,0,0,0" />
+                <Button x:Name="btnNFC"
+                        Width="100"
+                        Click="btnNFC_Click"
+                        Content="打开 NFC" />
+            </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="1"
-                    Margin="10,5,0,0"
-                    Orientation="Horizontal">
-            <Label Width="150"
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   Width="150"
                    HorizontalContentAlignment="Right"
                    Background="Yellow"
                    Content="二维码：" />
-            <Label Width="10"
-                   Margin="10,0,0,0"
+            <Label Grid.Column="1"
+                   Margin="0,0,0,0"
                    Background="Green"
                    Content="{Binding BarCode}" />
-        </StackPanel>
+        </Grid>
         <StackPanel Grid.Row="2"
                     Margin="0,5,0,5"
                     Orientation="Horizontal">

@@ -17,7 +17,7 @@ namespace HitachiLift
     public static class SerialPortOperate
     {
         private static bool _isWork = true;
-        private static SerialPort _port = null;
+        private static SerialPort _serial = null;
         private const byte _bFrameStart = 0xAC;
         private const byte _bFrameEnd = 0xCA;
         private static Thread _thread = null;
@@ -34,8 +34,8 @@ namespace HitachiLift
             try
             {
                 _portName = portName;
-                _port = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
-                _port.Open();
+                _serial = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
+                _serial.Open();
                 Log("串口打开");
                 return true;
             }
@@ -59,11 +59,11 @@ namespace HitachiLift
             {
                 try
                 {
-                    var frame = _port.ReadByte();
+                    var frame = _serial.ReadByte();
                     if (frame != _bFrameStart)
                         continue;
 
-                    var data = ReadData(_port);
+                    var data = ReadData(_serial);
                     if (Xor(data))
                     {
                         //校验成功
@@ -107,9 +107,9 @@ namespace HitachiLift
         public static void ClosePort()
         {
             _isWork = false;
-            if (_port != null && _port.IsOpen)
+            if (_serial != null && _serial.IsOpen)
             {
-                _port.Close();
+                _serial.Close();
             }
             Thread.Sleep(100);
             if (_thread != null &&
@@ -123,11 +123,11 @@ namespace HitachiLift
         
         public static bool SendData(byte[] data)
         {
-            if (_port != null && _port.IsOpen)
+            if (_serial != null && _serial.IsOpen)
             {
                 lock (_syncObject)
                 {
-                    _port.Write(data, 0, data.Length);
+                    _serial.Write(data, 0, data.Length);
                     return true;
                 }
             }

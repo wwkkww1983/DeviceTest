@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using Common.NotifyBase;
 using HitchElevator.Core;
 using HitachiLift;
+using System.Windows.Media.Animation;
+
 namespace HitchElevator
 {
     /// <summary>
@@ -31,6 +33,12 @@ namespace HitchElevator
             this.Loaded += MainWindow_Loaded;
         }
 
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            ClosePort();
+            base.OnClosing(e);
+        }
+
         public static readonly DependencyProperty BarcodeFloorProperty =
             DependencyProperty.Register("BarcodeFloor", typeof(string), typeof(MainWindow), new PropertyMetadata("楼层:"));
         public string BarcodeFloor
@@ -38,7 +46,6 @@ namespace HitchElevator
             get { return (string)GetValue(BarcodeFloorProperty); }
             set { SetValue(BarcodeFloorProperty, value); }
         }
-
 
         private void AddComboxItem(ComboBox cmb, string[] ports)
         {
@@ -78,14 +85,14 @@ namespace HitchElevator
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            //if (cmbIS.Text == cmbSelecter.Text)
-            //{
-            //    MessageBox.Show("不能为同一个串口!");
-            //    return;
-            //}
-            //_access = new AccessISPort();
-            //_access.SetCallBack(OnReadBarCode);
-            //_access.Open(cmbIS.Text);
+            if (cmbIS.Text == cmbSelecter.Text)
+            {
+                MessageBox.Show("不能为相同串口!");
+                return;
+            }
+            _access = new AccessISPort();
+            _access.SetCallBack(OnReadBarCode);
+            _access.Open(cmbIS.Text);
 
             SerialPortOperate.Open(cmbSelecter.Text);
             btnOpen.IsEnabled = false;
@@ -93,14 +100,19 @@ namespace HitchElevator
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
+            ClosePort();
+            btnOpen.IsEnabled = true;
+            Log("串口关闭");
+        }
+
+        private void ClosePort()
+        {
             if (_access != null)
             {
                 _access.Close();
                 _access = null;
             }
             SerialPortOperate.ClosePort();
-            btnOpen.IsEnabled = true;
-            Log("串口关闭");
         }
 
         private void OnReadBarCode(string barcode)
@@ -111,6 +123,9 @@ namespace HitchElevator
 
         private void SendToSelector(int floor)
         {
+            var animation = OpacityAnimation();
+            tbBarcode.BeginAnimation(Label.OpacityProperty, animation);
+
             byte bx = 0x00;
             var b41 = (byte)(bx | floor);
             var handBuffer = Funs.InitArray(8, 0x00);
@@ -139,6 +154,13 @@ namespace HitchElevator
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             listbox.Items.Clear();
+        }
+
+        private DoubleAnimation OpacityAnimation()
+        {
+            DoubleAnimation opacity = new DoubleAnimation(1, (Duration)TimeSpan.FromSeconds(2));
+            opacity.From = 0.1;
+            return opacity;
         }
     }
 }
