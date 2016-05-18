@@ -32,6 +32,11 @@ namespace AccessReader.Code
             }
         }
 
+        public void Write(byte[] buffer)
+        {
+
+        }
+
         private void ReadCommIC(object obj)
         {
             while (!_isStop)
@@ -60,35 +65,47 @@ namespace AccessReader.Code
                     }
                     else
                     {
+                        if (stx == 0x80)
+                            Log("出现，未授权");
+                        else if (stx == 0xC0)
+                            Log("出现，已授权");
                         var len = (byte)_serial.ReadByte();
-                        Log("读卡器返回, len=" + len);
+                        //读取剩余字节
                         var data = readAll(8 + len);
-                        var cardData = new byte[len];
-                        Array.Copy(data, 8, cardData, 0, len);
-                        var hex = GetHex(cardData);
-                        Log(hex);
+                        var backData = new byte[len];
+                        Array.Copy(data, 8, backData, 0, len);
+                        Log("读卡器返回, len=" + len + " " + GetHex(backData));
                         if (CMD == 1)
                         {
-                            if (cardData[2] == 0x03)
+                            //get mefiare type
+                            if (backData[2] == 0x03)
                             {
                                 var arr = new byte[4];
-                                Array.Copy(cardData, 3, arr, 0, 4);
+                                Array.Copy(backData, 3, arr, 0, 4);
                                 var uid = BitConverter.ToUInt32(arr, 0);
                                 Log("卡类=Mifare Classic 1K  卡数据=" + string.Join(" ", arr.Select(s => s.ToString("X2"))) + " UID=" + uid);
                             }
-                            else if (cardData[2] == 0x04)
+                            else if (backData[2] == 0x04)
                                 Log("Mifare Classic 4K");
-                            else if (cardData[2] == 0x05)
+                            else if (backData[2] == 0x05)
                                 Log("Mifare Ultralight");
                         }
                         else if (CMD == 2)
                         {
+                            //load media key
                             if (len == 4)
                             {
-                                if (cardData[2] == 0x90 && data[3] == 0x00)
+                                if (backData[2] == 0x90 && data[3] == 0x00)
                                 {
                                     Log("设置密码成功");
                                 }
+                            }
+                        }
+                        else if (CMD == 3)
+                        {
+                            if (backData[3] == 0x90 && backData[4] == 0x00)
+                            {
+                                Log("块=" + backData[2] + "授权成功");
                             }
                         }
                     }
