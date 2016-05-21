@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Common;
 namespace HitchElevator.Core
 {
     /// <summary>
@@ -24,7 +24,7 @@ namespace HitchElevator.Core
             try
             {
                 _serial.Open();
-                Window.Log("二维码串口打开="+portname);
+                Window.Log("二维码串口打开=" + portname);
                 ThreadPool.QueueUserWorkItem(ReadComm);
             }
             catch (Exception ex)

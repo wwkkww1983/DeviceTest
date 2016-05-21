@@ -465,7 +465,9 @@ namespace Common
         /// <returns></returns>
         public static string ToUTF8String(this byte[] buffer)
         {
-            return buffer.BufferToString(Encoding.UTF8);
+            var str = buffer.BufferToString(Encoding.UTF8);
+            str = str.Remove(str.IndexOf((char)0));
+            return str;
         }
         /// <summary>
         /// 

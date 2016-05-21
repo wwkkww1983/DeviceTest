@@ -12,6 +12,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel>
@@ -22,7 +23,7 @@
                         Click="btnBarOpen_Click"
                         Content="打开 Barcode" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="0,3,0,0" Orientation="Horizontal">
                 <ComboBox Name="cmbNFCPorts" Margin="10,0,0,0" />
                 <Button x:Name="btnNFC"
                         Width="100"
@@ -30,7 +31,7 @@
                         Content="打开 NFC" />
             </StackPanel>
         </StackPanel>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,3,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
@@ -45,23 +46,71 @@
                    Background="Green"
                    Content="{Binding BarCode}" />
         </Grid>
-        <StackPanel Grid.Row="2"
-                    Margin="0,5,0,5"
-                    Orientation="Horizontal">
-            <Button Name="btnClear"
-                    Margin="10,0,0,0"
-                    Click="btnClear_Click"
-                    Content="Clear" />
-            <Button x:Name="btnSend"
-                    Width="100"
-                    Click="btnSend_Click"
-                    Content="Get Mifare Type" />
-            <Button x:Name="btnMifareType"
-                    Width="100"
-                    Click="btnMifareType_Click"
-                    Content="Load Key" />
-        </StackPanel>
-        <Grid Grid.Row="3">
+        <GroupBox Grid.Row="2"
+                  FontWeight="Bold"
+                  Header="Mifare"
+                  Style="{x:Null}">
+            <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
+                <Button Name="btnClear"
+                        Width="60"
+                        Margin="10,0,0,0"
+                        Click="btnClear_Click"
+                        Content="Clear" />
+                <Button x:Name="btnSend"
+                        Width="120"
+                        Click="btnSend_Click"
+                        Content="Get Mifare Type" />
+                <Button x:Name="btnMifareType"
+                        Width="120"
+                        Click="btnMifareType_Click"
+                        Content="Load Key" />
+                <Button x:Name="btnMifare"
+                        Width="120"
+                        Click="btnMifare_Click"
+                        Content="Write And Read" />
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="3"
+                  FontWeight="Bold"
+                  Header="NFC"
+                  Style="{x:Null}">
+            <UniformGrid>
+                <Button Name="btnFireware"
+                        Width="60"
+                        Margin="10,0,0,0"
+                        Click="btnFireware_Click"
+                        Content="Fireware V" />
+
+                <Button Name="btnLoader"
+                        Width="60"
+                        Click="btnLoader_Click"
+                        Content="Loader V" />
+
+                <Button Name="btnNFCSerialNumber"
+                        Width="120"
+                        Click="btnNFCSerialNumber_Click"
+                        Content="btnNFCSerialNumber" />
+
+                <Button Name="btnNFCGetTiming"
+                        Click="btnNFCGetTiming_Click"
+                        Content="btnNFCGetTiming" />
+
+                <Button Click="btnEnterSleep_Click" Content="Enter Sleep" />
+
+                <Button Click="btnExitSleep_Click" Content="Exit Sleep" />
+
+                <Button Click="btnKernel_Click" Content="NFC Kernl V" />
+
+                <Button Click="btnMediaSerialNumber_Click" Content="Media SerialNumber" />
+
+                <Button Click="btnDisableMediaArrival_Click" Content="Disable Arrival" />
+
+                <Button Click="btnChangeBaud_Click" Content="ChangeBaud" />
+            </UniformGrid>
+        </GroupBox>
+
+        <Grid Grid.Row="4">
             <TextBox Name="txt"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch" />

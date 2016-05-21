@@ -11,7 +11,11 @@ namespace AccessReader.Code
     {
         private bool _isStop = false;
         private SerialPort _serial = null;
-        public int CMD { get; set; }
+        public int CMD
+        {
+            get;
+            set;
+        }
 
         public void Log(string str)
         {
@@ -34,7 +38,10 @@ namespace AccessReader.Code
 
         public void Write(byte[] buffer)
         {
-
+            if (_serial != null && _serial.IsOpen)
+            {
+                _serial.Write(buffer, 0, buffer.Length);
+            }
         }
 
         private void ReadCommIC(object obj)
@@ -43,7 +50,6 @@ namespace AccessReader.Code
             {
                 try
                 {
-                    var pos = 0;
                     byte[] buffer = new byte[128];
                     var stx = (byte)_serial.ReadByte();
                     if (stx == 0x50)
@@ -83,7 +89,7 @@ namespace AccessReader.Code
                                 var arr = new byte[4];
                                 Array.Copy(backData, 3, arr, 0, 4);
                                 var uid = BitConverter.ToUInt32(arr, 0);
-                                Log("卡类=Mifare Classic 1K  卡数据=" + string.Join(" ", arr.Select(s => s.ToString("X2"))) + " UID=" + uid);
+                                Log("卡类=Mifare Classic 1K  卡数据=" + string.Join(" ", arr.Select(s => s.ToString("X2"))) + " 序列号 UID=" + uid);
                             }
                             else if (backData[2] == 0x04)
                                 Log("Mifare Classic 4K");

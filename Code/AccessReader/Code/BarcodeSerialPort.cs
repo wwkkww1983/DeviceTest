@@ -4,21 +4,25 @@ using System.Linq;
 using System.Text;
 using System.IO.Ports;
 using System.Threading;
+using Common;
 
 namespace AccessReader.Code
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BarcodeSerialPort
     {
         private bool _isStop = false;
         private SerialPort _serial = null;
-
-        public BarcodeSerialPort()
+        private Action<string> _onReadeBarcode = null;
+        public BarcodeSerialPort(Action<string> barcodeCallback)
         {
+            _onReadeBarcode = barcodeCallback;
         }
 
         public bool Open(string portname)
         {
-            //二维码波特率为19200
             _serial = new SerialPort(portname, 19200, Parity.None, 8, StopBits.One);
             try
             {
@@ -60,7 +64,7 @@ namespace AccessReader.Code
                         buffer[pos] = b;
                         pos++;
                     }
-                    //PrintCode(buffer);
+                    PrintCode(buffer);
                 }
                 catch
                 {
@@ -69,6 +73,13 @@ namespace AccessReader.Code
             }
         }
 
-
+        private void PrintCode(byte[] buffer)
+        {
+            var code = buffer.ToUTF8String();
+            if (_onReadeBarcode != null)
+            {
+                _onReadeBarcode(code);
+            }
+        }
     }
 }

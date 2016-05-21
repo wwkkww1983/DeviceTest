@@ -1,0 +1,40 @@
+﻿<Controls:MetroWindow x:Class="AccessReader.MifareWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      Title="MifareWindow"
+                      Width="400"
+                      Height="300"
+                      ResizeMode="NoResize"
+                      WindowStartupLocation="CenterScreen">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label Margin="2,0,0,0" Content="密码A" />
+            <TextBox Width="150" />
+            <Label Margin="2,0,0,0" Content="密码B" />
+            <TextBox Width="150" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1"
+                    Margin="0,3,0,0"
+                    Orientation="Horizontal">
+            <Label Margin="2,0,0,0" Content="  扇区" />
+            <ComboBox Width="100"
+                      ItemsSource="{Binding Sectors}"
+                      SelectedIndex="3" />
+        </StackPanel>
+        <StackPanel Grid.Row="2"
+                    Margin="3,3,0,0"
+                    Orientation="Horizontal">
+            <Button Content="Read" />
+            <Button Margin="3,0,0,0" Content="Write" />
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>
