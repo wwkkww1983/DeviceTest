@@ -14,7 +14,12 @@ namespace MeetingClient.Core
         /// <summary>
         /// API地址区分大小写
         /// </summary>
-        private const string URL = "https://meeting.yowhale.com/openapi/guard/openDoor.json?{0}";
+        private string URL = "";
+
+        public MeetingHttpRequest(string url)
+        {
+            URL = url;
+        }
 
         public SortedDictionary<string, string> GetRequestParam(string qrcode)
         {

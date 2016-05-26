@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmVComReader));
             this.rtbCode = new System.Windows.Forms.RichTextBox();
             this.btnOpen = new System.Windows.Forms.Button();
             this.cmbPorts = new System.Windows.Forms.ComboBox();
@@ -71,8 +72,9 @@
             this.Controls.Add(this.cmbPorts);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.rtbCode);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmVComReader";
-            this.Text = "Usb 二维码阅读器";
+            this.Text = "Usb 二维码阅读器(虚拟串口)";
             this.Load += new System.EventHandler(this.FrmVComReader_Load);
             this.ResumeLayout(false);
 

@@ -28,9 +28,10 @@ namespace MeetingClient
         {
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnMeeting_Click(object sender, EventArgs e)
         {
-            using (MeetingHttpRequest requestAPI = new MeetingHttpRequest())
+            var url = "https://meeting.yowhale.com/openapi/guard/openDoor.json?{0}";
+            using (MeetingHttpRequest requestAPI = new MeetingHttpRequest(url))
             {
                 var sw = Stopwatch.StartNew();
                 var code = "meeting://book?code=8c3cff41-f476-4c9c-8126-e9a6163f564b";
@@ -41,5 +42,18 @@ namespace MeetingClient
             }
         }
 
+        private void btnVisitor_Click(object sender, EventArgs e)
+        {
+            var url = "https://visitor.yowhale.com/openapi/guard/openDoor.json?{0}";
+            using (MeetingHttpRequest requestAPI = new MeetingHttpRequest(url))
+            {
+                var sw = Stopwatch.StartNew();
+                var code = "visitor://book?code=2f2e4c9e-6cd8-402e-a95c-e08f4006894e";
+                var flag = requestAPI.VerfiyAccess(code);
+                sw.Stop();
+                Debug.WriteLine("open door:" + flag);
+                label1.Text = "API call:" + sw.ElapsedMilliseconds + " " + (flag ? "true" : "false");
+            }
+        }
     }
 }

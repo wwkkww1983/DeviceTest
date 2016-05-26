@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.bteMeeting = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnVisitor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // bteMeeting
             // 
-            this.button1.Location = new System.Drawing.Point(153, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 33);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "开闸";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.bteMeeting.Location = new System.Drawing.Point(52, 35);
+            this.bteMeeting.Name = "bteMeeting";
+            this.bteMeeting.Size = new System.Drawing.Size(87, 33);
+            this.bteMeeting.TabIndex = 0;
+            this.bteMeeting.Text = "会议室";
+            this.bteMeeting.UseVisualStyleBackColor = true;
+            this.bteMeeting.Click += new System.EventHandler(this.btnMeeting_Click);
             // 
             // label1
             // 
@@ -51,13 +52,24 @@
             this.label1.TabIndex = 1;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnVisitor
+            // 
+            this.btnVisitor.Location = new System.Drawing.Point(234, 35);
+            this.btnVisitor.Name = "btnVisitor";
+            this.btnVisitor.Size = new System.Drawing.Size(87, 33);
+            this.btnVisitor.TabIndex = 2;
+            this.btnVisitor.Text = "访客";
+            this.btnVisitor.UseVisualStyleBackColor = true;
+            this.btnVisitor.Click += new System.EventHandler(this.btnVisitor_Click);
+            // 
             // FrmGateMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(412, 150);
+            this.Controls.Add(this.btnVisitor);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.bteMeeting);
             this.Name = "FrmGateMain";
             this.Text = "道闸控制系统";
             this.Load += new System.EventHandler(this.FrmGateMain_Load);
@@ -67,8 +79,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bteMeeting;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnVisitor;
     }
 }
 
