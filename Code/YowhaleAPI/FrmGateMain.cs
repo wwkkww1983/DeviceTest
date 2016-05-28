@@ -49,6 +49,7 @@ namespace MeetingClient
             {
                 var sw = Stopwatch.StartNew();
                 var code = "visitor://book?code=2f2e4c9e-6cd8-402e-a95c-e08f4006894e";
+                code = "visitor://book?code=7f88fc92-e3ed-40d2-b32a-01e0074df113";
                 var flag = requestAPI.VerfiyAccess(code);
                 sw.Stop();
                 Debug.WriteLine("open door:" + flag);

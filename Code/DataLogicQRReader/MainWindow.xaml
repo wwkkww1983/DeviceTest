@@ -1,0 +1,48 @@
+﻿<mah:MetroWindow x:Class="DataLogicQRReader.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                 Title="Data Logic(GFS4400)"
+                 Width="800"
+                 Height="600"
+                 WindowStartupLocation="CenterScreen">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <Label Content="二维码串口：" />
+            <ComboBox Name="cmbPorts"
+                      Width="80"
+                      ItemsSource="{Binding ComPorts}" />
+
+
+            <Button Name="btnOpen"
+                    Width="80"
+                    Margin="10,0,0,0"
+                    Click="btnOpen_Click"
+                    Content="打开" />
+
+            <Button Name="btnClear"
+                    Width="80"
+                    Margin="10,0,0,0"
+                    Click="btnClear_Click"
+                    Content="清空" />
+        </StackPanel>
+
+
+        <GroupBox Grid.Row="1"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Header="日志数据">
+            <TextBox Name="tbLog"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto" />
+        </GroupBox>
+    </Grid>
+</mah:MetroWindow>

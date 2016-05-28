@@ -23,12 +23,6 @@ namespace F7511C
 
         private void FrmBoard_Load(object sender, EventArgs e)
         {
-            if (DateTime.Now > new DateTime(2016, 5, 1, 23, 59, 59))
-            {
-                this.Text += "---授权过期";
-                this.Disabeld();
-                return;
-            }
 #if(x86)
             {
                 var ret = IPCAPI32.F75111_Init();

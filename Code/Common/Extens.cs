@@ -466,7 +466,8 @@ namespace Common
         public static string ToUTF8String(this byte[] buffer)
         {
             var str = buffer.BufferToString(Encoding.UTF8);
-            str = str.Remove(str.IndexOf((char)0));
+            if (str.IndexOf((char)0) > -1)
+                str = str.Remove(str.IndexOf((char)0));
             return str;
         }
         /// <summary>

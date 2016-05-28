@@ -26,7 +26,7 @@ namespace DeskoHIDReader
         private const byte DataPos = 8;
         private const byte ETX = 0x03;
 
-        private const string intdeviceId = "68B5355";
+        private const string intdeviceId = "2848CA86";
         private const string outdeviceId = "31D9B3D";
 
         private HidDevice _deviceIn = null;
