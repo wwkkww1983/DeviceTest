@@ -73,9 +73,9 @@ namespace DataLogicQRReader
                     List<byte> buffer = new List<byte>();
                     while ((b = (byte)_serial.ReadByte()) > 0)
                     {
-                        buffer.Add(b);
                         if (b == ETX)
                             break;
+                        buffer.Add(b);
                     }
                     ParseBarcode(buffer);
                 }
@@ -88,11 +88,24 @@ namespace DataLogicQRReader
 
         private void ParseBarcode(List<byte> buffer)
         {
-            var data = new byte[buffer.Count - 1];
-            Array.Copy(buffer.ToArray(), 0, data, 0, data.Length);
+            var data = buffer.ToArray();
             var code = data.ToUTF8String();
             Log("二维码数据:" + buffer.ToArray().ToHex());
             Log("二维码编号:" + code);
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            _isStop = true;
+            if (_serial != null && _serial.IsOpen)
+            {
+                _serial.Close();
+            }
+            if (_thread != null)
+            {
+                _thread.Join(100);
+            }
+            base.OnClosing(e);
         }
     }
 }

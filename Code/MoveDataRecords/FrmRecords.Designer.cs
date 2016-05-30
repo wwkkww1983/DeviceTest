@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgv = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.btnPrevious = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
-            this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.btnNext = new System.Windows.Forms.Button();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnFirst = new System.Windows.Forms.Button();
             this.btnLast = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -63,58 +63,6 @@
             this.dgv.Size = new System.Drawing.Size(696, 413);
             this.dgv.TabIndex = 0;
             // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Location = new System.Drawing.Point(271, 421);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(87, 29);
-            this.btnPrevious.TabIndex = 1;
-            this.btnPrevious.Text = "上一个";
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(182, 478);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "ID：";
-            // 
-            // txtID
-            // 
-            this.txtID.Location = new System.Drawing.Point(217, 474);
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(60, 21);
-            this.txtID.TabIndex = 3;
-            // 
-            // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(367, 421);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(87, 29);
-            this.btnNext.TabIndex = 5;
-            this.btnNext.Text = "下一个";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(327, 474);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(59, 21);
-            this.txtName.TabIndex = 7;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(280, 478);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "姓名：";
-            // 
             // Column1
             // 
             this.Column1.DataPropertyName = "ID";
@@ -127,9 +75,61 @@
             this.Column2.HeaderText = "姓名";
             this.Column2.Name = "Column2";
             // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Location = new System.Drawing.Point(110, 421);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(87, 29);
+            this.btnPrevious.TabIndex = 1;
+            this.btnPrevious.Text = "上一个";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(28, 460);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "ID：";
+            // 
+            // txtID
+            // 
+            this.txtID.Location = new System.Drawing.Point(63, 456);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(60, 21);
+            this.txtID.TabIndex = 3;
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(206, 421);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(87, 29);
+            this.btnNext.TabIndex = 5;
+            this.btnNext.Text = "下一个";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(173, 456);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(59, 21);
+            this.txtName.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(126, 460);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "姓名：";
+            // 
             // btnFirst
             // 
-            this.btnFirst.Location = new System.Drawing.Point(178, 421);
+            this.btnFirst.Location = new System.Drawing.Point(17, 421);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(87, 29);
             this.btnFirst.TabIndex = 8;
@@ -139,7 +139,7 @@
             // 
             // btnLast
             // 
-            this.btnLast.Location = new System.Drawing.Point(460, 421);
+            this.btnLast.Location = new System.Drawing.Point(299, 421);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(87, 29);
             this.btnLast.TabIndex = 9;
@@ -150,9 +150,9 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Gray;
-            this.pictureBox1.Location = new System.Drawing.Point(392, 474);
+            this.pictureBox1.Location = new System.Drawing.Point(238, 456);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(155, 66);
+            this.pictureBox1.Size = new System.Drawing.Size(155, 84);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
