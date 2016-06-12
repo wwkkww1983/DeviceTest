@@ -6,17 +6,17 @@ using System.IO.Ports;
 using System.Threading;
 using Common;
 
-namespace AccessReader.Code
+namespace SerialQRReaders
 {
     /// <summary>
     /// 
     /// </summary>
-    public class BarcodeSerialPort
+    public class AccessQRReader
     {
         private bool _isStop = false;
         private SerialPort _serial = null;
         private Action<string> _onReadeBarcode = null;
-        public BarcodeSerialPort(Action<string> barcodeCallback)
+        public AccessQRReader(Action<string> barcodeCallback)
         {
             _onReadeBarcode = barcodeCallback;
         }

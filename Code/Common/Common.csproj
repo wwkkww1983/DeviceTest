@@ -46,6 +46,7 @@
     <Compile Include="FrmBase.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FuncTimeout.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="NotifyBase\NotifyPropertyBase.cs" />
     <Compile Include="NotifyBase\PropertyNotifyObject.cs" />

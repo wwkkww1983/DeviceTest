@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCode", "QRCode\QRCode.csproj", "{B93388B3-97C2-4C64-B53F-9DCD94AD4EB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCodePrint", "QRCodePrint\QRCodePrint.csproj", "{D3889B97-AE9C-4D8A-B7E4-C2F09724A2FE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeskoQRReader", "DeskoQRReader\DeskoQRReader.csproj", "{139D7C44-30A7-48CC-9F51-E2C43B4E9288}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D9A220D7-0C6C-4DFE-B183-DD41444886C7}"
@@ -29,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessReader", "AccessReade
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLogicQRReader", "DataLogicQRReader\DataLogicQRReader.csproj", "{2E94FADF-3051-43E2-A9CC-4ECC1AA0B732}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJ-Benz", "BJ-Benz\BJ-Benz.csproj", "{639AC812-41DE-4BC0-9969-496B99703FF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialQRReaders", "SerialQRReaders\SerialQRReaders.csproj", "{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,10 +41,6 @@ Global
 		{B93388B3-97C2-4C64-B53F-9DCD94AD4EB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B93388B3-97C2-4C64-B53F-9DCD94AD4EB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B93388B3-97C2-4C64-B53F-9DCD94AD4EB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3889B97-AE9C-4D8A-B7E4-C2F09724A2FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3889B97-AE9C-4D8A-B7E4-C2F09724A2FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3889B97-AE9C-4D8A-B7E4-C2F09724A2FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3889B97-AE9C-4D8A-B7E4-C2F09724A2FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{139D7C44-30A7-48CC-9F51-E2C43B4E9288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{139D7C44-30A7-48CC-9F51-E2C43B4E9288}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{139D7C44-30A7-48CC-9F51-E2C43B4E9288}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,6 +85,14 @@ Global
 		{2E94FADF-3051-43E2-A9CC-4ECC1AA0B732}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E94FADF-3051-43E2-A9CC-4ECC1AA0B732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E94FADF-3051-43E2-A9CC-4ECC1AA0B732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{639AC812-41DE-4BC0-9969-496B99703FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{639AC812-41DE-4BC0-9969-496B99703FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{639AC812-41DE-4BC0-9969-496B99703FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{639AC812-41DE-4BC0-9969-496B99703FF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

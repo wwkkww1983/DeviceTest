@@ -1,6 +1,7 @@
 ﻿using AccessReader.Code;
 using Common;
 using Common.NotifyBase;
+using SerialQRReaders;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -27,7 +28,7 @@ namespace AccessReader
     public partial class MainWindow
     {
         private NFCSerialPort _nfc = null;
-        private BarcodeSerialPort _barcode = null;
+        private AccessQRReader _barcode = null;
 
         private DataViewModel _data = null;
         //messagetype   0 1
@@ -77,7 +78,7 @@ namespace AccessReader
         {
             if (_barcode == null)
             {
-                _barcode = new BarcodeSerialPort((code) =>
+                _barcode = new AccessQRReader((code) =>
                 {
                     _data.Barcode = code;
                 });

@@ -1,0 +1,163 @@
+﻿<Controls:MetroWindow x:Class="BJ_Benz.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      Title="MainWindow"
+                      Width="400"
+                      Height="300"
+                      Background="#EBF0F4"
+                      Icon="qrcode.png"
+                      WindowStartupLocation="CenterScreen">
+    <Window.Resources />
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="8*" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                BorderBrush="SteelBlue"
+                BorderThickness="1"
+                CornerRadius="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="35" />
+                    <RowDefinition Height="35" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalContentAlignment="Right"
+                       Content="Usb阅读器:" />
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Content="{Binding DeskoHIDReaderStatus}" />
+
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       HorizontalContentAlignment="Right"
+                       Content="二维码串口:" />
+
+                <StackPanel Grid.Row="1"
+                            Grid.Column="1"
+                            Orientation="Horizontal">
+                    <ComboBox Name="cmbPort1"
+                              Width="80"
+                              Height="25"
+                              ItemsSource="{Binding Ports1}"
+                              SelectedIndex="0" />
+                    <Button Width="80"
+                            Height="25"
+                            Margin="5,0"
+                            Command="{Binding AccessQRCommand}"
+                            CommandParameter="{Binding SelectedItem,
+                                                       ElementName=cmbPort1}"
+                            Content="打开"
+                            IsEnabled="{Binding IsQRSerialButtonEnable}" />
+                </StackPanel>
+
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       HorizontalContentAlignment="Right"
+                       Content="IC卡串口:" />
+                <StackPanel Grid.Row="2"
+                            Grid.Column="1"
+                            Orientation="Horizontal">
+                    <ComboBox Name="cmbPorts2"
+                              Width="80"
+                              Height="25"
+                              ItemsSource="{Binding Ports2}"
+                              SelectedIndex="1" />
+                    <Button Width="80"
+                            Height="25"
+                            Margin="5,0"
+                            Command="{Binding AccessMifareCommand}"
+                            CommandParameter="{Binding SelectedItem,
+                                                       ElementName=cmbPorts2}"
+                            Content="打开"
+                            IsEnabled="{Binding IsMifareSerialButtonEnable}" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="3"
+                            Grid.Column="1"
+                            Orientation="Horizontal">
+                    <Button Width="80"
+                            Height="25"
+                            Margin="0,0"
+                            Command="{Binding OpenGateCommand}"
+                            CommandParameter="1"
+                            Content="入开闸" />
+                    <Button Width="80"
+                            Height="25"
+                            Margin="5,0"
+                            Command="{Binding OpenGateCommand}"
+                            CommandParameter="2"
+                            Content="出开闸" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Path Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              Margin="0,10,0,0"
+              StrokeThickness="2">
+            <Path.Stroke>
+                <LinearGradientBrush>
+                    <GradientStop Offset="0.2" Color="Black" />
+                    <GradientStop Offset="0.8" Color="Red" />
+                </LinearGradientBrush>
+            </Path.Stroke>
+            <Path.Data>
+                <LineGeometry StartPoint="0,0" EndPoint="1920,1" />
+            </Path.Data>
+        </Path>
+
+        <Label Grid.Row="2"
+               Grid.Column="0"
+               HorizontalContentAlignment="Right"
+               Content="二维码:" />
+        <Label Grid.Row="2"
+               Grid.Column="1"
+               Content="{Binding QRCode}" />
+
+        <Path Grid.Row="3"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              Margin="0,10,0,0"
+              StrokeThickness="2">
+            <Path.Stroke>
+                <LinearGradientBrush>
+                    <GradientStop Offset="0.2" Color="Black" />
+                    <GradientStop Offset="0.8" Color="Red" />
+                </LinearGradientBrush>
+            </Path.Stroke>
+            <Path.Data>
+                <LineGeometry StartPoint="0,0" EndPoint="1920,1" />
+            </Path.Data>
+        </Path>
+
+        <Label Grid.Row="4"
+               Grid.Column="0"
+               HorizontalContentAlignment="Right"
+               Content="IC卡号:" />
+        <Label Grid.Row="4"
+               Grid.Column="1"
+               Content="{Binding ICSerialNumber}" />
+    </Grid>
+</Controls:MetroWindow>
