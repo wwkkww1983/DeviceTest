@@ -92,17 +92,17 @@ namespace HitchElevator
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbIS.Text == cmbSelecter.Text)
-            {
-                MessageBox.Show("不能为相同串口!");
-                return;
-            }
+            //if (cmbIS.Text == cmbSelecter.Text)
+            //{
+            //    MessageBox.Show("不能为相同串口!");
+            //    return;
+            //}
             _access = new AccessISPort();
             _access.SetCallBack(OnReadBarCode);
             _access.Open(cmbIS.Text);
 
-            SerialPortOperate.Open(cmbSelecter.Text);
-            btnOpen.IsEnabled = false;
+            //SerialPortOperate.Open(cmbSelecter.Text);
+            //btnOpen.IsEnabled = false;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)

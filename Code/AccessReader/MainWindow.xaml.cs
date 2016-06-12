@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,7 +28,8 @@ namespace AccessReader
     {
         private NFCSerialPort _nfc = null;
         private BarcodeSerialPort _barcode = null;
-        int CMD = 0;
+
+        private DataViewModel _data = null;
         //messagetype   0 1
         //datalen       4 4
         //slot Id       5 1
@@ -41,31 +43,16 @@ namespace AccessReader
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
             this.DataContext = this;
-            _nfc = new NFCSerialPort();
-        }
 
-        public string BarCode
-        {
-            get { return (string)GetValue(BarCodeProperty); }
-            set { SetValue(BarCodeProperty, value); }
-        }
-
-        public static readonly DependencyProperty BarCodeProperty =
-            DependencyProperty.Register("BarCode", typeof(string), typeof(MainWindow), new PropertyMetadata(""));
-
-        private void AddComboxItem(ComboBox cmb, string[] ports)
-        {
-            foreach (var port in ports)
-            {
-                cmb.Items.Add(new ComboBoxItem { Content = port });
-            }
+            _data = new DataViewModel();
+            this.DataContext = _data;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var ports = SerialPort.GetPortNames();
-            AddComboxItem(cmbBarcodePorts, ports);
-            AddComboxItem(cmbNFCPorts, ports);
+            cmbBarcodePorts.ItemsSource = ports;
+            cmbNFCPorts.ItemsSource = ports;
             if (ports.Length == 0)
             {
                 btnBarOpen.IsEnabled = false;
@@ -78,17 +65,25 @@ namespace AccessReader
             }
         }
 
+        private void Log(string str)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                txt.Text += str + Environment.NewLine;
+            });
+        }
+
         private void btnBarOpen_Click(object sender, RoutedEventArgs e)
         {
             if (_barcode == null)
             {
                 _barcode = new BarcodeSerialPort((code) =>
                 {
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        BarCode = code;
-                    });
+                    _data.Barcode = code;
                 });
+                _barcode.Open(cmbBarcodePorts.Text);
+
+                btnBarOpen.IsEnabled = false;
             }
         }
 
@@ -96,9 +91,10 @@ namespace AccessReader
         {
             if (_nfc == null)
             {
-                _nfc = new NFCSerialPort();
+                _nfc = new NFCSerialPort(Log);
             }
             _nfc.Open(cmbNFCPorts.Text);
+            btnNFC.IsEnabled = false;
         }
 
         private void Log(object obj)
@@ -130,7 +126,34 @@ namespace AccessReader
             _nfc.CMD = cmd;
             _nfc.Write(data.ToArray());
         }
-        private void btnSend_Click(object sender, RoutedEventArgs e)
+
+        #region BarCode Query
+        private static byte[] CompositeBarcode(string data)
+        {
+            byte[] prefix_barcode = new byte[3] { 0x16, 0x4D, 0x0D };
+            var buffer = System.Text.Encoding.UTF8.GetBytes(data);
+            var list = new List<byte>();
+            list.AddRange(prefix_barcode);
+            list.AddRange(buffer);
+
+            buffer = list.ToArray();
+            return buffer;
+        }
+
+        private void btnQueryAISINF_Click(object sender, RoutedEventArgs e)
+        {
+            var data = CompositeBarcode("AISINF?");
+            _barcode.Write(data);
+        }
+
+        private void btnQueryAISBAU_Click(object sender, RoutedEventArgs e)
+        {
+            var data = CompositeBarcode("AISBAU?");
+            _barcode.Write(data);
+        }
+        #endregion
+
+        private void btnMifareType_Click(object sender, RoutedEventArgs e)
         {
             //获取卡类
             var str = "00h 00h";
@@ -138,10 +161,10 @@ namespace AccessReader
             SendDataToNFC(1, data);
         }
 
-        private void btnMifareType_Click(object sender, RoutedEventArgs e)
+        private void btnLoadKey_Click(object sender, RoutedEventArgs e)
         {
             //装载密码
-            var str = "00h 02h FFh FFh FFh FFh FFh FFh";
+            var str = "00h 02h 1 2 3 4 5 6";
             var data = CompositeMifareData(str);
             SendDataToNFC(2, data);
         }
@@ -151,11 +174,44 @@ namespace AccessReader
             txt.Clear();
         }
 
-        private void btnMifare_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAuthenticate_Click(object sender, RoutedEventArgs e)
         {
-            new MifareWindow().Show();
+            //new MifareWindow().Show();
+
+            //var str = "00h 02h 1 2 3 4 5 6";
+            //var data = CompositeMifareData(str);
+            //SendDataToNFC(2, data);
+            //Thread.Sleep(500);
+
+            var str = "00h 04h 1";
+            var data = CompositeMifareData(str);
+            SendDataToNFC(3, data);
         }
 
+        private void btnWriteBlock_Click(object sender, RoutedEventArgs e)
+        {
+            var str = "00h 48h 1 1 2 3 4 5 6 7 8 9 A B C D E F 10";
+            var data = CompositeMifareData(str);
+            SendDataToNFC(4, data);
+        }
+
+        private void btnReadBlock_Click(object sender, RoutedEventArgs e)
+        {
+
+            var str = "00h 02h 1 2 3 4 5 6";
+            var data = CompositeMifareData(str);
+            SendDataToNFC(2, data);
+            Thread.Sleep(500);
+
+            var str1 = "00h 06h 2";
+            var data1 = CompositeMifareData(str1);
+            SendDataToNFC(5, data1);
+        }
 
         #region NFC package
 
@@ -169,10 +225,23 @@ namespace AccessReader
             return buffer;
         }
 
+        private string GetTag(int len)
+        {
+            var str = "";
+            for (var i = 0; i < len; i++)
+            {
+                str += "00 ";
+            }
+            str = str.Trim();
+            return str;
+        }
+
         private void btnFireware_Click(object sender, RoutedEventArgs e)
         {
             //
             var str = "00";
+            //var tag = GetTag(63);
+            //str = str + " " + tag;
             var data = CompositeNFCData(str);
             SendDataToNFC(0, data);
         }
@@ -253,5 +322,6 @@ namespace AccessReader
             SendDataToNFC(0, data);
         }
         #endregion
+
     }
 }

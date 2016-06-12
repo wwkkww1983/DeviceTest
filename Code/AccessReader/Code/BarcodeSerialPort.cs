@@ -36,6 +36,14 @@ namespace AccessReader.Code
             }
         }
 
+        public void Write(byte[] data)
+        {
+            if (_serial != null && _serial.IsOpen)
+            {
+                _serial.Write(data, 0, data.Length);
+            }
+        }
+
         public void Close()
         {
             _isStop = true;
@@ -55,7 +63,10 @@ namespace AccessReader.Code
                     byte[] buffer = new byte[128];
                     var stx = (byte)_serial.ReadByte();
                     if (stx != 0x02)
+                    {
+                        System.Diagnostics.Debug.WriteLine((char)stx);
                         continue;
+                    }
                     byte b = 0;
                     while ((b = (byte)_serial.ReadByte()) > 0)
                     {

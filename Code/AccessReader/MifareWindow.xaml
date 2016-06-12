@@ -5,6 +5,7 @@
                       Title="MifareWindow"
                       Width="400"
                       Height="300"
+                      Background="DarkGray"
                       ResizeMode="NoResize"
                       WindowStartupLocation="CenterScreen">
     <Grid Margin="5">

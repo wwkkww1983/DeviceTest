@@ -71,7 +71,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Code\BarcodeSerialPort.cs" />
+    <Compile Include="Code\Commands.cs" />
     <Compile Include="Code\NFCSerialPort.cs" />
+    <Compile Include="DataViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

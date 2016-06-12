@@ -3,34 +3,48 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Title="Access Device Test"
-                      Width="600"
-                      Height="300"
+                      Width="800"
+                      Height="400"
                       WindowStartupLocation="CenterScreen">
-    <Window.Resources />
+    <Window.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="Width" Value="100" />
+        </Style>
+    </Window.Resources>
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <ComboBox Name="cmbBarcodePorts" Margin="10,0,0,0" />
-                <Button x:Name="btnBarOpen"
-                        Width="100"
-                        Click="btnBarOpen_Click"
-                        Content="打开 Barcode" />
+        <Border Grid.Row="0"
+                BorderBrush="SteelBlue"
+                BorderThickness="1"
+                CornerRadius="2"
+                Padding="2">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="串口：" />
+                    <ComboBox Name="cmbBarcodePorts" Margin="10,0,0,0" />
+                    <Button x:Name="btnBarOpen"
+                            Width="100"
+                            Click="btnBarOpen_Click"
+                            Content="打开 Barcode" />
+                </StackPanel>
+                <StackPanel Margin="0,3,0,0" Orientation="Horizontal">
+                    <Label Content="串口：" />
+                    <ComboBox Name="cmbNFCPorts" Margin="10,0,0,0" />
+                    <Button x:Name="btnNFC"
+                            Width="100"
+                            Click="btnNFC_Click"
+                            Content="打开 NFC" />
+                </StackPanel>
             </StackPanel>
-            <StackPanel Margin="0,3,0,0" Orientation="Horizontal">
-                <ComboBox Name="cmbNFCPorts" Margin="10,0,0,0" />
-                <Button x:Name="btnNFC"
-                        Width="100"
-                        Click="btnNFC_Click"
-                        Content="打开 NFC" />
-            </StackPanel>
-        </StackPanel>
+        </Border>
+
         <Grid Grid.Row="1" Margin="0,3,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -38,15 +52,36 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0"
                    Width="150"
+                   Height="50"
                    HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Center"
                    Background="Yellow"
-                   Content="二维码：" />
+                   Content="二维码："
+                   FontSize="20" />
             <Label Grid.Column="1"
                    Margin="0,0,0,0"
-                   Background="Green"
-                   Content="{Binding BarCode}" />
+                   VerticalContentAlignment="Center"
+                   Background="Black"
+                   Content="{Binding Barcode}"
+                   FontSize="20"
+                   Foreground="White" />
         </Grid>
         <GroupBox Grid.Row="2"
+                  FontWeight="Bold"
+                  Header="Mifare"
+                  Style="{x:Null}">
+            <UniformGrid>
+                <Button Margin="10,0,0,0"
+                        Click="btnQueryAISINF_Click"
+                        Content="AISINF?" />
+                <Button Margin="10,0,0,0"
+                        Click="btnQueryAISBAU_Click"
+                        Content="AISBAU?" />
+
+            </UniformGrid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="3"
                   FontWeight="Bold"
                   Header="Mifare"
                   Style="{x:Null}">
@@ -56,22 +91,25 @@
                         Margin="10,0,0,0"
                         Click="btnClear_Click"
                         Content="Clear" />
-                <Button x:Name="btnSend"
-                        Width="120"
-                        Click="btnSend_Click"
-                        Content="Get Mifare Type" />
-                <Button x:Name="btnMifareType"
-                        Width="120"
+                <Button Width="120"
                         Click="btnMifareType_Click"
+                        Content="Get Mifare Type" />
+                <Button Width="120"
+                        Click="btnLoadKey_Click"
                         Content="Load Key" />
-                <Button x:Name="btnMifare"
-                        Width="120"
-                        Click="btnMifare_Click"
-                        Content="Write And Read" />
+                <Button Width="120"
+                        Click="btnAuthenticate_Click"
+                        Content="Authenticate Block" />
+                <Button Width="120"
+                        Click="btnWriteBlock_Click"
+                        Content="Write Block" />
+                <Button Width="120"
+                        Click="btnReadBlock_Click"
+                        Content="Read Block" />
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Grid.Row="3"
+        <GroupBox Grid.Row="4"
                   FontWeight="Bold"
                   Header="NFC"
                   Style="{x:Null}">
@@ -110,10 +148,12 @@
             </UniformGrid>
         </GroupBox>
 
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="5">
             <TextBox Name="txt"
                      HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch" />
+                     VerticalAlignment="Stretch"
+                     HorizontalScrollBarVisibility="Hidden"
+                     VerticalScrollBarVisibility="Auto" />
         </Grid>
     </Grid>
 </Controls:MetroWindow>
