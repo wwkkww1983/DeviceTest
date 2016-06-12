@@ -14,6 +14,5 @@ namespace AccessReader
             get { return this.GetValue(s => s.Barcode); }
             set { this.SetValue(s => s.Barcode, value); }
         }
-
     }
 }
