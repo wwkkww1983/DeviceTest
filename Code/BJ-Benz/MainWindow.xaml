@@ -8,7 +8,9 @@
                       MinWidth="400"
                       MinHeight="300"
                       Background="#EBF0F4"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
                       Icon="qrcode.ico"
+                      NonActiveWindowTitleBrush="{StaticResource WindowTitleColorBrush}"
                       WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="labelRight" TargetType="Label">
@@ -39,7 +41,7 @@
         <Border Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                BorderBrush="SteelBlue"
+                BorderBrush="DarkGray"
                 BorderThickness="1"
                 CornerRadius="2">
             <Grid>
