@@ -20,8 +20,8 @@ namespace BJ_Benz
         private delegate void ReadHandlerDelegate(HidReport report);
 
 
-        private AccessQRReader _accessQRReader = null;
         private NFCSerialPort _nfcReader = null;
+        private AccessQRReader _accessQRReader = null;
         public ViewModel()
         {
             DeskoHIDReaderStatus = "未连接";
@@ -29,8 +29,11 @@ namespace BJ_Benz
             Ports1 = SerialPort.GetPortNames().OrderBy(s => s).ToArray();
             Ports2 = SerialPort.GetPortNames().OrderBy(s => s).ToArray();
 
-            IsMifareSerialButtonEnable = true;
-            IsQRSerialButtonEnable = true;
+            if (Ports1.Length > 1)
+            {
+                IsMifareSerialButtonEnable = true;
+                IsQRSerialButtonEnable = true;
+            }
         }
 
         public string DeskoHIDReaderStatus
@@ -52,14 +55,11 @@ namespace BJ_Benz
             set { this.SetValue(s => s.ICSerialNumber, value); }
         }
 
-
         public bool IsQRSerialButtonEnable
         {
             get { return this.GetValue(s => s.IsQRSerialButtonEnable); }
             set { this.SetValue(s => s.IsQRSerialButtonEnable, value); }
         }
-
-
 
         public bool IsMifareSerialButtonEnable
         {
@@ -67,6 +67,12 @@ namespace BJ_Benz
             set { this.SetValue(s => s.IsMifareSerialButtonEnable, value); }
         }
 
+        public Point LineEndPoint
+        {
+            get { return this.GetValue(s => s.LineEndPoint); }
+            set { this.SetValue(s => s.LineEndPoint, value); }
+        }
+        
 
         private SimpleCommand _openGateCommand;
         public SimpleCommand OpenGateCommand
@@ -147,9 +153,7 @@ namespace BJ_Benz
             }
         }
 
-
         public string[] Ports1 { get; set; }
-
         public string[] Ports2 { get; set; }
 
         public void Init()
@@ -265,7 +269,6 @@ namespace BJ_Benz
             code = code.Remove(code.IndexOf((char)0));
             return code;
         }
-
 
         public void Dispose()
         {

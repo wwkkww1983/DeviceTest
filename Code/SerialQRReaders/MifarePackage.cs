@@ -14,21 +14,20 @@ namespace SerialQRReaders
         //seq           6 1
         //bwi           7 1
         //levelparameter8 2
-        private const string prefix_mifare = "6fh {0} 00h 00h 00h 00h 00h 00h 00h 00h ";
+        private const string prefix_mifare = "6fh {0} 00h 00h 00h 00h 00h 00h 00h 00h";
 
 
-        private static byte[] CompositeMifareData(string str)
+        private static byte[] CompositeMifareData(string dataStr)
         {
-            var len = str.Split(' ').Length;
-            str = string.Format(prefix_mifare, len) + str;
-            str = str.Replace("h", "").Trim();
-            var arr = str.Split(' ');
-            var buffer = arr.Select(s=> Convert.ToByte(str, 16)).ToArray();
+            var len = dataStr.Split(' ').Length;
+            var totalStr= string.Format(prefix_mifare, len) + dataStr;
+            totalStr = totalStr.Replace("h", "").Trim();
+            var arr = dataStr.Split(' ');
+            var buffer = arr.Select(s=> Convert.ToByte(dataStr, 16)).ToArray();
             return buffer;
         }
 
-
-        public static byte[] Data(string str)
+        public static byte[] GetSendData(string str)
         {
             var data = CompositeMifareData(str);
             return data;

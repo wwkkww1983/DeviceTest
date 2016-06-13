@@ -27,7 +27,6 @@ namespace SerialQRReaders
 
         public void Log(string str)
         {
-            Console.WriteLine(str);
             _dataBack(str);
         }
 
@@ -66,34 +65,7 @@ namespace SerialQRReaders
                     {
                         var b1 = (byte)_serial.ReadByte();
                         var b2 = (byte)_serial.ReadByte();
-
-                        var slot = b1 & 0xF0;
-                        var mediaStatus = b1 & 0x0F;
-                        if (mediaStatus == 1)
-                        {
-                            Log("进入");
-                            _getSerialNumberTick = new FuncTimeout();
-                            _getSerialNumberTick.StartLoop(500, () =>
-                            {
-                                var sendData = MifarePackage.Data("00 00");
-                                CMD = 1;
-                                Write(sendData);
-                            });
-                        }
-                        else
-                        {
-                            Log("离开");
-                            StopAuto();
-                        }
-
-
-                        if (b2 == 0x01)
-                            Log("SO14443-4 A");
-                        else if (b2 == 0x03)
-                            Log("Mifare Classic 1K");
-                        else
-                            Log("其它类型:" + b2);
-
+                        MifareInOrLeave(b1, b2);
                         continue;
                     }
                     else
@@ -102,12 +74,13 @@ namespace SerialQRReaders
                         //    Log("出现，未授权");
                         //else if (stx == 0xC0)
                         //    Log("出现，已授权");
+
                         var len = (byte)_serial.ReadByte();
                         //读取剩余字节
                         var data = readAll(8 + len);
                         var backData = new byte[len];
                         Array.Copy(data, 8, backData, 0, len);
-                        Log("读卡器返回, len=" + len + " " + GetHex(backData));
+                        Log("读卡器返回, len=" + len + " " + backData.ToHex());
                         if (CMD == 0)
                         {
                             NFCResponse(backData);
@@ -140,10 +113,28 @@ namespace SerialQRReaders
             return data;
         }
 
-        private string GetHex(byte[] buffer)
+        private void MifareInOrLeave(byte b1, byte b2)
         {
-            var str = string.Join(" ", buffer.Where(s => s >= 0).Select(s => s.ToString("X2") + "h").ToArray());
-            return str;
+            var slot = b1 & 0xF0;
+            var mediaStatus = b1 & 0x0F;
+            if (mediaStatus == 1)
+            {
+                Log("进入, 读取序列号...");
+                _getSerialNumberTick = new FuncTimeout();
+                _getSerialNumberTick.StartLoop(500, () =>
+                {
+                    var sendData = MifarePackage.GetSendData("00 00");
+                    CMD = 1;
+                    Write(sendData);
+                });
+            }
+            else
+            {
+                Log("离开");
+                StopAuto();
+            }
+
+            ShowICType(b2);
         }
 
 
@@ -163,7 +154,7 @@ namespace SerialQRReaders
                 var serialNumber = new byte[20];
                 Array.Copy(backData, 1, serialNumber, 0, 20);
                 var hex = serialNumber.ToHex();
-                Log("NFC Serial Number=" + hex);
+                Log("NFC Media Serial Number=" + hex);
             }
             else if (echocode == 0x0B)
             {
@@ -171,12 +162,7 @@ namespace SerialQRReaders
             }
             else if (echocode == 0x0D)
             {
-                if (backData[1] == 03)
-                    Log("mediatype=MIFARE Classic 1K");
-                else if (backData[1] == 04)
-                    Log("mediatype=MIFARE Classic 4K");
-                else
-                    Log("mediatype=" + backData[1]);
+                ShowICType(backData[1]);
 
                 var seialnumberlen = backData[2];
                 Log("serialnumberlen=" + seialnumberlen);
@@ -184,16 +170,19 @@ namespace SerialQRReaders
                 var arr = new byte[4];
                 Array.Copy(backData, 3, arr, 0, 4);
                 var uid = BitConverter.ToUInt32(arr, 0);
-                Log("卡类=Mifare Classic 1K  卡数据=" + string.Join(" ", arr.Select(s => s.ToString("X2"))) + " 序列号 UID=" + uid);
+                Log("卡类=Mifare Classic 1K  卡数据=" + arr.ToHex() + " 序列号 UID=" + uid);
             }
         }
         private void MifareResponse(byte[] backData, int len)
         {
+
             if (CMD == 1)
             {
                 //get mefiare type
+                ShowICType(backData[2]);
                 if (backData[2] == 0x03)
                 {
+                    ShowResponseCode(backData, "读卡成功");
                     StopAuto();
                     var arr = new byte[4];
                     Array.Copy(backData, 3, arr, 0, 4);
@@ -202,53 +191,96 @@ namespace SerialQRReaders
                     Log("卡类=Mifare Classic 1K  卡数据=" + uidhex + " 序列号 UID=" + uid);
                     _dataBack(uidhex);
                 }
-                else if (backData[2] == 0x04)
-                    Log("Mifare Classic 4K");
-                else if (backData[2] == 0x05)
-                    Log("Mifare Ultralight");
             }
             else if (CMD == 2)
             {
                 //load media key
                 if (len == 4)
                 {
-                    if (backData[2] == 0x90 && backData[3] == 0x00)
-                    {
-                        Log("设置密码成功");
-                    }
+                    ShowResponseCode(backData, "设置密码成功");
                 }
             }
             else if (CMD == 3)
             {
-                //
-                if (backData[3] == 0x90 && backData[4] == 0x00)
-                {
-                    Log("块=" + backData[2] + "授权成功");
-                }
+                //Authociate block
+                ShowResponseCode(backData, "块=" + backData[2] + "授权成功");
             }
             else if (CMD == 4)
             {
-                if (backData[3] == 0x90 && backData[4] == 0x00)
-                {
-                    Log("块=" + backData[2] + " 写成功");
-                }
-                else
-                {
-                    Log(string.Format("Response Code={0}, Block={1}, Code={2} {3}",
-                        backData[1], backData[2], backData[3], backData[4]));
-                }
+                //write block
+                ShowResponseCode(backData, "块=" + backData[2] + "写成功");
             }
             else if (CMD == 5)
             {
-                if (backData[3] == 0x90 && backData[4] == 0x00)
-                {
-                    Log("块=" + backData[2] + " 读成功");
-                }
-                else
-                {
-                    Log(string.Format("Response Code={0}, Block={1}, Code={2} {3}",
-                        backData[1], backData[2], backData[3], backData[4]));
-                }
+                //read block
+                ShowResponseCode(backData, "块=" + backData[2] + "读成功");
+            }
+        }
+
+        private void ShowICType(byte b)
+        {
+            if (b == 0x01)
+                Log("SO14443-4 A");
+            else if (b == 0x02)
+                Log("SO14443-4 B");
+            else if (b == 0x03)
+                Log("Mifare Classic 1K");
+            else if (b == 0x4)
+                Log("Mifare Classic 4K");
+            else if (b == 0x5)
+                Log("Mifare Ultralight");
+            else if (b == 0x06)
+                Log("Mifare Plus");
+            else if (b == 0x09)
+                Log("NFC Type 1 Tag");
+            else
+                Log("其它类型:" + b);
+        }
+
+        private string GetMifareFailureCode(byte b)
+        {
+            if (b == 0x80)
+                return "Missing parameters";
+            else if (b == 0x81)
+                return "Invalid command header; command header is not [0x00]";
+            else if (b == 0x82)
+                return "Invalid command";
+            else if (b == 0x83)
+                return "Authentication failed";
+            else if (b == 0x84)
+                return "Read block failed";
+            else if (b == 0x85)
+                return "Write block failed";
+            else if (b == 0x86)
+                return "Restore value block failed (this is an internal command failure)";
+            else if (b == 0x87)
+                return "Create value block failed";
+            else if (b == 0x88)
+                return "Increment value block failed";
+            else if (b == 0x89)
+                return "Decrement value block failed";
+            else if (b == 0x8A)
+                return "Transfer value block failed (this is an internal command failure)";
+            else if (b == 0x8B)
+                return "MIFARE Ultralight-C Authentication Part 1 failed";
+            else if (b == 0x8C)
+                return "MIFARE Ultralight-C Authentication Part 2 failed";
+            else
+                return "MIFARE direct transceive failed";
+        }
+
+        private void ShowResponseCode(byte[] backData, string okmsg)
+        {
+            var len = backData.Length;
+            var lastByte1 = backData.Last();
+            var lastByte2 = backData[len - 2];
+            if (lastByte1 == 0x00 && lastByte2 == 0x90)
+            {
+                Log(okmsg);
+            }
+            else
+            {
+                Log(string.Format("Code [{1}][{2}] {3}", lastByte2, lastByte1, GetMifareFailureCode(lastByte1)));
             }
         }
 
@@ -257,6 +289,7 @@ namespace SerialQRReaders
             if (_getSerialNumberTick != null)
             {
                 _getSerialNumberTick.Stop();
+                _getSerialNumberTick = null;
             }
         }
 

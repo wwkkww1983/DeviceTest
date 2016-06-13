@@ -16,6 +16,7 @@ namespace SerialQRReaders
         private bool _isStop = false;
         private SerialPort _serial = null;
         private Action<string> _onReadeBarcode = null;
+
         public AccessQRReader(Action<string> barcodeCallback)
         {
             _onReadeBarcode = barcodeCallback;
@@ -87,10 +88,7 @@ namespace SerialQRReaders
         private void PrintCode(byte[] buffer)
         {
             var code = buffer.ToUTF8String();
-            if (_onReadeBarcode != null)
-            {
-                _onReadeBarcode(code);
-            }
+            _onReadeBarcode(code);
         }
     }
 }

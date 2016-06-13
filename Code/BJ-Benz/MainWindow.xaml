@@ -2,13 +2,27 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      Title="MainWindow"
+                      Title="二维码联动测试(demo)"
                       Width="400"
                       Height="300"
+                      MinWidth="400"
+                      MinHeight="300"
                       Background="#EBF0F4"
-                      Icon="qrcode.png"
+                      Icon="qrcode.ico"
                       WindowStartupLocation="CenterScreen">
-    <Window.Resources />
+    <Window.Resources>
+        <Style x:Key="labelRight" TargetType="Label">
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+        <Style x:Key="labelLeft" TargetType="Label">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -16,7 +30,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="35" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -118,23 +132,24 @@
               Margin="0,10,0,0"
               StrokeThickness="2">
             <Path.Stroke>
-                <LinearGradientBrush>
-                    <GradientStop Offset="0.2" Color="Black" />
-                    <GradientStop Offset="0.8" Color="Red" />
+                <LinearGradientBrush EndPoint="1,0">
+                    <GradientStop Offset="0.2" Color="Red" />
+                    <GradientStop Offset="0.8" Color="Green" />
                 </LinearGradientBrush>
             </Path.Stroke>
             <Path.Data>
-                <LineGeometry StartPoint="0,0" EndPoint="1920,1" />
+                <LineGeometry EndPoint="{Binding LineEndPoint}" />
             </Path.Data>
         </Path>
 
         <Label Grid.Row="2"
                Grid.Column="0"
-               HorizontalContentAlignment="Right"
-               Content="二维码:" />
+               Content="二维码:"
+               Style="{StaticResource labelRight}" />
         <Label Grid.Row="2"
                Grid.Column="1"
-               Content="{Binding QRCode}" />
+               Content="{Binding QRCode}"
+               Style="{StaticResource labelLeft}" />
 
         <Path Grid.Row="3"
               Grid.Column="0"
@@ -142,22 +157,23 @@
               Margin="0,10,0,0"
               StrokeThickness="2">
             <Path.Stroke>
-                <LinearGradientBrush>
-                    <GradientStop Offset="0.2" Color="Black" />
-                    <GradientStop Offset="0.8" Color="Red" />
+                <LinearGradientBrush EndPoint="1,0">
+                    <GradientStop Offset="0.2" Color="Red" />
+                    <GradientStop Offset="0.8" Color="Green" />
                 </LinearGradientBrush>
             </Path.Stroke>
             <Path.Data>
-                <LineGeometry StartPoint="0,0" EndPoint="1920,1" />
+                <LineGeometry EndPoint="{Binding LineEndPoint}" />
             </Path.Data>
         </Path>
 
         <Label Grid.Row="4"
                Grid.Column="0"
-               HorizontalContentAlignment="Right"
-               Content="IC卡号:" />
+               Content="IC卡号:"
+               Style="{StaticResource labelRight}" />
         <Label Grid.Row="4"
                Grid.Column="1"
-               Content="{Binding ICSerialNumber}" />
+               Content="{Binding ICSerialNumber}"
+               Style="{StaticResource labelLeft}" />
     </Grid>
 </Controls:MetroWindow>

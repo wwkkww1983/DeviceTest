@@ -29,14 +29,20 @@ namespace BJ_Benz
 
             this.Loaded += MainWindow_Loaded;
             this.Closing += MainWindow_Closing;
+            this.SizeChanged += MainWindow_SizeChanged;
         }
 
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            viewModel.LineEndPoint = new Point(e.NewSize.Width, 1);
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             viewModel.Init();
         }
 
-        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             viewModel.Dispose();
         }
