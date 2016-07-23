@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace MeetingClient
 {
     /// <summary>
-    /// 
+    /// Home test
     /// </summary>
     public partial class FrmGateMain : FrmBase
     {
@@ -26,6 +26,7 @@ namespace MeetingClient
 
         private void FrmGateMain_Load(object sender, EventArgs e)
         {
+            MessageBox.Show("this box is from sz home");
         }
 
         private void btnMeeting_Click(object sender, EventArgs e)
