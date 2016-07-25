@@ -26,7 +26,6 @@ namespace MeetingClient
 
         private void FrmGateMain_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("this box is from sz home");
         }
 
         private void btnMeeting_Click(object sender, EventArgs e)
