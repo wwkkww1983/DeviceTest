@@ -61,6 +61,7 @@ namespace MeetingClient.Core
             try
             {
                 var httpGetUrl = string.Format(URL, preSignStr);
+                Console.WriteLine(httpGetUrl);
                 var request = (HttpWebRequest)WebRequest.Create(httpGetUrl);
                 request.Method = "Get";
                 request.ContentType = "application/x-www-form-urlencoded";
@@ -78,12 +79,12 @@ namespace MeetingClient.Core
 
                 JavaScriptSerializer java = new JavaScriptSerializer();
                 var jsonObject = java.Deserialize<ErrorModel>(jsonStr);
-                if (!jsonObject.success)
+                if (!jsonObject.content)
                 {
-                    var str = jsonObject.errorCode + " " + jsonObject.errorMsg + " " + jsonObject.level;
+                    var str = "未授权:" + jsonObject.errorCode + " " + jsonObject.errorMsg + " " + jsonObject.level;
                     Debug.WriteLine(str);
                 }
-                return jsonObject.success;
+                return jsonObject.content;
             }
             catch (Exception ex)
             {

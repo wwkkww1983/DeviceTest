@@ -12,7 +12,7 @@ namespace MeetingClient.Core
         private static string input_charset = "";
         private static string sign_type = "";
 
-        public static string termId = "10";
+        public static string termId = "2";
         public static string Partner = "";
 
         static Config()

@@ -7,6 +7,8 @@ namespace MeetingClient.Core
 {
     public class ErrorModel
     {
+        public bool content { get; set; }
+
         public string errorCode { get; set; }
 
         public string errorMsg { get; set; }
