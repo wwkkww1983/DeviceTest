@@ -10,19 +10,22 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Collections;
+using System.Diagnostics;
 
 namespace QRReader
 {
     /// <summary>
     /// 德国Desko二维码阅读器
+    /// 两种通讯方式：
+    /// 一、串口接口
+    /// 二、USB接口，但需要安装虚拟串口驱动
     /// </summary>
     public partial class FrmCodeReader : FrmBase
     {
         private bool _isStop = false;
         private SerialPort _serial = null;
-        private string _sourceByte = "02 5D 51 31 68 74 74 70 3A 2F 2F 77 77 77 2E 63 68 69 6E 61 62 65 73 6F 2E 63 6F 6D 2F 03";
+        private CommunicationType _cType = CommunicationType.Com;
 
-        private DeviceType _deviceType = DeviceType.Com;
         public FrmCodeReader()
         {
             InitializeComponent();
@@ -35,24 +38,38 @@ namespace QRReader
             if (cmbPorts.Items.Count == 0)
             {
                 btnOpen.Enabled = false;
+                btnVirtualComPort.Enabled = false;
             }
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
+        {
+            _cType = CommunicationType.Com;
+            OpenComPort();
+        }
+
+        private void btnVirtualComPort_Click(object sender, EventArgs e)
+        {
+            _cType = CommunicationType.VirtualCom;
+            OpenComPort();
+        }
+
+        private void OpenComPort()
         {
             _serial = new SerialPort(cmbPorts.Text, 9600, Parity.None, 8, StopBits.One);
             try
             {
                 _serial.Open();
                 ThreadPool.QueueUserWorkItem(ReadComm);
-                btnOpen.Enabled = false;
+                if (_cType == CommunicationType.Com)
+                    btnOpen.Enabled = false;
+                else
+                    btnVirtualComPort.Enabled = false;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            var buffer = _sourceByte.Split(' ').Select(s => Convert.ToByte(s, 16)).ToArray();
-            PrintCode(buffer, buffer.Length);
         }
 
         private void ReadComm(object obj)
@@ -97,7 +114,16 @@ namespace QRReader
             {
                 rtbCode.AppendText(sb.ToString());
                 rtbCode.AppendText("\n");
-                var codeStr = Encoding.UTF8.GetString(buffer, 4, pos - 5);
+
+                var codeStr = "";
+                if (_cType == CommunicationType.Com)
+                {
+                    codeStr = Encoding.UTF8.GetString(buffer, 4, pos - 5);
+                }
+                else
+                {
+                    codeStr = Encoding.UTF8.GetString(buffer, 2, pos - 4);
+                }
                 rtbCode.AppendText(DateTime.Now + " " + codeStr);
                 rtbCode.AppendText("\n");
             }));
@@ -113,16 +139,20 @@ namespace QRReader
             }
             base.OnFormClosing(e);
         }
-
-        private void btnVirtualComPort_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
-    public enum DeviceType
+    /// <summary>
+    /// 通讯方式
+    /// </summary>
+    public enum CommunicationType
     {
+        /// <summary>
+        /// 串口
+        /// </summary>
         Com,
+        /// <summary>
+        /// 虚拟串口
+        /// </summary>
         VirtualCom
     }
 }
