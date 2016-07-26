@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace MeetingClient
 {
     /// <summary>
-    /// 
+    /// Home test
     /// </summary>
     public partial class FrmGateMain : FrmBase
     {

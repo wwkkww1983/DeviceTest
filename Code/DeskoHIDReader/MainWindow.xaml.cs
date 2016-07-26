@@ -21,12 +21,12 @@ namespace DeskoHIDReader
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string vid = "0c2e";
+        private const string vid = "0536";
 
         private const byte DataPos = 8;
         private const byte ETX = 0x03;
 
-        private const string intdeviceId = "3130ad03";
+        private const string intdeviceId = "AJ-48-00987";
         private const string outdeviceId = "31D9B3D";
 
         private HidDevice _deviceIn = null;

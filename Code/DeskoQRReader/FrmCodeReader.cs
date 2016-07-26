@@ -21,6 +21,8 @@ namespace QRReader
         private bool _isStop = false;
         private SerialPort _serial = null;
         private string _sourceByte = "02 5D 51 31 68 74 74 70 3A 2F 2F 77 77 77 2E 63 68 69 6E 61 62 65 73 6F 2E 63 6F 6D 2F 03";
+
+        private DeviceType _deviceType = DeviceType.Com;
         public FrmCodeReader()
         {
             InitializeComponent();
@@ -111,5 +113,16 @@ namespace QRReader
             }
             base.OnFormClosing(e);
         }
+
+        private void btnVirtualComPort_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    public enum DeviceType
+    {
+        Com,
+        VirtualCom
     }
 }
