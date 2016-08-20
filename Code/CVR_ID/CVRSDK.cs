@@ -43,8 +43,5 @@ namespace CVR_ID
         public static extern int CVR_GetSAMID(ref byte strTmp);
         [DllImport(dllpath, EntryPoint = "GetManuID", CharSet = CharSet.Ansi, SetLastError = false, CallingConvention = CallingConvention.StdCall)]
         public static extern int GetManuID(ref byte strTmp);
-
-
     }
-
 }

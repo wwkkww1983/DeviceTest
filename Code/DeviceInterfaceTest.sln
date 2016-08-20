@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJ-Benz", "BJ-Benz\BJ-Benz.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialQRReaders", "SerialQRReaders\SerialQRReaders.csproj", "{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRT571", "CRT571\CRT571.csproj", "{9CF78801-ECF0-4E09-8292-33E39A995180}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVR_ID", "CVR_ID\CVR_ID.csproj", "{BABAE79F-14B6-4AE8-9B8E-0A49543F8CE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,14 @@ Global
 		{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF78801-ECF0-4E09-8292-33E39A995180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF78801-ECF0-4E09-8292-33E39A995180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF78801-ECF0-4E09-8292-33E39A995180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF78801-ECF0-4E09-8292-33E39A995180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BABAE79F-14B6-4AE8-9B8E-0A49543F8CE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BABAE79F-14B6-4AE8-9B8E-0A49543F8CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BABAE79F-14B6-4AE8-9B8E-0A49543F8CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BABAE79F-14B6-4AE8-9B8E-0A49543F8CE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
