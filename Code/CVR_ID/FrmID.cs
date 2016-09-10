@@ -22,7 +22,6 @@ namespace CVR_ID
             InitializeComponent();
 
             var ports = SerialPort.GetPortNames();
-            cmbPorts.DataSource = ports;
             timerID.Tick += timerID_Tick;
         }
 
@@ -43,7 +42,7 @@ namespace CVR_ID
         {
             try
             {
-                pictureBox1.ImageLocation = Application.StartupPath + "\\zp.bmp";
+                pictureBox1.ImageLocation = Application.StartupPath + "\\dll\\zp.bmp";
                 byte[] name = new byte[30];
                 int length = 30;
                 CVRSDK.GetPeopleName(ref name[0], ref length);
@@ -59,7 +58,7 @@ namespace CVR_ID
                 byte[] birthday = new byte[30];
                 length = 16;
                 CVRSDK.GetPeopleBirthday(ref birthday[0], ref length);
-                byte[] address = new byte[30];
+                byte[] address = new byte[50];
                 length = 70;
                 CVRSDK.GetPeopleAddress(ref address[0], ref length);
                 byte[] validtermOfEnd = new byte[30];
@@ -100,10 +99,6 @@ namespace CVR_ID
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            if (cmbPorts.Items.Count == 0)
-            {
-                CMessageBox.Show("计算机未发现串口！");
-            }
             try
             {
                 int iPort;
@@ -112,6 +107,7 @@ namespace CVR_ID
                     iRetUSB = CVRSDK.CVR_InitComm(iPort);
                     if (iRetUSB == 1)
                     {
+                        Console.WriteLine("USB打开:" + iPort);
                         break;
                     }
                 }

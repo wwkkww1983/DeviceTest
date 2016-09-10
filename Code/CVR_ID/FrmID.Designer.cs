@@ -36,7 +36,6 @@
             this.lblNation = new System.Windows.Forms.Label();
             this.lblIdCard = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
-            this.cmbPorts = new System.Windows.Forms.ComboBox();
             this.btnOpen = new System.Windows.Forms.Button();
             this.lblSecurity = new System.Windows.Forms.Label();
             this.lblValidDate = new System.Windows.Forms.Label();
@@ -45,9 +44,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(263, 113);
+            this.pictureBox1.Location = new System.Drawing.Point(311, 125);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(131, 131);
+            this.pictureBox1.Size = new System.Drawing.Size(131, 142);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
@@ -55,73 +54,71 @@
             // lblDept
             // 
             this.lblDept.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblDept.Location = new System.Drawing.Point(12, 257);
+            this.lblDept.Location = new System.Drawing.Point(39, 277);
             this.lblDept.Name = "lblDept";
-            this.lblDept.Size = new System.Drawing.Size(213, 23);
+            this.lblDept.Size = new System.Drawing.Size(234, 25);
             this.lblDept.TabIndex = 14;
+            this.lblDept.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblAddress
             // 
             this.lblAddress.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblAddress.Location = new System.Drawing.Point(12, 223);
+            this.lblAddress.Location = new System.Drawing.Point(39, 241);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(213, 23);
+            this.lblAddress.Size = new System.Drawing.Size(234, 25);
             this.lblAddress.TabIndex = 13;
+            this.lblAddress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblBirthday
             // 
             this.lblBirthday.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblBirthday.Location = new System.Drawing.Point(12, 189);
+            this.lblBirthday.Location = new System.Drawing.Point(39, 204);
             this.lblBirthday.Name = "lblBirthday";
-            this.lblBirthday.Size = new System.Drawing.Size(213, 23);
+            this.lblBirthday.Size = new System.Drawing.Size(234, 25);
             this.lblBirthday.TabIndex = 12;
+            this.lblBirthday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblSex
             // 
             this.lblSex.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblSex.Location = new System.Drawing.Point(12, 155);
+            this.lblSex.Location = new System.Drawing.Point(39, 167);
             this.lblSex.Name = "lblSex";
-            this.lblSex.Size = new System.Drawing.Size(213, 23);
+            this.lblSex.Size = new System.Drawing.Size(234, 25);
             this.lblSex.TabIndex = 11;
+            this.lblSex.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblNation
             // 
             this.lblNation.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblNation.Location = new System.Drawing.Point(12, 121);
+            this.lblNation.Location = new System.Drawing.Point(39, 130);
             this.lblNation.Name = "lblNation";
-            this.lblNation.Size = new System.Drawing.Size(213, 23);
+            this.lblNation.Size = new System.Drawing.Size(234, 25);
             this.lblNation.TabIndex = 10;
+            this.lblNation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblIdCard
             // 
             this.lblIdCard.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblIdCard.Location = new System.Drawing.Point(12, 87);
+            this.lblIdCard.Location = new System.Drawing.Point(39, 93);
             this.lblIdCard.Name = "lblIdCard";
-            this.lblIdCard.Size = new System.Drawing.Size(213, 23);
+            this.lblIdCard.Size = new System.Drawing.Size(234, 25);
             this.lblIdCard.TabIndex = 9;
+            this.lblIdCard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblName
             // 
             this.lblName.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblName.Location = new System.Drawing.Point(12, 53);
+            this.lblName.Location = new System.Drawing.Point(39, 56);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(213, 23);
+            this.lblName.Size = new System.Drawing.Size(234, 25);
             this.lblName.TabIndex = 8;
-            // 
-            // cmbPorts
-            // 
-            this.cmbPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbPorts.FormattingEnabled = true;
-            this.cmbPorts.Location = new System.Drawing.Point(12, 12);
-            this.cmbPorts.Name = "cmbPorts";
-            this.cmbPorts.Size = new System.Drawing.Size(121, 20);
-            this.cmbPorts.TabIndex = 16;
+            this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(139, 12);
+            this.btnOpen.Location = new System.Drawing.Point(42, 12);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(75, 23);
+            this.btnOpen.Size = new System.Drawing.Size(75, 25);
             this.btnOpen.TabIndex = 17;
             this.btnOpen.Text = "打开";
             this.btnOpen.UseVisualStyleBackColor = true;
@@ -130,28 +127,29 @@
             // lblSecurity
             // 
             this.lblSecurity.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblSecurity.Location = new System.Drawing.Point(12, 291);
+            this.lblSecurity.Location = new System.Drawing.Point(39, 314);
             this.lblSecurity.Name = "lblSecurity";
-            this.lblSecurity.Size = new System.Drawing.Size(213, 23);
+            this.lblSecurity.Size = new System.Drawing.Size(234, 25);
             this.lblSecurity.TabIndex = 18;
+            this.lblSecurity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblValidDate
             // 
             this.lblValidDate.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.lblValidDate.Location = new System.Drawing.Point(12, 325);
+            this.lblValidDate.Location = new System.Drawing.Point(39, 351);
             this.lblValidDate.Name = "lblValidDate";
-            this.lblValidDate.Size = new System.Drawing.Size(213, 23);
+            this.lblValidDate.Size = new System.Drawing.Size(234, 25);
             this.lblValidDate.TabIndex = 19;
+            this.lblValidDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FrmID
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(410, 358);
+            this.ClientSize = new System.Drawing.Size(474, 387);
             this.Controls.Add(this.lblValidDate);
             this.Controls.Add(this.lblSecurity);
             this.Controls.Add(this.btnOpen);
-            this.Controls.Add(this.cmbPorts);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblDept);
             this.Controls.Add(this.lblAddress);
@@ -177,7 +175,6 @@
         private System.Windows.Forms.Label lblNation;
         private System.Windows.Forms.Label lblIdCard;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.ComboBox cmbPorts;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.Label lblSecurity;
         private System.Windows.Forms.Label lblValidDate;
