@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutsubishiLift", "Mutsubish
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VGuangQRReader", "VGuangQRReader\VGuangQRReader.csproj", "{C7149832-8DAD-44D6-9112-508DC456D4E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanNaD-C2000", "KanNaD-C2000\KanNaD-C2000.csproj", "{5A0848C6-6812-4228-8EC0-AC73C3F75FE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{C7149832-8DAD-44D6-9112-508DC456D4E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7149832-8DAD-44D6-9112-508DC456D4E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7149832-8DAD-44D6-9112-508DC456D4E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A0848C6-6812-4228-8EC0-AC73C3F75FE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0848C6-6812-4228-8EC0-AC73C3F75FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0848C6-6812-4228-8EC0-AC73C3F75FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0848C6-6812-4228-8EC0-AC73C3F75FE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
