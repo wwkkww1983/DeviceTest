@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,8 +37,13 @@ namespace KanNaD_C2000
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            tcp.Connect(IPAddress.Parse("192.168.1.71"), 9877);
-            nws = tcp.GetStream();
+            //tcp.Connect(IPAddress.Parse("192.168.1.71"), 9877);
+            //nws = tcp.GetStream();
+
+            serial = new SerialPort("COM4", 9600, Parity.None, 8, StopBits.One);
+            serial.Open();
+
+            ThreadPool.QueueUserWorkItem(WhileRead);
         }
 
         private void Button1_Click(object sender, RoutedEventArgs e)
@@ -164,26 +171,112 @@ namespace KanNaD_C2000
             nws.Write(data, 0, data.Length);
         }
 
-        private void Loop_click(object sender, RoutedEventArgs e)
+        private void WhileRead(object arg)
         {
-            //btn.Visibility = Visibility.Collapsed;
-
-            Task.Factory.StartNew(() =>
+            while (true)
             {
-                Button1_Click(null, null);
-                this.Dispatcher.Invoke(() => { lblResult.Content = "1开"; });
-                System.Threading.Thread.Sleep(1500);
-                Button2_Click(null, null);
-                this.Dispatcher.Invoke(() => { lblResult.Content = "1关"; });
-
-                System.Threading.Thread.Sleep(1500);
-                Button3_Click(null, null);
-                this.Dispatcher.Invoke(() => { lblResult.Content = "2开"; });
-
-                System.Threading.Thread.Sleep(1500);
-                Button2_Click(null, null);
-                this.Dispatcher.Invoke(() => { lblResult.Content = "2关"; });
-            });
+                var b = 0;
+                while ((b = serial.ReadByte()) >= 0)
+                {
+                    Console.Write(b.ToString("X2") + " ");
+                }
+            }
         }
+
+        SerialPort serial = null;
+        private void Button5_Click(object sender, RoutedEventArgs e)
+        {
+            var data = SerialData(1);
+            serial.Write(data, 0, data.Length);
+
+            Thread.Sleep(1000);
+
+            data = SerialData(0);
+            serial.Write(data, 0, data.Length);
+        }
+
+        private void Button6_Click(object sender, RoutedEventArgs e)
+        {
+            var data = SerialData(2);
+            serial.Write(data, 0, data.Length);
+
+            Thread.Sleep(1000);
+
+            data = SerialData(0);
+            serial.Write(data, 0, data.Length);
+        }
+
+
+        private void Button7_Click(object sender, RoutedEventArgs e)
+        {
+            var data = SerialData(3);
+            serial.Write(data, 0, data.Length);
+
+            Thread.Sleep(1000);
+
+            data = SerialData(0);
+            serial.Write(data, 0, data.Length);
+        }
+
+        private byte[] SerialData(byte data)
+        {
+            List<byte> list = new List<byte>();
+            //地址
+            list.Add(01);
+            //功能码
+            list.Add(0x0F);
+            //起始地址
+            list.Add(00);
+            list.Add(0x64);
+            //寄存器个数
+            list.Add(00);
+            list.Add(02);
+            //数据长度
+            list.Add(01);
+            //数据
+            list.Add(data);
+
+            list.Add(0);
+            list.Add(0);
+
+            byte[] crc = new byte[2];
+            GetCRC(list.ToArray(), ref crc);
+
+            Console.WriteLine(crc[0].ToString("X2"));
+            Console.WriteLine(crc[1].ToString("X2"));
+
+            list[list.Count - 2] = crc[0];
+            list[list.Count - 1] = crc[1];
+
+            var buffer = list.ToArray();
+            return buffer;
+        }
+
+        private void GetCRC(byte[] message, ref byte[] CRC)
+        {
+            //Function expects a modbus message of any length as well as a 2 byte CRC array in which to 
+            //return the CRC values:
+
+            ushort CRCFull = 0xFFFF;
+            byte CRCHigh = 0xFF, CRCLow = 0xFF;
+            char CRCLSB;
+
+            for (int i = 0; i < (message.Length) - 2; i++)
+            {
+                CRCFull = (ushort)(CRCFull ^ message[i]);
+
+                for (int j = 0; j < 8; j++)
+                {
+                    CRCLSB = (char)(CRCFull & 0x0001);
+                    CRCFull = (ushort)((CRCFull >> 1) & 0x7FFF);
+
+                    if (CRCLSB == 1)
+                        CRCFull = (ushort)(CRCFull ^ 0xA001);
+                }
+            }
+            CRC[1] = CRCHigh = (byte)((CRCFull >> 8) & 0xFF);
+            CRC[0] = CRCLow = (byte)(CRCFull & 0xFF);
+        }
+
     }
 }
