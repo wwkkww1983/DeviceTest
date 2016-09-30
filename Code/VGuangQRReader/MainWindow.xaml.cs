@@ -22,9 +22,13 @@ namespace VGuangQRReader
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Test vm = null;
         public MainWindow()
         {
             InitializeComponent();
+
+            vm = new Test();
+            this.DataContext = vm;
         }
 
         private SerialPort port = null;
@@ -55,6 +59,25 @@ namespace VGuangQRReader
                     }
                 }
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            vm.LastVehicle = true;
+            vm.LastVehicle = false;
+            vm.TipContent = "最后一张";
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            vm.FirstVehicle = true;
+            vm.FirstVehicle = false;
+            vm.TipContent = "第一张";
+        }
+
+        private void DoubleAnimation_Completed(object sender, EventArgs e)
+        {
+            vm.FirstVehicle = false;
         }
     }
 }

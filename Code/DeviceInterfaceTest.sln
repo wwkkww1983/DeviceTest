@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCode", "QRCode\QRCode.csproj", "{B93388B3-97C2-4C64-B53F-9DCD94AD4EB0}"
 EndProject
@@ -38,6 +38,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VGuangQRReader", "VGuangQRReader\VGuangQRReader.csproj", "{C7149832-8DAD-44D6-9112-508DC456D4E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanNaD-C2000", "KanNaD-C2000\KanNaD-C2000.csproj", "{5A0848C6-6812-4228-8EC0-AC73C3F75FE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SR-104", "SR-104\SR-104.csproj", "{AF45CBE9-213F-4D9B-B9DB-F25016092F4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +119,10 @@ Global
 		{5A0848C6-6812-4228-8EC0-AC73C3F75FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A0848C6-6812-4228-8EC0-AC73C3F75FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A0848C6-6812-4228-8EC0-AC73C3F75FE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF45CBE9-213F-4D9B-B9DB-F25016092F4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF45CBE9-213F-4D9B-B9DB-F25016092F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF45CBE9-213F-4D9B-B9DB-F25016092F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF45CBE9-213F-4D9B-B9DB-F25016092F4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
