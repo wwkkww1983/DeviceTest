@@ -277,6 +277,5 @@ namespace KanNaD_C2000
             CRC[1] = CRCHigh = (byte)((CRCFull >> 8) & 0xFF);
             CRC[0] = CRCLow = (byte)(CRCFull & 0xFF);
         }
-
     }
 }
