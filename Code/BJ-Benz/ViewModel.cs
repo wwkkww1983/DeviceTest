@@ -19,7 +19,6 @@ namespace BJ_Benz
         private HidDevice _deviceIn = null;
         private delegate void ReadHandlerDelegate(HidReport report);
 
-
         private NFCSerialPort _nfcReader = null;
         private AccessQRReader _accessQRReader = null;
         public ViewModel()
