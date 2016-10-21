@@ -85,6 +85,5 @@ namespace SR_104
                 serial.Write(data, 0, data.Length);
             }
         }
-
     }
 }

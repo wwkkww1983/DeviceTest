@@ -38,6 +38,9 @@
     <ApplicationIcon>qrcode.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HIDSdk">
+      <HintPath>E:\Work\Person\Alibaba\Code\QuickDoorSolution\GateControl\HIDSdk\HIDSdk.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -117,10 +120,6 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{d9a220d7-0c6c-4dfe-b183-dd41444886c7}</Project>
       <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HIDSdk\HIDSdk.csproj">
-      <Project>{ede75ab0-a55b-4f7d-b72f-fc54f50ce5f3}</Project>
-      <Name>HIDSdk</Name>
     </ProjectReference>
     <ProjectReference Include="..\SerialQRReaders\SerialQRReaders.csproj">
       <Project>{9dab872c-27d2-4f1d-ab83-bca3b33f498f}</Project>
