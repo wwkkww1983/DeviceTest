@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common;
+using Common.Log;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -15,8 +17,12 @@ namespace SR104
     {
         private static bool _isOpen = false;
         private static SerialPort _serial = null;
-
-        public static bool Open(string portName)
+        /// <summary>
+        /// 打开串口
+        /// </summary>
+        /// <param name="portName"></param>
+        /// <returns></returns>
+        public static bool OpenPort(string portName)
         {
             try
             {
@@ -24,10 +30,22 @@ namespace SR104
                 _serial.Open();
                 _isOpen = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogHelper.Info(portName + "串口打开失败，" + ex.Message);
             }
             return _isOpen;
+        }
+        /// <summary>
+        /// 关闭串口
+        /// </summary>
+        public static void ClosePort()
+        {
+            _isOpen = false;
+            if (_serial != null)
+            {
+                _serial.Close();
+            }
         }
         /// <summary>
         /// 吸合
@@ -77,6 +95,5 @@ namespace SR104
 
     public enum SR_Order
     {
-
     }
 }

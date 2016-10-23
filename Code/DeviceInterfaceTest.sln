@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCode", "QRCode\QRCode.csproj", "{B93388B3-97C2-4C64-B53F-9DCD94AD4EB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D9A220D7-0C6C-4DFE-B183-DD41444886C7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YowhaleAPI", "YowhaleAPI\YowhaleAPI.csproj", "{05868D0B-0A2B-417C-866D-C9FC08387894}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJ-Benz", "BJ-Benz\BJ-Benz.csproj", "{639AC812-41DE-4BC0-9969-496B99703FF2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialQRReaders", "SerialQRReaders\SerialQRReaders.csproj", "{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}"
 EndProject
@@ -27,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KonNaD_Switch", "KanNaD-Swi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SR104", "SR104\SR104.csproj", "{DF30F663-09EE-401B-B2B7-FDE1663BC422}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D9A220D7-0C6C-4DFE-B183-DD41444886C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,18 +35,10 @@ Global
 		{B93388B3-97C2-4C64-B53F-9DCD94AD4EB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B93388B3-97C2-4C64-B53F-9DCD94AD4EB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B93388B3-97C2-4C64-B53F-9DCD94AD4EB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05868D0B-0A2B-417C-866D-C9FC08387894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05868D0B-0A2B-417C-866D-C9FC08387894}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05868D0B-0A2B-417C-866D-C9FC08387894}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05868D0B-0A2B-417C-866D-C9FC08387894}.Release|Any CPU.Build.0 = Release|Any CPU
-		{639AC812-41DE-4BC0-9969-496B99703FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{639AC812-41DE-4BC0-9969-496B99703FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{639AC812-41DE-4BC0-9969-496B99703FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{639AC812-41DE-4BC0-9969-496B99703FF2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DAB872C-27D2-4F1D-AB83-BCA3B33F498F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -81,6 +71,10 @@ Global
 		{DF30F663-09EE-401B-B2B7-FDE1663BC422}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF30F663-09EE-401B-B2B7-FDE1663BC422}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF30F663-09EE-401B-B2B7-FDE1663BC422}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

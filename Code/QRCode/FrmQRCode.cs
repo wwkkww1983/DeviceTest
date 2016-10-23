@@ -100,7 +100,6 @@ namespace QRCode
 
         private void FrmQRCode_Load(object sender, EventArgs e)
         {
-
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
