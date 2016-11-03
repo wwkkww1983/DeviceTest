@@ -28,6 +28,18 @@ namespace MeetingClient
 
         private void FrmGateMain_Load(object sender, EventArgs e)
         {
+            Task.Factory.StartNew(() =>
+            {
+                var url = "https://meeting.yowhale.com/openapi/guard/openDoor.json?{0}";
+                using (MeetingHttpRequest requestAPI = new MeetingHttpRequest(url))
+                {
+                    var sw = Stopwatch.StartNew();
+                    var code = "meeting://book?code=60d60b0c-7355-4049-ab6c-9066de78faea";
+                    var flag = requestAPI.VerfiyAccess(code);
+                    sw.Stop();
+                    Debug.WriteLine("open door:" + flag + " " + sw.ElapsedMilliseconds);
+                }
+            });
         }
 
         private void btnMeeting_Click(object sender, EventArgs e)
@@ -46,6 +58,7 @@ namespace MeetingClient
                         Debug.WriteLine("open door:" + flag + " " + sw.ElapsedMilliseconds);
                         //label1.Text = "API call:" + sw.ElapsedMilliseconds + " " + (flag ? "true" : "false");
                     }
+                    break;
                     Thread.Sleep(1000);
                 }
             });
@@ -68,6 +81,7 @@ namespace MeetingClient
                         Debug.WriteLine("open door:" + flag + " " + sw.ElapsedMilliseconds);
                         //label1.Text = "API call:" + sw.ElapsedMilliseconds + " " + (flag ? "true" : "false");
                     }
+                    break;
                     Thread.Sleep(1000);
                 }
             });
