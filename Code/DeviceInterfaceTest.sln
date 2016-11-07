@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QRCode", "QRCode\QRCode.csproj", "{B93388B3-97C2-4C64-B53F-9DCD94AD4EB0}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SR104", "SR104\SR104.csproj", "{DF30F663-09EE-401B-B2B7-FDE1663BC422}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D9A220D7-0C6C-4DFE-B183-DD41444886C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Honeywell3580", "Honeywell3580\Honeywell3580.csproj", "{63EE42E0-044C-4148-A627-0D8B2E5ECB88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9A220D7-0C6C-4DFE-B183-DD41444886C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63EE42E0-044C-4148-A627-0D8B2E5ECB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63EE42E0-044C-4148-A627-0D8B2E5ECB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63EE42E0-044C-4148-A627-0D8B2E5ECB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63EE42E0-044C-4148-A627-0D8B2E5ECB88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
