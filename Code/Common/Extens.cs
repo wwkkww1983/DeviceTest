@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace Common
 {
@@ -351,6 +352,15 @@ namespace Common
             return File.ReadAllBytes(path);
         }
         /// <summary>
+        /// Base64 to byte[]
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static byte[] Base64ToByte(this string str)
+        {
+            return Convert.FromBase64String(str);
+        }
+        /// <summary>
         /// 字符串ASCII
         /// </summary>
         /// <param name="value"></param>
@@ -428,6 +438,29 @@ namespace Common
             }
             return new string(array);
         }
+
+        public static ImageSource ToImageSource(this string filePath)
+        {
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                byte[] buffer = new byte[fs.Length];
+                fs.Read(buffer, 0, buffer.Length);
+                fs.Close();
+                fs.Dispose();
+
+                System.Windows.Media.Imaging.BitmapImage bitmapImage =
+                    new System.Windows.Media.Imaging.BitmapImage();
+                using (System.IO.MemoryStream ms = new System.IO.MemoryStream(buffer))
+                {
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = ms;
+                    bitmapImage.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
+                    bitmapImage.EndInit();
+                    bitmapImage.Freeze();
+                }
+                return bitmapImage;
+            }
+        }
         #endregion
 
         #region byte[] 扩展方法
@@ -461,6 +494,15 @@ namespace Common
         public static string ToGB2312String(this byte[] buffer)
         {
             return buffer.BufferToString(Encoding.Default);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
+        public static string ToBase64(this byte[] buffer)
+        {
+            return Convert.ToBase64String(buffer);
         }
         #endregion
 

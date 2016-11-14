@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +62,7 @@
     <Compile Include="NotifyBase\PropertyNotifyObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleCommand.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
