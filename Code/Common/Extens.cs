@@ -346,26 +346,9 @@ namespace Common
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static byte[] ToImageByte(this string path)
+        public static byte[] FileToByte(this string path)
         {
-            if (File.Exists(path) == false)
-                return null;
-
-            var ext = Path.GetExtension(path).ToUpper();
-            if (ext != ".JPG" && ext != ".JPEG")
-                return null;
-
-            byte[] buffer = null;
-            try
-            {
-                using (FileStream fs = File.OpenRead(path))
-                {
-                    buffer = new byte[fs.Length];
-                    fs.Read(buffer, 0, buffer.Length);
-                }
-            }
-            catch { }
-            return buffer;
+            return File.ReadAllBytes(path);
         }
         /// <summary>
         /// 字符串ASCII
