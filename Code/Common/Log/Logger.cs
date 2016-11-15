@@ -20,17 +20,28 @@ namespace Common.Log
         /// <param name="str"></param>
         public static void Info(object str, params string[] args)
         {
-            var msg = string.Format("gate:" + DateTime.Now.ToString("HH:mm:ss") + " " + str, args);
-            //Trace.WriteLine(msg);
-            Console.WriteLine(msg);
-            log.WriteInfomation(msg);
+            try
+            {
+                var msg = string.Format("gate:" + DateTime.Now.ToString("HH:mm:ss") + " " + str, args);
+                Console.WriteLine(msg);
+                log.WriteInfomation(msg);
+            }
+            catch
+            {
+            }
         }
 
         public static void LogJson(string str)
         {
-            var msg = "gate:" + DateTime.Now.ToString("HH:mm:ss") + " " + str;
-            Console.WriteLine(msg);
-            log.WriteInfomation(msg);
+            try
+            {
+                var msg = "gate:" + DateTime.Now.ToString("HH:mm:ss") + " " + str;
+                Console.WriteLine(msg);
+                log.WriteInfomation(msg);
+            }
+            catch
+            {
+            }
         }
     }
 }
