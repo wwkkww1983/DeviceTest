@@ -51,10 +51,21 @@ namespace KonNaDSwitch
         {
             if (tcpclient.Connected)
             {
-                if (stream.CanWrite)
+                try
                 {
-                    stream.Write(data, 0, data.Length);
+                    if (stream.CanWrite)
+                    {
+                        stream.Write(data, 0, data.Length);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    LogHelper.Info("发送开门指令异常->" + ex.Message);
+                }
+            }
+            else
+            {
+                LogHelper.Info("继电器连接断开");
             }
         }
         /// <summary>
