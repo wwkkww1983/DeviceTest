@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 
 namespace Common
 {
@@ -96,6 +99,78 @@ namespace Common
                 return dialog.FileName;
             else
                 return string.Empty;
+        }
+
+        /// <summary>
+        /// 将图片文件转换成BitmapSource
+        /// </summary>
+        /// <param name="sFilePath"></param>
+        /// <returns></returns>
+        public static System.Windows.Media.Imaging.BitmapSource ToBitmapSource(string sFilePath)
+        {
+            try
+            {
+                using (System.IO.FileStream fs = new System.IO.FileStream(sFilePath,
+                System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                {
+                    byte[] buffer = new byte[fs.Length];
+                    fs.Read(buffer, 0, buffer.Length);
+                    fs.Close();
+                    fs.Dispose();
+
+                    System.Windows.Media.Imaging.BitmapImage bitmapImage =
+                        new System.Windows.Media.Imaging.BitmapImage();
+                    using (System.IO.MemoryStream ms = new System.IO.MemoryStream(buffer))
+                    {
+                        bitmapImage.BeginInit();
+                        bitmapImage.StreamSource = ms;
+                        bitmapImage.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad;
+                        bitmapImage.EndInit();
+                        bitmapImage.Freeze();
+                    }
+                    return bitmapImage;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [DllImport("gdi32.dll")]
+        public static extern bool DeleteObject(IntPtr hObject);
+
+        public static BitmapSource BitmapToBitmapSource(System.Drawing.Bitmap bitmap)
+        {
+            try
+            {
+                IntPtr ptr = bitmap.GetHbitmap();
+                BitmapSource result = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(ptr, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                DeleteObject(ptr);
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static System.Drawing.Image CutImage(System.Drawing.Image source, int left, int top, int width, int height)
+        {
+            var rect = new System.Drawing.Rectangle { X = left, Y = top, Width = width, Height = height };
+
+            System.Drawing.Bitmap destImage = new System.Drawing.Bitmap(width, height);
+            System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(destImage);
+            g.Clear(System.Drawing.Color.Transparent);
+            g.DrawImage(source,
+                new System.Drawing.Rectangle { X = 0, Y = 0, Width = width, Height = height },
+                rect,
+                System.Drawing.GraphicsUnit.Pixel);
+
+            g.Save();
+            g.Dispose();
+
+            return destImage;
         }
     }
 }

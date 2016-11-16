@@ -349,6 +349,9 @@ namespace Common
         /// <returns></returns>
         public static byte[] FileToByte(this string path)
         {
+            if (!File.Exists(path))
+                return new byte[] { };
+
             return File.ReadAllBytes(path);
         }
         /// <summary>
