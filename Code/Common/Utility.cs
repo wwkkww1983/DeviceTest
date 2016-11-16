@@ -172,5 +172,10 @@ namespace Common
 
             return destImage;
         }
+
+        public static string GUID()
+        {
+            return Guid.NewGuid().ToString("N");
+        }
     }
 }
