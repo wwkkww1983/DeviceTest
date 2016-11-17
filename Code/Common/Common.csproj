@@ -53,6 +53,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CMessageBox.cs" />
+    <Compile Include="Dialog\CustomDialog.cs" />
+    <Compile Include="Dialog\CustomMessageWindow.xaml.cs">
+      <DependentUpon>CustomMessageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extens.cs" />
     <Compile Include="FrmBase.cs">
       <SubType>Form</SubType>
@@ -67,7 +71,12 @@
     <Compile Include="SimpleCommand.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Dialog\CustomMessageWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

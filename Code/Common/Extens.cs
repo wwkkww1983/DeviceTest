@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -464,6 +465,17 @@ namespace Common
                 return bitmapImage;
             }
         }
+
+        public static bool IsIPAddress(this string str)
+        {
+            if (str.IsEmpty())
+                return false;
+
+            IPAddress outAddress = null;
+            var flag = IPAddress.TryParse(str, out outAddress);
+            return flag;
+        }
+
         #endregion
 
         #region byte[] 扩展方法
