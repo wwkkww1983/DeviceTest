@@ -123,5 +123,10 @@ namespace Common.Dialog
         {
             this.DragMove();
         }
+
+        private void btnClose_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DialogResult = false;
+        }
     }
 }

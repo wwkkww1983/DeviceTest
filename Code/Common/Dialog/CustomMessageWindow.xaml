@@ -60,6 +60,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Column="0"
@@ -68,15 +69,11 @@
                    Content="{Binding Caption}"
                    FontSize="14"
                    Foreground="White" />
-            <!--<thems:ImageButtonEx Grid.Column="1"
-                                 Width="32"
-                                 Height="32"
-                                 HorizontalAlignment="Right"
-                                 VerticalAlignment="Center"
-                                 Click="btnClose_Click"
-                                 Focusable="False"
-                                 HoverImage="/Hz.Products.UIThemes;component/Images/close_hover.png"
-                                 NormalImage="/Hz.Products.UIThemes;component/Images/close_normal.png" />-->
+
+            <Image Grid.Column="2"
+                   PreviewMouseLeftButtonDown="btnClose_PreviewMouseLeftButtonDown"
+                   Source="/Common;component/Images/close_normal.png"
+                   ToolTip="关闭" />
         </Grid>
 
         <!--  行二 信息区  -->
