@@ -471,9 +471,22 @@ namespace Common
             if (str.IsEmpty())
                 return false;
 
-            IPAddress outAddress = null;
-            var flag = IPAddress.TryParse(str, out outAddress);
-            return flag;
+            var ips = str.Split('.');
+            if (ips.Length != 4)
+                return false;
+
+            var ip1 = ips[0].ToInt32();
+            var ip2 = ips[1].ToInt32();
+            var ip3 = ips[2].ToInt32();
+            var ip4 = ips[3].ToInt32();
+
+            if (ip1 < 256 && ip2 < 256 && ip3 < 256 && ip4 < 256)
+                if (ip1 == 0 && ip2 == 1 && ip3 == 0 && ip4 == 0)
+                    return false;
+                else
+                    return true;
+            else
+                return false;
         }
 
         #endregion
