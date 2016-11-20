@@ -365,6 +365,15 @@ namespace Common
             return Convert.FromBase64String(str);
         }
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string FileToBase64(this string path)
+        {
+            return path.FileToByte().ToBase64();
+        }
+        /// <summary>
         /// 字符串ASCII
         /// </summary>
         /// <param name="value"></param>
