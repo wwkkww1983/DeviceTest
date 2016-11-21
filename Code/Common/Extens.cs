@@ -784,5 +784,15 @@ namespace Common
             return d.ToString("0.00");
         }
         #endregion
+
+        #region Long扩展方法
+        public static DateTime ToDateTime(this long timspan)
+        {
+            var datetime = new DateTime(1970, 1, 1);
+            datetime = TimeZone.CurrentTimeZone.ToLocalTime(datetime);
+            datetime = datetime.AddSeconds(timspan);
+            return datetime;
+        }
+        #endregion
     }
 }
