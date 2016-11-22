@@ -503,6 +503,23 @@ namespace Common
             return Encoding.UTF8.GetBytes(value);
         }
 
+        public static ImageSource Base64ToImageSource(this string str)
+        {
+            var buffer = str.Base64ToByte();
+            try
+            {
+                System.Windows.Media.Imaging.BitmapImage image = new System.Windows.Media.Imaging.BitmapImage();
+                image.BeginInit();
+                image.StreamSource = new MemoryStream(buffer);
+                image.EndInit();
+                return image;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         #endregion
 
         #region byte[] 扩展方法
