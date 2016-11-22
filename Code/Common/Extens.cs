@@ -818,7 +818,17 @@ namespace Common
             var url = sb.ToString();
             url = url.TrimEnd('&');
             return url;
-        } 
+        }
+        #endregion
+
+        #region Long扩展方法
+        public static DateTime ToDateTime(this long timspan)
+        {
+            var datetime = new DateTime(1970, 1, 1);
+            datetime = TimeZone.CurrentTimeZone.ToLocalTime(datetime);
+            datetime = datetime.AddSeconds(timspan);
+            return datetime;
+        }
         #endregion
     }
 }
