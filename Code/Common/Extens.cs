@@ -498,6 +498,11 @@ namespace Common
                 return false;
         }
 
+        public static byte[] ToUtf8(this string value)
+        {
+            return Encoding.UTF8.GetBytes(value);
+        }
+
         #endregion
 
         #region byte[] 扩展方法
@@ -783,6 +788,20 @@ namespace Common
         {
             return d.ToString("0.00");
         }
+        #endregion
+
+        #region Directionary<string,string> 扩展方法
+        public static string LinkUrl(this Dictionary<string, string> param)
+        {
+            var sb = new StringBuilder();
+            foreach (var item in param)
+            {
+                sb.Append(item.Key + "=" + item.Value + "&");
+            }
+            var url = sb.ToString();
+            url = url.TrimEnd('&');
+            return url;
+        } 
         #endregion
     }
 }
