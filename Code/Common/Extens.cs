@@ -7,6 +7,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Windows.Forms;
 using System.Windows.Media;
 
@@ -518,6 +519,11 @@ namespace Common
             {
                 return null;
             }
+        }
+
+        public static string UrlEncode(this string content)
+        {
+            return HttpUtility.UrlEncode(content);
         }
 
         #endregion
