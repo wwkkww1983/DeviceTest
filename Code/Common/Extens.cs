@@ -8,8 +8,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Common
 {
@@ -526,6 +528,12 @@ namespace Common
             return HttpUtility.UrlEncode(content);
         }
 
+        public static T Deserialize<T>(this string input)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            return serializer.Deserialize<T>(input);
+        }
+
         #endregion
 
         #region byte[] 扩展方法
@@ -568,6 +576,22 @@ namespace Common
         public static string ToBase64(this byte[] buffer)
         {
             return Convert.ToBase64String(buffer);
+        }
+
+        public static ImageSource ToImageSource(this byte[] buffer)
+        {
+            try
+            {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.StreamSource = new MemoryStream(buffer);
+                image.EndInit();
+                return image;
+            }
+            catch
+            {
+                return null;
+            }
         }
         #endregion
 

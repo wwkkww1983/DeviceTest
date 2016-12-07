@@ -73,6 +73,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleCommand.cs" />
     <Compile Include="Utility.cs" />
+    <Compile Include="WebAPI\AlipayConfig.cs" />
+    <Compile Include="WebAPI\AlipayCore.cs" />
+    <Compile Include="WebAPI\HttpMethod.cs" />
+    <Compile Include="WebAPI\IHttpMethod.cs" />
+    <Compile Include="WebAPI\JsonResult.cs" />
+    <Compile Include="WebAPI\MD5.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Dialog\CustomMessageWindow.xaml">
