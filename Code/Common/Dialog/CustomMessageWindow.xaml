@@ -72,6 +72,7 @@
                    Foreground="White" />
 
             <Image Grid.Column="2"
+                   Cursor="Hand"
                    PreviewMouseLeftButtonDown="btnClose_PreviewMouseLeftButtonDown"
                    Source="/Common;component/Images/close_normal.png"
                    ToolTip="关闭" />
@@ -115,6 +116,7 @@
             <Button Name="btnOK"
                     Click="btnOK_Click"
                     Content="确定"
+                    Cursor="Hand"
                     Style="{StaticResource tpButton}" />
         </StackPanel>
         <StackPanel Name="spQuestion"
@@ -126,12 +128,14 @@
             <Button Name="btnYes"
                     Click="btnYes_Click"
                     Content="是(_Y)"
+                    Cursor="Hand"
                     Style="{StaticResource tpButton}" />
 
             <Button Name="btnNo"
                     Margin="10,0,0,0"
                     Click="btnNo_Click"
                     Content="否(_N)"
+                    Cursor="Hand"
                     Style="{StaticResource tpButton}" />
         </StackPanel>
     </Grid>

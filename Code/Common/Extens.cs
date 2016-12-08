@@ -790,7 +790,7 @@ namespace Common
         #endregion
 
         #region BitArray 扩展方法
-        public static byte ConvertToByte(BitArray bits)
+        public static byte BitArrayToByte(this BitArray bits)
         {
             if (bits.Count > 8)
                 throw new ArgumentException("ConvertToByte can only work with a BitArray containing a maximum of 8 values");
@@ -803,6 +803,16 @@ namespace Common
                     result |= (byte)(1 << i);
             }
             return result;
+        }
+
+        public static int BitArrayToInt(this BitArray bitArray)
+        {
+            if (bitArray.Length > 32)
+                throw new ArgumentException("Argument length shall be at most 32 bits.");
+
+            int[] array = new int[1];
+            bitArray.CopyTo(array, 0);
+            return array[0];
         }
         #endregion
 

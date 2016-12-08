@@ -97,8 +97,8 @@
     <Resource Include="Images\datepicker.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\dialog_confirm.png" />
-    <Content Include="Images\dialog_info.png" />
+    <Resource Include="Images\dialog_confirm.png" />
+    <Resource Include="Images\dialog_info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
