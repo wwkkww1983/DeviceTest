@@ -23,7 +23,7 @@ namespace Common.Log
             try
             {
                 var msg = string.Format("gate:" + DateTime.Now.ToString("HH:mm:ss") + " " + str, args);
-                Console.WriteLine(msg);
+                Trace.WriteLine(msg);
                 log.WriteInfomation(msg);
             }
             catch
