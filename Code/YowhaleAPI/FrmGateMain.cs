@@ -30,7 +30,7 @@ namespace MeetingClient
         {
             Task.Factory.StartNew(() =>
             {
-                var url = "https://meeting.yowhale.com/openapi/guard/openDoor.json?{0}";
+                var url = "https://visitor.yowhale.com/openapi/guard/openDoor.json?{0}";
                 using (MeetingHttpRequest requestAPI = new MeetingHttpRequest(url))
                 {
                     var sw = Stopwatch.StartNew();
@@ -58,7 +58,6 @@ namespace MeetingClient
                         Debug.WriteLine("open door:" + flag + " " + sw.ElapsedMilliseconds);
                         //label1.Text = "API call:" + sw.ElapsedMilliseconds + " " + (flag ? "true" : "false");
                     }
-                    break;
                     Thread.Sleep(1000);
                 }
             });
