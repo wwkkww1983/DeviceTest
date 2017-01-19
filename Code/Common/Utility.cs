@@ -177,5 +177,12 @@ namespace Common
         {
             return Guid.NewGuid().ToString("N");
         }
+
+        public static string GetWeekOfDay()
+        {
+            string[] weekDay = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string week = weekDay[(int)DateTime.Now.DayOfWeek].ToString();
+            return week;
+        }
     }
 }
