@@ -184,5 +184,12 @@ namespace Common
             string week = weekDay[(int)DateTime.Now.DayOfWeek].ToString();
             return week;
         }
+
+        public static byte[] DownloadData(string url)
+        {
+            WebClient web = new WebClient();
+            var data = web.DownloadData(new Uri(url));
+            return data;
+        }
     }
 }
