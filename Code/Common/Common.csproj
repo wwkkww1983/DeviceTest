@@ -79,6 +79,7 @@
     <Compile Include="WebAPI\IHttpMethod.cs" />
     <Compile Include="WebAPI\JsonResult.cs" />
     <Compile Include="WebAPI\MD5.cs" />
+    <Compile Include="WebAPI\OperationResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Dialog\CustomMessageWindow.xaml">

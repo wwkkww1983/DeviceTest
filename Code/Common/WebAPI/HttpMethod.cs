@@ -160,6 +160,61 @@ namespace Common.WebAPI
             }
         }
 
+
+        public string Post(string url, byte[] data, string cookie, Dictionary<string, string> param)
+        {
+            string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
+            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+
+            HttpWebRequest request = (HttpWebRequest)PostImage(url, boundary);
+            if( !cookie.IsEmpty())
+                request.Headers["cookie"] = cookie;
+
+            WebResponse response = null;
+
+            StringBuilder sb = new StringBuilder();
+            try
+            {
+                var rs = request.GetRequestStream();
+                string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
+                foreach (string key in param.Keys)
+                {
+                    rs.Write(boundarybytes, 0, boundarybytes.Length);
+                    string formitem = string.Format(formdataTemplate, key, param[key]);
+                    byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+                    rs.Write(formitembytes, 0, formitembytes.Length);
+                }
+
+                //文件开始
+                rs.Write(boundarybytes, 0, boundarybytes.Length);
+                //图片
+                string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
+                string header = string.Format(headerTemplate, "image", "image.jpg", "text/plain");
+                byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+                rs.Write(headerbytes, 0, headerbytes.Length);
+                rs.Write(data, 0, data.Length);
+                //文件结束
+                byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+                rs.Write(trailer, 0, trailer.Length);
+                rs.Close();
+
+                response = request.GetResponse();
+                if (response != null)
+                {
+                    var responseStream = response.GetResponseStream();
+                    StreamReader sr = new StreamReader(responseStream);
+                    var content = sr.ReadToEnd();
+                    sr.Close();
+                    return content;
+                }
+                return string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
         public string Post(string url, Dictionary<string, string> parms)
         {
             var dataQuery = parms.LinkUrl();
@@ -185,6 +240,92 @@ namespace Common.WebAPI
             {
             }
             return responseStr;
+        }
+
+        public string Post(string url, string cookie, Dictionary<string, string> parms)
+        {
+            var dataQuery = parms.LinkUrl();
+            var data = Encoding.UTF8.GetBytes(dataQuery);
+            WebRequest request = WebRequest.Create(url);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.Method = "POST";
+            request.ContentLength = data.Length;
+            if (!cookie.IsEmpty())
+                request.Headers["cookie"] = cookie;
+            var responseStr = "";
+            try
+            {
+                using (var rs = request.GetRequestStream())
+                {
+                    rs.Write(data, 0, data.Length);
+                }
+                var response = request.GetResponse();
+                using (var stream = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                {
+                    responseStr = stream.ReadToEnd();
+                }
+            }
+            catch
+            {
+            }
+            return responseStr;
+        }
+
+        public string Delete(string url)
+        {
+            try
+            {
+                var wr = WebRequest.Create(url);
+                wr.Timeout = 5000;
+                wr.Method = "DELETE";
+
+                var response = wr.GetResponse();
+                var reader = new StreamReader(response.GetResponseStream());
+                var str = reader.ReadToEnd();
+                return str;
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// 登录V3
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="parms"></param>
+        /// <param name="cookie"></param>
+        /// <returns></returns>
+        public KoalaLogin Login(string url, Dictionary<string, string> parms, out string cookie)
+        {
+            try
+            {
+                var buffer = parms.LinkUrl().ToUtf8();
+                var wr = WebRequest.Create(url);
+                wr.Timeout = 5000;
+                wr.ContentType = "application/x-www-form-urlencoded";
+                wr.Method = "POST";
+                wr.ContentLength = buffer.Length;
+
+                var requeststream = wr.GetRequestStream();
+                requeststream.Write(buffer, 0, buffer.Length);
+                requeststream.Close();
+
+                var response = wr.GetResponse();
+                var stream = response.GetResponseStream();
+                StreamReader sr = new StreamReader(stream, System.Text.Encoding.UTF8);
+                var content = sr.ReadToEnd();
+
+                var headers = response.Headers;
+                cookie = headers["Set-Cookie"];
+                return content.Deserialize<KoalaLogin>();
+            }
+            catch
+            {
+                cookie = "";
+                return null;
+            }
         }
     }
 }
