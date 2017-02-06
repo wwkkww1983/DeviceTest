@@ -40,7 +40,7 @@ namespace Common.WebAPI
     /// <summary>
     /// 用户
     /// </summary>
-    public class Subject
+    public class SubjectData
     {
         public string remark { get; set; }
 
@@ -69,6 +69,13 @@ namespace Common.WebAPI
         public int id { get; set; }
 
         public string name { get; set; }
+    }
+
+    public class Subject
+    {
+        public int code { get; set; }
+
+        public SubjectData data { get; set; }
     }
 
     public class UploadPhoto

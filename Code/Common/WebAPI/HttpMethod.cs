@@ -167,7 +167,7 @@ namespace Common.WebAPI
             byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
 
             HttpWebRequest request = (HttpWebRequest)PostImage(url, boundary);
-            if( !cookie.IsEmpty())
+            if (!cookie.IsEmpty())
                 request.Headers["cookie"] = cookie;
 
             WebResponse response = null;
@@ -215,6 +215,60 @@ namespace Common.WebAPI
             }
         }
 
+        public string PostPhoto(string url, byte[] data, string cookie, Dictionary<string, string> param)
+        {
+            string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
+            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+
+            HttpWebRequest request = (HttpWebRequest)PostImage(url, boundary);
+            if (!cookie.IsEmpty())
+                request.Headers["cookie"] = cookie;
+
+            WebResponse response = null;
+
+            StringBuilder sb = new StringBuilder();
+            try
+            {
+                var rs = request.GetRequestStream();
+                string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
+                foreach (string key in param.Keys)
+                {
+                    rs.Write(boundarybytes, 0, boundarybytes.Length);
+                    string formitem = string.Format(formdataTemplate, key, param[key]);
+                    byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+                    rs.Write(formitembytes, 0, formitembytes.Length);
+                }
+
+                //文件开始
+                rs.Write(boundarybytes, 0, boundarybytes.Length);
+                //图片
+                string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
+                string header = string.Format(headerTemplate, "photo", "image.jpg", "text/plain");
+                byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+                rs.Write(headerbytes, 0, headerbytes.Length);
+                rs.Write(data, 0, data.Length);
+                //文件结束
+                byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+                rs.Write(trailer, 0, trailer.Length);
+                rs.Close();
+
+                response = request.GetResponse();
+                if (response != null)
+                {
+                    var responseStream = response.GetResponseStream();
+                    StreamReader sr = new StreamReader(responseStream);
+                    var content = sr.ReadToEnd();
+                    sr.Close();
+                    return content;
+                }
+                return string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
         public string Post(string url, Dictionary<string, string> parms)
         {
             var dataQuery = parms.LinkUrl();
@@ -236,7 +290,7 @@ namespace Common.WebAPI
                     responseStr = stream.ReadToEnd();
                 }
             }
-            catch
+            catch (Exception ex)
             {
             }
             return responseStr;
@@ -271,15 +325,17 @@ namespace Common.WebAPI
             return responseStr;
         }
 
-        public string Delete(string url)
+        public string Delete(string url, string cookie)
         {
             try
             {
-                var wr = WebRequest.Create(url);
-                wr.Timeout = 5000;
-                wr.Method = "DELETE";
+                var request = WebRequest.Create(url);
+                request.Timeout = 5000;
+                request.Method = "DELETE";
+                if (!cookie.IsEmpty())
+                    request.Headers["cookie"] = cookie;
 
-                var response = wr.GetResponse();
+                var response = request.GetResponse();
                 var reader = new StreamReader(response.GetResponseStream());
                 var str = reader.ReadToEnd();
                 return str;
@@ -302,10 +358,11 @@ namespace Common.WebAPI
             try
             {
                 var buffer = parms.LinkUrl().ToUtf8();
-                var wr = WebRequest.Create(url);
+                var wr = (HttpWebRequest)WebRequest.Create(url);
                 wr.Timeout = 5000;
                 wr.ContentType = "application/x-www-form-urlencoded";
                 wr.Method = "POST";
+                wr.UserAgent = "Koala Admin";
                 wr.ContentLength = buffer.Length;
 
                 var requeststream = wr.GetRequestStream();
@@ -319,9 +376,10 @@ namespace Common.WebAPI
 
                 var headers = response.Headers;
                 cookie = headers["Set-Cookie"];
-                return content.Deserialize<KoalaLogin>();
+                //return content.Deserialize<KoalaLogin>();
+                return new KoalaLogin();
             }
-            catch
+            catch (Exception ex)
             {
                 cookie = "";
                 return null;
