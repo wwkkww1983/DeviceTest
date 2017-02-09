@@ -127,6 +127,7 @@ namespace Common.Dialog
         private void btnClose_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DialogResult = false;
+            this.Close();
         }
     }
 }

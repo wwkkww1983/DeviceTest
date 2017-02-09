@@ -385,5 +385,27 @@ namespace Common.WebAPI
                 return null;
             }
         }
+
+        public T Get<T>(string url, string cookie)
+        {
+            var wr = (HttpWebRequest)WebRequest.Create(url);
+            wr.Timeout = 5000;
+            wr.Method = "GET";
+            if (!cookie.IsEmpty())
+                wr.Headers.Add("cookie", cookie);
+
+            try
+            {
+                var response = wr.GetResponse();
+                var stream = response.GetResponseStream();
+                StreamReader sr = new StreamReader(stream, System.Text.Encoding.UTF8);
+                var content = sr.ReadToEnd();
+                return content.Deserialize<T>();
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
     }
 }

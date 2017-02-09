@@ -69,6 +69,25 @@ namespace Common.WebAPI
         public int id { get; set; }
 
         public string name { get; set; }
+
+        public string[] photo_ids { get; set; }
+
+        public photo[] photos { get; set; }
+    }
+
+    public class photo
+    {
+        public int company_id { get; set; }
+
+        public int id { get; set; }
+
+        public float quality { get; set; }
+
+        public int subject_id { get; set; }
+
+        public string url { get; set; }
+
+        public int version { get; set; }
     }
 
     public class Subject
@@ -92,5 +111,12 @@ namespace Common.WebAPI
         public string url { get; set; }
         public float code { get; set; }
 
+    }
+
+    public class SubjectList
+    {
+        public int code { get; set; }
+
+        public List<SubjectData> data { get; set; }
     }
 }

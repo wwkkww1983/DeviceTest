@@ -8,9 +8,14 @@ namespace Common
 {
     public class CMessageBox
     {
-        public static DialogResult Show(string text)
+        public static DialogResult Show(string text, string title = "提示")
         {
-            return MessageBox.Show(text, "提示");
+            return MessageBox.Show(text, title);
+        }
+
+        public static DialogResult Confirm(string text, string title = "确认")
+        {
+            return MessageBox.Show(text, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
         }
     }
 }
