@@ -407,5 +407,65 @@ namespace Common.WebAPI
                 return default(T);
             }
         }
+
+        public FaceCompare Compare(string url, byte[] data1, byte[] data2)
+        {
+            string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
+            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+
+            HttpWebRequest request = (HttpWebRequest)PostImage(url, boundary);
+            WebResponse response = null;
+
+            StringBuilder sb = new StringBuilder();
+            try
+            {
+                var rs = request.GetRequestStream();
+                //string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
+                //foreach (string key in param.Keys)
+                //{
+                //    rs.Write(boundarybytes, 0, boundarybytes.Length);
+                //    string formitem = string.Format(formdataTemplate, key, param[key]);
+                //    byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+                //    rs.Write(formitembytes, 0, formitembytes.Length);
+                //}
+
+                //文件开始
+                rs.Write(boundarybytes, 0, boundarybytes.Length);
+                //图片1
+                string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
+                string header = string.Format(headerTemplate, "image1", "image1.jpg", "text/plain");
+                byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+                rs.Write(headerbytes, 0, headerbytes.Length);
+                rs.Write(data1, 0, data1.Length);
+                //文件结束1
+                byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+                rs.Write(trailer, 0, trailer.Length);
+
+                //图片2
+                string header2 = string.Format(headerTemplate, "image2", "image2.jpg", "text/plain");
+                byte[] headerbytes2 = System.Text.Encoding.UTF8.GetBytes(header2);
+                rs.Write(headerbytes2, 0, headerbytes.Length);
+                rs.Write(data2, 0, data2.Length);
+
+                //文件结束
+                rs.Write(trailer, 0, trailer.Length);
+
+                rs.Close();
+
+                response = request.GetResponse();
+                if (response != null)
+                {
+                    var responseStream = response.GetResponseStream();
+                    StreamReader sr = new StreamReader(responseStream);
+                    var content = sr.ReadToEnd();
+                    sr.Close();
+                    return content.Deserialize<FaceCompare>();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return null;
+        }
     }
 }

@@ -119,4 +119,39 @@ namespace Common.WebAPI
 
         public List<SubjectData> data { get; set; }
     }
+
+    public class FaceCompare
+    {
+        public FaceInfo face_info_1 { get; set; }
+
+        public FaceInfo face_info_2 { get; set; }
+
+        public bool same { get; set; }
+        /// <summary>
+        /// 0~100
+        /// </summary>
+        public float score { get; set; }
+    }
+
+    public class FaceInfo
+    {
+        public Rect rect { get; set; }
+
+        public float quality { get; set; }
+
+        public float brightness { get; set; }
+
+        public float std_deviation { get; set; }
+    }
+
+    public class Rect
+    {
+        public int Left { get; set; }
+
+        public int Top { get; set; }
+
+        public int Width { get; set; }
+
+        public int Height { get; set; }
+    }
 }
