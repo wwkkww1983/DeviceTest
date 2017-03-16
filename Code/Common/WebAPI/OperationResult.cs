@@ -154,4 +154,45 @@ namespace Common.WebAPI
 
         public int Height { get; set; }
     }
+
+    /// <summary>
+    /// 获得 ARC 运行状态
+    /// </summary>
+    public class NucRunState
+    {
+        public string version { get; set; }
+
+        public Disk disk { get; set; }
+
+        public Ip ip { get; set; }
+    }
+
+    public class Disk
+    {
+        /// <summary>
+        /// 总硬盘空间，单位为KiB
+        /// </summary>
+        public long total { get; set; }
+        /// <summary>
+        /// 已用空间
+        /// </summary>
+        public long used { get; set; }
+        /// <summary>
+        /// 剩余空间
+        /// </summary>
+        public long avail { get; set; }
+    }
+
+    public class Ip
+    {
+        public string addr { get; set; }
+
+        public string netmask { get; set; }
+
+        public string gateway { get; set; }
+
+        public string dns { get; set; }
+
+        public bool dhcp { get; set; }
+    }
 }
