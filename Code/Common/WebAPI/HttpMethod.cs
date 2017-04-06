@@ -325,6 +325,36 @@ namespace Common.WebAPI
             return responseStr;
         }
 
+        public string PostJson(string url, string cookie, object instance)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var jsonData = js.Serialize(instance);
+            var data = Encoding.UTF8.GetBytes(jsonData);
+            WebRequest request = WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "POST";
+            request.ContentLength = data.Length;
+            if (!cookie.IsEmpty())
+                request.Headers["cookie"] = cookie;
+            var responseStr = "";
+            try
+            {
+                using (var rs = request.GetRequestStream())
+                {
+                    rs.Write(data, 0, data.Length);
+                }
+                var response = request.GetResponse();
+                using (var stream = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                {
+                    responseStr = stream.ReadToEnd();
+                }
+            }
+            catch
+            {
+            }
+            return responseStr;
+        }
+
         public string Delete(string url, string cookie)
         {
             try

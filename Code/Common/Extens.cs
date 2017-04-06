@@ -853,7 +853,7 @@ namespace Common
             var sb = new StringBuilder();
             foreach (var item in param)
             {
-                sb.Append(item.Key + "=" + item.Value + "&");
+                sb.Append(item.Key + "=" + item.Value.UrlEncode() + "&");
             }
             var url = sb.ToString();
             url = url.TrimEnd('&');
