@@ -869,6 +869,14 @@ namespace Common
             datetime = datetime.AddSeconds(timspan);
             return datetime;
         }
+
+        public static long ToUnix(this DateTime dt)
+        {
+            var datetime = new DateTime(1970, 1, 1);
+            datetime = TimeZone.CurrentTimeZone.ToLocalTime(datetime);
+            var ts = (dt - datetime).TotalSeconds;
+            return (long)ts;
+        }
         #endregion
     }
 }
