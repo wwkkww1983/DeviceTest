@@ -34,7 +34,7 @@ namespace VGuangQRReader
         private SerialPort port = null;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            port = new SerialPort("COM6", 9600, Parity.None, 8, StopBits.One);
+            port = new SerialPort("COM12", 9600, Parity.None, 8, StopBits.One);
             port.Open();
             ThreadPool.QueueUserWorkItem(Read);
         }
@@ -49,7 +49,10 @@ namespace VGuangQRReader
                 while ((b = port.ReadByte()) > 0)
                 {
                     if (b != 13)
+                    {
+                        Console.WriteLine(b);
                         buffer.Add((byte)b);
+                    }
                     else
                     {
                         var array = buffer.ToArray();
@@ -70,9 +73,10 @@ namespace VGuangQRReader
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            vm.FirstVehicle = true;
-            vm.FirstVehicle = false;
-            vm.TipContent = "第一张";
+            var single = "55AA22010002DE";
+            var interval = "55AA220300030200DF";
+
+            port.Write("55AA25010000DB");
         }
 
         private void DoubleAnimation_Completed(object sender, EventArgs e)

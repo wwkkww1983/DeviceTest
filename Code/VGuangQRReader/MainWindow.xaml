@@ -9,6 +9,12 @@
         Height="350"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="26" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -75,7 +81,7 @@
 
         <Button Grid.Row="2"
                 Click="Button_Click_2"
-                Content="First" />
+                Content="设置模式" />
         <Button Grid.Row="3"
                 Click="Button_Click_1"
                 Content="Last" />

@@ -402,7 +402,7 @@ namespace Common.WebAPI
                 var content = sr.ReadToEnd();
                 return content.Deserialize<T>();
             }
-            catch
+            catch(Exception ex)
             {
                 return default(T);
             }
