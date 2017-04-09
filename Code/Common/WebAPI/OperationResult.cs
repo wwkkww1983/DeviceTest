@@ -107,10 +107,9 @@ namespace Common.WebAPI
     {
         public int id { get; set; }
         public int company_id { get; set; }
-        public int subject_id { get; set; }
+        public string subject_id { get; set; }
         public string url { get; set; }
         public float code { get; set; }
-
     }
 
     public class SubjectList

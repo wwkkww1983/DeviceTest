@@ -853,7 +853,7 @@ namespace Common
             var sb = new StringBuilder();
             foreach (var item in param)
             {
-                sb.Append(item.Key + "=" + item.Value + "&");
+                sb.Append(item.Key + "=" + item.Value.UrlEncode() + "&");
             }
             var url = sb.ToString();
             url = url.TrimEnd('&');
@@ -868,6 +868,14 @@ namespace Common
             datetime = TimeZone.CurrentTimeZone.ToLocalTime(datetime);
             datetime = datetime.AddSeconds(timspan);
             return datetime;
+        }
+
+        public static long ToUnix(this DateTime dt)
+        {
+            var datetime = new DateTime(1970, 1, 1);
+            datetime = TimeZone.CurrentTimeZone.ToLocalTime(datetime);
+            var ts = (dt - datetime).TotalSeconds;
+            return (long)ts;
         }
         #endregion
     }
