@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Net;
@@ -101,6 +102,17 @@ namespace Common
                 return string.Empty;
         }
 
+        public static string OpenFolderBrowserDialog()
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                return fbd.SelectedPath;
+            }
+            else
+                return string.Empty;
+        }
+
         /// <summary>
         /// 将图片文件转换成BitmapSource
         /// </summary>
@@ -188,8 +200,53 @@ namespace Common
         public static byte[] DownloadData(string url)
         {
             WebClient web = new WebClient();
-            var data = web.DownloadData(new Uri(url));
-            return data;
+            try
+            {
+                var data = web.DownloadData(new Uri(url));
+                return data;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static bool CreateDirectory(string path)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(path))
+                    return false;
+
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除文件目录
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool DeleteDirectory(string path)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(path))
+                    return true;
+
+                Directory.Delete(path, true);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }
