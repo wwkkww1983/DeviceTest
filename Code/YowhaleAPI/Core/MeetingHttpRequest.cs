@@ -33,15 +33,12 @@ namespace MeetingClient.Core
         private string GetSign(string qrcode)
         {
             var inputPara = GetRequestParam(qrcode);
-
             Dictionary<string, string> sPara = new Dictionary<string, string>();
             //过滤空值、sign与sign_type参数
             sPara = Core.FilterPara(inputPara);
             //获取待签名字符串
             string preSignStr = Core.CreateLinkString(sPara);
-
             var mysign = AlipayMD5.Sign(preSignStr, Config.Key, Config.Input_charset);
-
             return mysign;
         }
 
