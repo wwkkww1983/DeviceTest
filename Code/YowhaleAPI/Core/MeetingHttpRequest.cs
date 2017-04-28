@@ -79,7 +79,7 @@ namespace MeetingClient.Core
                 if (!jsonObject.content)
                 {
                     var str = "未授权:" + jsonObject.errorCode + " " + jsonObject.errorMsg + " " + jsonObject.level;
-                    Debug.WriteLine(str);
+                    Console.WriteLine(str);
                 }
                 return jsonObject.content;
             }

@@ -28,18 +28,6 @@ namespace MeetingClient
 
         private void FrmGateMain_Load(object sender, EventArgs e)
         {
-            Task.Factory.StartNew(() =>
-            {
-                var url = "https://visitor.yowhale.com/openapi/guard/openDoor.json?{0}";
-                using (MeetingHttpRequest requestAPI = new MeetingHttpRequest(url))
-                {
-                    var sw = Stopwatch.StartNew();
-                    var code = "meeting://book?code=60d60b0c-7355-4049-ab6c-9066de78faea";
-                    var flag = requestAPI.VerfiyAccess(code);
-                    sw.Stop();
-                    Debug.WriteLine("open door:" + flag + " " + sw.ElapsedMilliseconds);
-                }
-            });
         }
 
         private void btnMeeting_Click(object sender, EventArgs e)
@@ -52,7 +40,7 @@ namespace MeetingClient
                     using (MeetingHttpRequest requestAPI = new MeetingHttpRequest(url))
                     {
                         var sw = Stopwatch.StartNew();
-                        var code = "meeting://book?code=60d60b0c-7355-4049-ab6c-9066de78faea";
+                        var code = "https://visitor.shenjing.com/openapi/guard/openDoor.json?app=guard&content=visitor%3A%2F%2Farrive%3Fcode%3Ddf18392b-9b7e-4d73-a516-7d56fe67d6b8&guard=2&sign=46aab8e44e151fbc3ebf2b94a09c0c01&sign_type=MD5";
                         var flag = requestAPI.VerfiyAccess(code);
                         sw.Stop();
                         Debug.WriteLine("open door:" + flag + " " + sw.ElapsedMilliseconds);
@@ -73,15 +61,13 @@ namespace MeetingClient
                     using (MeetingHttpRequest requestAPI = new MeetingHttpRequest(url))
                     {
                         var sw = Stopwatch.StartNew();
-                        var code = "visitor://book?code=2f2e4c9e-6cd8-402e-a95c-e08f4006894e";
-                        code = "visitor://book?code=7f88fc92-e3ed-40d2-b32a-01e0074df113";
+                        var code = "https://visitor.shenjing.com/openapi/guard/openDoor.json?app=guard&content=visitor%3A%2F%2Farrive%3Fcode%3Ddf18392b-9b7e-4d73-a516-7d56fe67d6b8&guard=2&sign=46aab8e44e151fbc3ebf2b94a09c0c01&sign_type=MD5";
                         var flag = requestAPI.VerfiyAccess(code);
                         sw.Stop();
                         Debug.WriteLine("open door:" + flag + " " + sw.ElapsedMilliseconds);
-                        //label1.Text = "API call:" + sw.ElapsedMilliseconds + " " + (flag ? "true" : "false");
                     }
-                    break;
                     Thread.Sleep(1000);
+                    break;
                 }
             });
         }
