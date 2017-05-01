@@ -35,7 +35,7 @@
             // 
             // bteMeeting
             // 
-            this.bteMeeting.Location = new System.Drawing.Point(52, 35);
+            this.bteMeeting.Location = new System.Drawing.Point(52, 38);
             this.bteMeeting.Name = "bteMeeting";
             this.bteMeeting.Size = new System.Drawing.Size(87, 33);
             this.bteMeeting.TabIndex = 0;
@@ -54,7 +54,7 @@
             // 
             // btnVisitor
             // 
-            this.btnVisitor.Location = new System.Drawing.Point(234, 35);
+            this.btnVisitor.Location = new System.Drawing.Point(234, 38);
             this.btnVisitor.Name = "btnVisitor";
             this.btnVisitor.Size = new System.Drawing.Size(87, 33);
             this.btnVisitor.TabIndex = 2;
