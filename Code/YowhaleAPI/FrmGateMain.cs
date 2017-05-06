@@ -51,7 +51,7 @@ namespace MeetingClient
             using (MeetingHttpRequest requestAPI = new MeetingHttpRequest(url))
             {
                 var sw = Stopwatch.StartNew();
-                var code = "meeting://book?code=df13400d-4199-4227-9a5c-d8abc6dbc7c9";
+                var code = "visitor://book?code=c828ac9f-f8b0-4d32-9720-1601394fa22a";
                 var flag = requestAPI.VerfiyAccess(code);
                 sw.Stop();
                 Debug.WriteLine("open door:" + flag + " " + sw.ElapsedMilliseconds);
