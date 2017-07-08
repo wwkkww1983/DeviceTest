@@ -68,7 +68,7 @@ namespace Common
             var ports = SerialPort.GetPortNames().ToList();
             if (ports.Count > 0)
             {
-                ports = ports.OrderBy(s => s.Length).ToList();
+                ports = ports.OrderBy(s => s.Substring(3, s.Length - 3).ToInt32()).ToList();
             }
             ports.Insert(0, "None");
             return ports;
