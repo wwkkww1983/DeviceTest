@@ -50,7 +50,6 @@ namespace VGuangQRReader
                 {
                     if (b != 13)
                     {
-                        Console.WriteLine(b);
                         buffer.Add((byte)b);
                     }
                     else
