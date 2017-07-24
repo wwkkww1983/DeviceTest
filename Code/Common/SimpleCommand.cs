@@ -24,10 +24,15 @@ namespace Common
             }
         }
 
-        private Action act;
+        private Action action;
+
+        public SimpleCommand()
+        {
+        }
+
         public SimpleCommand(Action act)
         {
-            this.act = act;
+            this.action = act;
         }
 
         public bool CanExecute(object parameter)
@@ -37,7 +42,7 @@ namespace Common
 
         public void Execute(object parameter)
         {
-            act.Invoke();
+            action.Invoke();
         }
     }
 }
