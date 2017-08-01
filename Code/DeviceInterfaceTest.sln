@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Honeywell3580", "Honeywell3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YowhaleAPI", "YowhaleAPI\YowhaleAPI.csproj", "{05868D0B-0A2B-417C-866D-C9FC08387894}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitchElevator", "HitchElevator\HitchElevator.csproj", "{D82E362D-A063-40CC-8E85-5902E3CF9384}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitachiLift", "HitachiLift\HitachiLift.csproj", "{B129893E-53F1-450F-B3A5-BF38356F00B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{05868D0B-0A2B-417C-866D-C9FC08387894}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05868D0B-0A2B-417C-866D-C9FC08387894}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05868D0B-0A2B-417C-866D-C9FC08387894}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D82E362D-A063-40CC-8E85-5902E3CF9384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D82E362D-A063-40CC-8E85-5902E3CF9384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D82E362D-A063-40CC-8E85-5902E3CF9384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D82E362D-A063-40CC-8E85-5902E3CF9384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B129893E-53F1-450F-B3A5-BF38356F00B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B129893E-53F1-450F-B3A5-BF38356F00B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B129893E-53F1-450F-B3A5-BF38356F00B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B129893E-53F1-450F-B3A5-BF38356F00B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
