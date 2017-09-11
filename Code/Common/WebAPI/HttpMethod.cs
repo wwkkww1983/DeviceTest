@@ -154,7 +154,7 @@ namespace Common.WebAPI
                 }
                 return string.Empty;
             }
-            catch
+            catch(Exception ex)
             {
                 return string.Empty;
             }
