@@ -37,13 +37,13 @@ namespace KanNaD_C2000
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //tcp.Connect(IPAddress.Parse("192.168.1.71"), 9877);
-            //nws = tcp.GetStream();
+            tcp.Connect(IPAddress.Parse("192.168.1.200"), 502);
+            nws = tcp.GetStream();
 
-            serial = new SerialPort("COM6", 9600, Parity.None, 8, StopBits.One);
-            serial.Open();
+            //serial = new SerialPort("COM6", 9600, Parity.None, 8, StopBits.One);
+            //serial.Open();
 
-            ThreadPool.QueueUserWorkItem(WhileRead);
+            //ThreadPool.QueueUserWorkItem(WhileRead);
         }
 
         private void Button1_Click(object sender, RoutedEventArgs e)
