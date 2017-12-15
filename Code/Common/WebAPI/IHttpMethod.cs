@@ -12,5 +12,7 @@ namespace Common.WebAPI
         string Post(string url, byte[] data, Dictionary<string, string> parms);
 
         string Post(string url, Dictionary<string, string> parms);
+
+        string Post(string url, Dictionary<string, string> parms, out string error);
     }
 }

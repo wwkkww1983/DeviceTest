@@ -154,7 +154,7 @@ namespace Common.WebAPI
                 }
                 return string.Empty;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return string.Empty;
             }
@@ -296,6 +296,35 @@ namespace Common.WebAPI
             return responseStr;
         }
 
+        public string Post(string url, Dictionary<string, string> parms, out string error)
+        {
+            error = "";
+            var dataQuery = parms.LinkUrl();
+            var data = Encoding.UTF8.GetBytes(dataQuery);
+            WebRequest request = WebRequest.Create(url);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.Method = "POST";
+            request.ContentLength = data.Length;
+            var responseStr = "";
+            try
+            {
+                using (var rs = request.GetRequestStream())
+                {
+                    rs.Write(data, 0, data.Length);
+                }
+                var response = request.GetResponse();
+                using (var stream = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                {
+                    responseStr = stream.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+            return responseStr;
+        }
+
         public string Post(string url, string cookie, Dictionary<string, string> parms)
         {
             var dataQuery = parms.LinkUrl();
@@ -432,7 +461,7 @@ namespace Common.WebAPI
                 var content = sr.ReadToEnd();
                 return content.Deserialize<T>();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return default(T);
             }
