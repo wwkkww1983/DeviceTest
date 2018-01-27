@@ -12,7 +12,7 @@ namespace Common.WebAPI
     {
         public int code { get; set; }
 
-        public LoginData data { get; set; }
+        //public LoginData data { get; set; }
     }
 
     /// <summary>

@@ -435,8 +435,7 @@ namespace Common.WebAPI
 
                 var headers = response.Headers;
                 cookie = headers["Set-Cookie"];
-                //return content.Deserialize<KoalaLogin>();
-                return new KoalaLogin();
+                return content.Deserialize<KoalaLogin>();
             }
             catch (Exception ex)
             {
