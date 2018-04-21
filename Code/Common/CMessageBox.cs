@@ -10,7 +10,7 @@ namespace Common
     {
         public static DialogResult Show(string text, string title = "提示")
         {
-            return MessageBox.Show(text, title);
+            return MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public static DialogResult Confirm(string text, string title = "确认")

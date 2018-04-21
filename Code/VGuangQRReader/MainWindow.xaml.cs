@@ -34,7 +34,7 @@ namespace VGuangQRReader
         private SerialPort port = null;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            port = new SerialPort("COM12", 9600, Parity.None, 8, StopBits.One);
+            port = new SerialPort("COM5", 9600, Parity.None, 8, StopBits.One);
             port.Open();
             ThreadPool.QueueUserWorkItem(Read);
         }
