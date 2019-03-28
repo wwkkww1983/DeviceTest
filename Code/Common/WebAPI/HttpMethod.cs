@@ -496,7 +496,7 @@ namespace Common.WebAPI
                 rs.Write(headerbytes, 0, headerbytes.Length);
                 rs.Write(data1, 0, data1.Length);
                 //文件结束1
-                byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+                byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
                 rs.Write(trailer, 0, trailer.Length);
 
                 //图片2
