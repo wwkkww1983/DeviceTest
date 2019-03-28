@@ -491,7 +491,7 @@ namespace Common.WebAPI
                 rs.Write(boundarybytes, 0, boundarybytes.Length);
                 //图片1
                 string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
-                string header = string.Format(headerTemplate, "image1", "image1.jpg", "text/plain");
+                string header = string.Format(headerTemplate, "image1", "image1.jpg", "application/octet-stream");
                 byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
                 rs.Write(headerbytes, 0, headerbytes.Length);
                 rs.Write(data1, 0, data1.Length);
@@ -500,7 +500,7 @@ namespace Common.WebAPI
                 rs.Write(trailer, 0, trailer.Length);
 
                 //图片2
-                string header2 = string.Format(headerTemplate, "image2", "image2.jpg", "text/plain");
+                string header2 = string.Format(headerTemplate, "image2", "image2.jpg", "application/octet-stream");
                 byte[] headerbytes2 = System.Text.Encoding.UTF8.GetBytes(header2);
                 rs.Write(headerbytes2, 0, headerbytes.Length);
                 rs.Write(data2, 0, data2.Length);
